@@ -1,0 +1,6 @@
+nohup: ignoring input
+Starting barcode scanner in continuous mode...
+Press Ctrl+C to stop scanning
+Tracking products to: product_list.txt
+Terminated
+Scanner stopped. See product_list.txt for the list of scanned products.
