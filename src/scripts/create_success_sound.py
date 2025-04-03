@@ -6,16 +6,21 @@ import os
 import numpy as np
 from scipy.io import wavfile
 
-def create_success_sound(output_file="data/sounds/success.wav", duration=0.5, sample_rate=44100):
+# Get the project root directory
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "../.."))
+OUTPUT_FILE = os.path.join(PROJECT_ROOT, "data/sounds/success.wav")
+
+def create_success_sound(output_file=OUTPUT_FILE, duration=0.5, sample_rate=44100):
     """
     Create a success sound (ascending two-tone sound) and save as WAV
     
     Parameters:
     - output_file: Path to save the WAV file
     - duration: Duration of the sound in seconds
-    - sample_rate: Sample rate in Hz
+    - sample_rate: Sample rate for the WAV file
     """
-    # Ensure the directory exists
+    # Create the output directory if it doesn't exist
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     
     # Create time array

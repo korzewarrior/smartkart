@@ -10,7 +10,8 @@
         "speech_volume": 0.8,
         "voice": null,
         "enable_sounds": true,
-        "sound_volume": 0.7
+        "sound_volume": 0.7,
+        "bluetooth_speaker": ""
     },
     "buttons": {
         "pin_select": 17,

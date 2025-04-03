@@ -10,6 +10,7 @@ SmartKart is a Raspberry Pi-based shopping assistant device designed to help vis
 - **Product Database**: Connects to Open Food Facts API and maintains a local cache of product information
 - **Multiple Operating Modes**: Scanning mode, product details mode, and settings menu
 - **Configurable Settings**: Adjustable speech rate, volume, and scanner sensitivity
+- **Bluetooth Speaker Support**: Automatic connection to a paired Bluetooth speaker
 
 ## Hardware Components
 
@@ -33,6 +34,11 @@ smartkart/
 │   │   └── product_lookup.py   # Product information retrieval
 │   ├── interface/              # User interface components
 │   │   └── button_controller.py # Physical button controls
+│   ├── scripts/                # Utility scripts
+│   │   ├── create_not_found_sound.py   # Creates audio feedback sounds
+│   │   ├── create_scanning_sound.py    # Creates audio feedback sounds
+│   │   ├── create_success_sound.py     # Creates audio feedback sounds
+│   │   └── setup_bluetooth.sh          # Bluetooth speaker setup utility
 │   ├── utils/                  # Utility functions and helpers
 │   │   └── config.py           # Configuration management
 │   └── main.py                 # Main application implementation
@@ -46,10 +52,6 @@ smartkart/
 │   │   └── success.wav         # Sound for successful scan
 │   ├── scan_results/           # Saved product scan information
 │   └── product_list.txt        # Local product database
-├── scripts/                    # Utility scripts
-│   ├── create_not_found_sound.py   # Creates audio feedback sounds
-│   ├── create_scanning_sound.py    # Creates audio feedback sounds
-│   └── create_success_sound.py     # Creates audio feedback sounds
 ├── config.json                 # Configuration file
 ├── run.py                      # Python application launcher
 ├── run.sh                      # Shell script to run the application
@@ -64,6 +66,7 @@ smartkart/
 - Python 3.7 or higher
 - Camera module connected and enabled
 - Audio output configured
+- Bluetooth speaker (optional)
 
 ### Installation
 
@@ -84,6 +87,25 @@ python run.py
 # OR use the shell script 
 ./run.sh
 ```
+
+### Bluetooth Speaker Setup
+
+For optimal audio feedback, the SmartKart application supports connecting to a Bluetooth speaker automatically at startup. Follow these steps to set up your Bluetooth speaker:
+
+1. Make sure your Bluetooth speaker is in pairing mode
+2. Run the Bluetooth setup utility:
+   ```bash
+   cd src/scripts
+   ./setup_bluetooth.sh
+   ```
+3. Use the utility to:
+   - Scan for available devices
+   - Pair with your speaker
+   - Connect to your speaker
+   - Test the audio output
+   - Save the speaker's MAC address to the config file
+
+Once configured, the application will automatically connect to your Bluetooth speaker when you run the `run.sh` script.
 
 ## Usage
 

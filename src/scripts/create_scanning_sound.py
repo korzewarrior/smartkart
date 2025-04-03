@@ -7,23 +7,27 @@ import os
 import numpy as np
 from scipy.io import wavfile
 
-def create_scanning_sound(output_file="data/sounds/scanning.wav", duration=3.0, sample_rate=44100):
+# Get the project root directory
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "../.."))
+OUTPUT_FILE = os.path.join(PROJECT_ROOT, "data/sounds/scanning.wav")
+
+def create_scanning_sound(output_file=OUTPUT_FILE, duration=3.0, sample_rate=44100):
     """
     Create a gentle scanning sound that can loop continuously
     
     Parameters:
     - output_file: Path to save the WAV file
     - duration: Duration of the sound in seconds
-    - sample_rate: Sample rate in Hz
+    - sample_rate: Sample rate for the WAV file
     """
-    # Ensure the directory exists
+    # Create the output directory if it doesn't exist
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     
-    # Create time array
+    # Create time array for the specified duration
     t = np.linspace(0, duration, int(sample_rate * duration), False)
     
     # Create a gentle oscillating sound with fade in/out for smooth looping
-    # Base tone - gentle sine wave modulation
     base_freq = 300  # Low frequency base
     mod_freq = 0.5   # Slow modulation
     
@@ -41,7 +45,7 @@ def create_scanning_sound(output_file="data/sounds/scanning.wav", duration=3.0, 
     fade_time = 0.3  # seconds
     fade_samples = int(fade_time * sample_rate)
     
-    # Apply fade-in and fade-out
+    # Create fade-in and fade-out
     fade_in = np.linspace(0, 1, fade_samples)
     fade_out = np.linspace(1, 0, fade_samples)
     
@@ -50,10 +54,10 @@ def create_scanning_sound(output_file="data/sounds/scanning.wav", duration=3.0, 
     envelope[:fade_samples] = fade_in
     envelope[-fade_samples:] = fade_out
     
-    # Apply envelope to signal
+    # Apply envelope
     signal = signal * envelope
     
-    # Normalize to 16-bit range, but lower volume (0.3) to keep it gentle
+    # Normalize to 16-bit range, but use lower volume (0.3) to make it gentle
     signal = np.int16(signal * 0.3 * 32767)
     
     # Save to WAV file
@@ -62,4 +66,4 @@ def create_scanning_sound(output_file="data/sounds/scanning.wav", duration=3.0, 
 
 if __name__ == "__main__":
     create_scanning_sound()
-    print("Scanning sound created. You can now use this in the SmartKart application.") 
+    print("Scanning sound created. Use this continuous sound during barcode scanning.") 

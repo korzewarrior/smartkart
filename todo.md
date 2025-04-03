@@ -1,0 +1,1 @@
+bluetooth speaker automatic connection on reboot
