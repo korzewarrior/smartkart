@@ -4069,4 +4069,257 @@
 2025-04-01 14:16:59,492 - SmartKart - INFO - Stopping SmartKart application
 2025-04-01 14:16:59,492 - SmartKart - INFO - Stopping background scanner
 2025-04-01 14:16:59,514 - SmartKart - INFO - Background scanner thread stopped
-                                                                                                                                                
+                                                                                                                                                2025-04-03 14:30:08,458 - SmartKart - INFO - Logging initialized
+2025-04-03 14:30:08,459 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-03 14:30:08,459 - SmartKart - INFO - Configuration saved to config.json
+2025-04-03 14:30:08,459 - SmartKart - INFO - SmartKart initializing
+2025-04-03 14:30:08,459 - SmartKart - INFO - Initializing subsystems
+2025-04-03 14:30:08,459 - SmartKart - INFO - Initializing speech system
+2025-04-03 14:30:08,485 - SmartKart - INFO - Speech system initialized
+2025-04-03 14:30:08,485 - SmartKart - INFO - Initializing barcode scanner
+2025-04-03 14:30:08,486 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-03 14:30:08,486 - SmartKart - INFO - Barcode scanner initialized
+2025-04-03 14:30:08,486 - SmartKart - INFO - Initializing product database
+2025-04-03 14:30:08,486 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-03 14:30:08,486 - SmartKart - INFO - Product database initialized
+2025-04-03 14:30:08,486 - SmartKart - INFO - Initializing button controller
+2025-04-03 14:30:08,488 - SmartKart - INFO - Button controller initialized
+2025-04-03 14:30:08,488 - SmartKart - INFO - Starting SmartKart application
+2025-04-03 14:30:11,281 - SmartKart - INFO - Stopping SmartKart application
+2025-04-03 14:30:11,728 - SmartKart - INFO - SmartKart application stopped
+2025-04-03 14:30:16,568 - SmartKart - INFO - Logging initialized
+2025-04-03 14:30:16,569 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-03 14:30:16,569 - SmartKart - INFO - Configuration saved to config.json
+2025-04-03 14:30:16,569 - SmartKart - INFO - SmartKart initializing
+2025-04-03 14:30:16,569 - SmartKart - INFO - Initializing subsystems
+2025-04-03 14:30:16,569 - SmartKart - INFO - Initializing speech system
+2025-04-03 14:30:16,591 - SmartKart - INFO - Speech system initialized
+2025-04-03 14:30:16,591 - SmartKart - INFO - Initializing barcode scanner
+2025-04-03 14:30:16,591 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-03 14:30:16,591 - SmartKart - INFO - Barcode scanner initialized
+2025-04-03 14:30:16,591 - SmartKart - INFO - Initializing product database
+2025-04-03 14:30:16,592 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-03 14:30:16,592 - SmartKart - INFO - Product database initialized
+2025-04-03 14:30:16,592 - SmartKart - INFO - Initializing button controller
+2025-04-03 14:30:16,593 - SmartKart - INFO - Button controller initialized
+2025-04-03 14:30:16,593 - SmartKart - INFO - Starting SmartKart application
+2025-04-03 14:30:16,605 - SmartKart - INFO - Stopping SmartKart application
+2025-04-03 14:30:19,868 - SmartKart - INFO - SmartKart application stopped
+2025-04-03 14:32:04,350 - SmartKart - INFO - Logging initialized
+2025-04-03 14:32:04,350 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-03 14:32:04,350 - SmartKart - INFO - Configuration saved to config.json
+2025-04-03 14:32:04,350 - SmartKart - INFO - SmartKart initializing
+2025-04-03 14:32:04,350 - SmartKart - INFO - Initializing subsystems
+2025-04-03 14:32:04,350 - SmartKart - INFO - Initializing speech system
+2025-04-03 14:32:04,379 - SmartKart - INFO - Speech system initialized
+2025-04-03 14:32:04,380 - SmartKart - INFO - Initializing barcode scanner
+2025-04-03 14:32:04,380 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-03 14:32:04,380 - SmartKart - INFO - Barcode scanner initialized
+2025-04-03 14:32:04,380 - SmartKart - INFO - Initializing product database
+2025-04-03 14:32:04,380 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-03 14:32:04,380 - SmartKart - INFO - Product database initialized
+2025-04-03 14:32:04,380 - SmartKart - INFO - Initializing button controller
+2025-04-03 14:32:04,383 - SmartKart - INFO - Button controller initialized
+2025-04-03 14:32:04,383 - SmartKart - INFO - Starting SmartKart application
+2025-04-03 14:32:07,650 - SmartKart - INFO - Stopping SmartKart application
+2025-04-03 14:32:07,755 - SmartKart - INFO - SmartKart application stopped
+2025-04-03 14:33:04,992 - SmartKart - INFO - Logging initialized
+2025-04-03 14:33:04,992 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-03 14:33:04,993 - SmartKart - INFO - Configuration saved to config.json
+2025-04-03 14:33:04,993 - SmartKart - INFO - SmartKart initializing
+2025-04-03 14:33:04,993 - SmartKart - INFO - Initializing subsystems
+2025-04-03 14:33:04,993 - SmartKart - INFO - Initializing speech system
+2025-04-03 14:33:05,020 - SmartKart - INFO - Speech system initialized
+2025-04-03 14:33:05,020 - SmartKart - INFO - Initializing barcode scanner
+2025-04-03 14:33:05,020 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-03 14:33:05,020 - SmartKart - INFO - Barcode scanner initialized
+2025-04-03 14:33:05,020 - SmartKart - INFO - Initializing product database
+2025-04-03 14:33:05,020 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-03 14:33:05,020 - SmartKart - INFO - Product database initialized
+2025-04-03 14:33:05,020 - SmartKart - INFO - Initializing button controller
+2025-04-03 14:33:05,022 - SmartKart - INFO - Button controller initialized
+2025-04-03 14:33:05,022 - SmartKart - INFO - Starting SmartKart application
+2025-04-03 14:33:06,136 - SmartKart - INFO - Stopping SmartKart application
+2025-04-03 14:33:08,293 - SmartKart - INFO - SmartKart application stopped
+2025-04-03 14:34:40,026 - SmartKart - INFO - Logging initialized
+2025-04-03 14:34:40,026 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-03 14:34:40,027 - SmartKart - INFO - Configuration saved to config.json
+2025-04-03 14:34:40,027 - SmartKart - INFO - SmartKart initializing
+2025-04-03 14:34:40,027 - SmartKart - INFO - Initializing subsystems
+2025-04-03 14:34:40,027 - SmartKart - INFO - Initializing speech system
+2025-04-03 14:34:40,049 - SmartKart - INFO - Speech system initialized
+2025-04-03 14:34:40,049 - SmartKart - INFO - Initializing barcode scanner
+2025-04-03 14:34:40,049 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-03 14:34:40,049 - SmartKart - INFO - Barcode scanner initialized
+2025-04-03 14:34:40,049 - SmartKart - INFO - Initializing product database
+2025-04-03 14:34:40,049 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-03 14:34:40,049 - SmartKart - INFO - Product database initialized
+2025-04-03 14:34:40,049 - SmartKart - INFO - Initializing button controller
+2025-04-03 14:34:40,051 - SmartKart - INFO - Button controller initialized
+2025-04-03 14:34:40,051 - SmartKart - INFO - Starting SmartKart application
+2025-04-03 14:34:41,151 - SmartKart - INFO - Stopping SmartKart application
+2025-04-03 14:34:43,330 - SmartKart - INFO - SmartKart application stopped
+2025-04-03 14:34:49,143 - SmartKart - INFO - Logging initialized
+2025-04-03 14:34:49,143 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-03 14:34:49,144 - SmartKart - INFO - Configuration saved to config.json
+2025-04-03 14:34:49,144 - SmartKart - INFO - SmartKart initializing
+2025-04-03 14:34:49,144 - SmartKart - INFO - Initializing subsystems
+2025-04-03 14:34:49,144 - SmartKart - INFO - Initializing speech system
+2025-04-03 14:34:49,165 - SmartKart - INFO - Speech system initialized
+2025-04-03 14:34:49,165 - SmartKart - INFO - Initializing barcode scanner
+2025-04-03 14:34:49,165 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-03 14:34:49,165 - SmartKart - INFO - Barcode scanner initialized
+2025-04-03 14:34:49,165 - SmartKart - INFO - Initializing product database
+2025-04-03 14:34:49,166 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-03 14:34:49,166 - SmartKart - INFO - Product database initialized
+2025-04-03 14:34:49,166 - SmartKart - INFO - Initializing button controller
+2025-04-03 14:34:49,167 - SmartKart - INFO - Button controller initialized
+2025-04-03 14:34:49,167 - SmartKart - INFO - Starting SmartKart application
+2025-04-03 14:34:50,055 - SmartKart - INFO - Stopping SmartKart application
+2025-04-03 14:34:52,438 - SmartKart - INFO - SmartKart application stopped
+2025-04-03 14:37:23,779 - SmartKart - INFO - Logging initialized
+2025-04-03 14:37:23,779 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-03 14:37:23,780 - SmartKart - INFO - Configuration saved to config.json
+2025-04-03 14:37:23,780 - SmartKart - INFO - SmartKart initializing
+2025-04-03 14:37:23,780 - SmartKart - INFO - Initializing subsystems
+2025-04-03 14:37:23,780 - SmartKart - INFO - Initializing speech system
+2025-04-03 14:37:23,802 - SmartKart - INFO - Speech system initialized
+2025-04-03 14:37:23,803 - SmartKart - INFO - Initializing barcode scanner
+2025-04-03 14:37:23,803 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-03 14:37:23,803 - SmartKart - INFO - Barcode scanner initialized
+2025-04-03 14:37:23,803 - SmartKart - INFO - Initializing product database
+2025-04-03 14:37:23,803 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-03 14:37:23,803 - SmartKart - INFO - Product database initialized
+2025-04-03 14:37:23,803 - SmartKart - INFO - Initializing button controller
+2025-04-03 14:37:23,805 - SmartKart - INFO - Button controller initialized
+2025-04-03 14:37:23,805 - SmartKart - INFO - Starting SmartKart application
+2025-04-03 14:37:24,749 - SmartKart - ERROR - Error handling menu input: 'SmartKart' object has no attribute 'STATE_PRODUCT_LIST'
+2025-04-03 14:37:30,500 - SmartKart - ERROR - Error handling menu input: 'SmartKart' object has no attribute 'STATE_PRODUCT_LIST'
+2025-04-03 14:37:46,580 - SmartKart - ERROR - Error handling menu input: 'SmartKart' object has no attribute 'STATE_PRODUCT_LIST'
+2025-04-03 14:37:52,912 - SmartKart - ERROR - Error handling menu input: 'SmartKart' object has no attribute 'STATE_PRODUCT_LIST'
+2025-04-03 14:37:59,438 - SmartKart - ERROR - Error handling menu input: 'SmartKart' object has no attribute 'STATE_PRODUCT_LIST'
+2025-04-08 13:43:02,360 - SmartKart - INFO - Logging initialized
+2025-04-08 13:43:02,360 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-08 13:43:02,361 - SmartKart - INFO - Configuration saved to config.json
+2025-04-08 13:43:02,361 - SmartKart - INFO - SmartKart initializing
+2025-04-08 13:43:02,361 - SmartKart - INFO - Initializing subsystems
+2025-04-08 13:43:02,361 - SmartKart - INFO - Initializing speech system
+2025-04-08 13:43:02,394 - SmartKart - INFO - Speech system initialized
+2025-04-08 13:43:02,394 - SmartKart - INFO - Initializing barcode scanner
+2025-04-08 13:43:02,394 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-08 13:43:02,394 - SmartKart - INFO - Barcode scanner initialized
+2025-04-08 13:43:02,394 - SmartKart - INFO - Initializing product database
+2025-04-08 13:43:02,395 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-08 13:43:02,395 - SmartKart - INFO - Product database initialized
+2025-04-08 13:43:02,395 - SmartKart - INFO - Initializing button controller
+2025-04-08 13:43:02,396 - SmartKart - INFO - Button controller initialized
+2025-04-08 13:43:02,396 - SmartKart - INFO - Starting SmartKart application
+2025-04-08 13:43:06,575 - SmartKart - ERROR - Error handling menu input: 'SmartKart' object has no attribute 'STATE_PRODUCT_LIST'
+2025-04-08 13:51:27,042 - SmartKart - INFO - KeyboardInterrupt received, shutting down
+2025-04-08 13:51:27,213 - SmartKart - INFO - Stopping SmartKart application
+2025-04-08 13:51:27,318 - SmartKart - INFO - SmartKart application stopped
+2025-04-08 13:51:30,713 - SmartKart - INFO - Logging initialized
+2025-04-08 13:51:30,713 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-08 13:51:30,713 - SmartKart - INFO - Configuration saved to config.json
+2025-04-08 13:51:30,713 - SmartKart - INFO - SmartKart initializing
+2025-04-08 13:51:30,713 - SmartKart - INFO - Initializing subsystems
+2025-04-08 13:51:30,713 - SmartKart - INFO - Initializing speech system
+2025-04-08 13:51:30,734 - SmartKart - INFO - Speech system initialized
+2025-04-08 13:51:30,734 - SmartKart - INFO - Initializing barcode scanner
+2025-04-08 13:51:30,734 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-08 13:51:30,734 - SmartKart - INFO - Barcode scanner initialized
+2025-04-08 13:51:30,734 - SmartKart - INFO - Initializing product database
+2025-04-08 13:51:30,734 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-08 13:51:30,734 - SmartKart - INFO - Product database initialized
+2025-04-08 13:51:30,734 - SmartKart - INFO - Initializing button controller
+2025-04-08 13:51:30,735 - SmartKart - INFO - Button controller initialized
+2025-04-08 13:51:30,736 - SmartKart - INFO - Starting SmartKart application
+2025-04-08 13:51:35,643 - SmartKart - INFO - KeyboardInterrupt received, shutting down
+2025-04-08 13:51:35,824 - SmartKart - INFO - Stopping SmartKart application
+2025-04-08 13:51:35,928 - SmartKart - INFO - SmartKart application stopped
+2025-04-08 13:51:50,871 - SmartKart - INFO - Logging initialized
+2025-04-08 13:51:50,871 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-08 13:51:50,872 - SmartKart - INFO - Configuration saved to config.json
+2025-04-08 13:51:50,872 - SmartKart - INFO - SmartKart initializing
+2025-04-08 13:51:50,872 - SmartKart - INFO - Initializing subsystems
+2025-04-08 13:51:50,872 - SmartKart - INFO - Initializing speech system
+2025-04-08 13:51:50,893 - SmartKart - INFO - Speech system initialized
+2025-04-08 13:51:50,893 - SmartKart - INFO - Initializing barcode scanner
+2025-04-08 13:51:50,893 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-08 13:51:50,893 - SmartKart - INFO - Barcode scanner initialized
+2025-04-08 13:51:50,893 - SmartKart - INFO - Initializing product database
+2025-04-08 13:51:50,893 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-08 13:51:50,893 - SmartKart - INFO - Product database initialized
+2025-04-08 13:51:50,893 - SmartKart - INFO - Initializing button controller
+2025-04-08 13:51:50,894 - SmartKart - INFO - Button controller initialized
+2025-04-08 13:51:50,895 - SmartKart - INFO - Starting SmartKart application
+2025-04-08 13:58:06,015 - SmartKart - INFO - Logging initialized
+2025-04-08 13:58:06,015 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-08 13:58:06,016 - SmartKart - INFO - Configuration saved to config.json
+2025-04-08 13:58:06,016 - SmartKart - INFO - SmartKart initializing
+2025-04-08 13:58:06,016 - SmartKart - INFO - Initializing subsystems
+2025-04-08 13:58:06,016 - SmartKart - INFO - Initializing speech system
+2025-04-08 13:58:06,036 - SmartKart - INFO - Speech system initialized
+2025-04-08 13:58:06,036 - SmartKart - INFO - Initializing barcode scanner
+2025-04-08 13:58:06,036 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-08 13:58:06,036 - SmartKart - INFO - Barcode scanner initialized
+2025-04-08 13:58:06,037 - SmartKart - INFO - Initializing product database
+2025-04-08 13:58:06,037 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-08 13:58:06,037 - SmartKart - INFO - Product database initialized
+2025-04-08 13:58:06,037 - SmartKart - INFO - Initializing button controller
+2025-04-08 13:58:06,038 - SmartKart - INFO - Button controller initialized
+2025-04-08 13:58:06,038 - SmartKart - INFO - Starting SmartKart application
+2025-04-08 13:59:20,782 - SmartKart - INFO - Logging initialized
+2025-04-08 13:59:20,782 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-08 13:59:20,782 - SmartKart - INFO - Configuration saved to config.json
+2025-04-08 13:59:20,782 - SmartKart - INFO - SmartKart initializing
+2025-04-08 13:59:20,782 - SmartKart - INFO - Initializing subsystems
+2025-04-08 13:59:20,782 - SmartKart - INFO - Initializing speech system
+2025-04-08 13:59:20,803 - SmartKart - INFO - Speech system initialized
+2025-04-08 13:59:20,804 - SmartKart - INFO - Initializing barcode scanner
+2025-04-08 13:59:20,804 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-08 13:59:20,804 - SmartKart - INFO - Barcode scanner initialized
+2025-04-08 13:59:20,804 - SmartKart - INFO - Initializing product database
+2025-04-08 13:59:20,804 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-08 13:59:20,804 - SmartKart - INFO - Product database initialized
+2025-04-08 13:59:20,804 - SmartKart - INFO - Initializing button controller
+2025-04-08 13:59:20,805 - SmartKart - INFO - Button controller initialized
+2025-04-08 13:59:20,805 - SmartKart - INFO - Starting SmartKart application
+2025-04-08 14:12:43,944 - SmartKart - INFO - Logging initialized
+2025-04-08 14:12:43,944 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-08 14:12:43,945 - SmartKart - INFO - Configuration saved to config.json
+2025-04-08 14:12:43,945 - SmartKart - INFO - SmartKart initializing
+2025-04-08 14:12:43,945 - SmartKart - INFO - Initializing subsystems
+2025-04-08 14:12:43,945 - SmartKart - INFO - Initializing speech system
+2025-04-08 14:12:43,976 - SmartKart - INFO - Speech system initialized
+2025-04-08 14:12:43,976 - SmartKart - INFO - Initializing barcode scanner
+2025-04-08 14:12:43,976 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-08 14:12:43,976 - SmartKart - INFO - Barcode scanner initialized
+2025-04-08 14:12:43,977 - SmartKart - INFO - Initializing product database
+2025-04-08 14:12:43,977 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-08 14:12:43,977 - SmartKart - INFO - Product database initialized
+2025-04-08 14:12:43,977 - SmartKart - INFO - Initializing button controller
+2025-04-08 14:12:43,979 - SmartKart - INFO - Button controller initialized
+2025-04-08 14:12:43,979 - SmartKart - INFO - Starting SmartKart application
+2025-04-16 18:40:04,021 - SmartKart - INFO - Logging initialized
+2025-04-16 18:40:04,021 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 18:40:04,022 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 18:40:04,022 - SmartKart - INFO - SmartKart initializing
+2025-04-16 18:40:04,022 - SmartKart - INFO - Initializing subsystems
+2025-04-16 18:40:04,022 - SmartKart - INFO - Initializing speech system
+2025-04-16 18:40:04,050 - SmartKart - INFO - Speech system initialized
+2025-04-16 18:40:04,050 - SmartKart - INFO - Initializing barcode scanner
+2025-04-16 18:40:04,050 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-16 18:40:04,051 - SmartKart - INFO - Barcode scanner initialized
+2025-04-16 18:40:04,051 - SmartKart - INFO - Initializing product database
+2025-04-16 18:40:04,051 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 18:40:04,051 - SmartKart - INFO - Product database initialized
+2025-04-16 18:40:04,051 - SmartKart - INFO - Initializing button controller
+2025-04-16 18:40:04,052 - SmartKart - INFO - Button controller initialized
+2025-04-16 18:40:04,052 - SmartKart - INFO - Starting SmartKart application
+2025-04-16 18:40:12,628 - SmartKart - ERROR - Error handling menu input: 'SmartKart' object has no attribute 'STATE_PRODUCT_LIST'
+2025-04-16 18:40:15,947 - SmartKart - ERROR - Error handling menu input: 'SmartKart' object has no attribute 'STATE_PRODUCT_LIST'
+2025-04-16 18:40:20,275 - SmartKart - ERROR - Error handling menu input: 'SmartKart' object has no attribute 'STATE_PRODUCT_LIST'
+2025-04-16 18:40:23,588 - SmartKart - INFO - KeyboardInterrupt received, shutting down
+2025-04-16 18:40:23,769 - SmartKart - INFO - Stopping SmartKart application
+2025-04-16 18:40:23,874 - SmartKart - INFO - SmartKart application stopped

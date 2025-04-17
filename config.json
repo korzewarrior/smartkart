@@ -7,7 +7,7 @@
     },
     "audio": {
         "speech_rate": 150,
-        "speech_volume": 0.8,
+        "speech_volume": 1.0,
         "voice": null,
         "enable_sounds": true,
         "sound_volume": 0.7,

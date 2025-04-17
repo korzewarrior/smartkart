@@ -254,6 +254,13 @@ class SmartKart:
             if self.current_product:
                 ingredients = self.current_product.get('ingredients_text', 'No ingredients available')
                 self._speak(f"Ingredients: {ingredients}")
+        elif self.current_state == self.STATE_SETTINGS and self.settings_mode == "voice_selection":
+            # Select the current voice
+            self._set_voice(self.voice_selection_index)
+            
+            # Return to idle state
+            self.current_state = self.STATE_IDLE
+            self.settings_mode = None
     
     def _on_up_pressed(self, button_idx):
         """
@@ -261,6 +268,21 @@ class SmartKart:
         """
         self.logger.info("Up button pressed")
         
+        # Check if we're in voice selection mode
+        if self.current_state == self.STATE_SETTINGS and self.settings_mode == "voice_selection":
+            # Navigate to previous voice
+            if hasattr(self, 'voice_list') and self.voice_list:
+                # Move selection up
+                self.voice_selection_index = max(0, self.voice_selection_index - 1)
+                
+                # Speak the selected voice name
+                selected_voice = self.voice_list[self.voice_selection_index]
+                self._speak(f"Voice sample: {selected_voice.name}")
+                
+                # Request UI refresh
+                self.needs_refresh = True
+                return
+                
         # If in any mode, pressing Up will repeat the last scanned item
         if self.last_product_name:
             # Basic product info
@@ -296,6 +318,21 @@ class SmartKart:
         """
         self.logger.info("Down button pressed")
         
+        # Check if we're in voice selection mode
+        if self.current_state == self.STATE_SETTINGS and self.settings_mode == "voice_selection":
+            # Navigate to next voice
+            if hasattr(self, 'voice_list') and self.voice_list:
+                # Move selection down
+                self.voice_selection_index = min(len(self.voice_list) - 1, self.voice_selection_index + 1)
+                
+                # Speak the selected voice name
+                selected_voice = self.voice_list[self.voice_selection_index]
+                self._speak(f"Voice sample: {selected_voice.name}")
+                
+                # Request UI refresh
+                self.needs_refresh = True
+                return
+        
         if self.current_state == self.STATE_PRODUCT_DETAILS:
             # Decrease volume
             current_volume = self.config.get('audio', 'speech_volume')
@@ -319,6 +356,11 @@ class SmartKart:
             # Go back to idle mode
             self.current_state = self.STATE_IDLE
             self._speak("Returning to ready mode.")
+        elif self.current_state == self.STATE_SETTINGS and self.settings_mode == "voice_selection":
+            # Exit voice selection without changing
+            self.current_state = self.STATE_IDLE
+            self.settings_mode = None
+            self._speak("Voice selection cancelled.")
     
     def _speak(self, text):
         """
@@ -327,7 +369,80 @@ class SmartKart:
         if self.speech:
             self.speech.speak(text)
         else:
-            print(f"SPEECH: {text}")
+            print(f"[SPEECH] {text}")
+    
+    def _list_available_voices(self):
+        """
+        List all available voices
+        """
+        if not self.speech:
+            return
+            
+        voices = self.speech.get_available_voices()
+        self.logger.info(f"Found {len(voices)} available voices")
+        
+        # Clear the log to use for displaying voices
+        self.log_messages = []
+        self._add_to_log("===== AVAILABLE VOICES =====")
+        
+        # Add each voice to the log
+        for i, voice in enumerate(voices):
+            voice_name = voice.name
+            voice_id = voice.id
+            voice_lang = ", ".join(voice.languages) if voice.languages else "Unknown"
+            self._add_to_log(f"{i}: {voice_name} ({voice_lang})")
+            
+        # Add instructions to the log
+        self._add_to_log("")
+        self._add_to_log("Press UP/DOWN to navigate")
+        self._add_to_log("Press SELECT to choose a voice")
+        self._add_to_log("Press BACK to cancel")
+        
+        # Set up navigation variables
+        self.voice_list = voices
+        self.voice_selection_index = 0
+        self.current_state = self.STATE_SETTINGS
+        self.settings_mode = "voice_selection"
+        self.needs_refresh = True
+        
+        # Announce the first voice
+        if voices:
+            first_voice = voices[0]
+            self._speak(f"Voice sample: {first_voice.name}. Use UP and DOWN to navigate voices.")
+            
+    def _set_voice(self, voice_index):
+        """
+        Set the selected voice
+        
+        Parameters:
+        - voice_index: Index of the voice to set
+        """
+        if not self.speech or not hasattr(self, 'voice_list') or voice_index >= len(self.voice_list):
+            return False
+            
+        try:
+            # Get the selected voice
+            selected_voice = self.voice_list[voice_index]
+            
+            # Set the voice
+            success = self.speech.set_voice(selected_voice.id)
+            
+            if success:
+                # Update the configuration
+                self.config.set('audio', 'voice', selected_voice.id)
+                self.config.save()
+                
+                # Speak using the new voice
+                self._speak(f"Voice changed to {selected_voice.name}")
+                return True
+            else:
+                self._speak("Failed to set the selected voice.")
+                return False
+                
+        except Exception as e:
+            self.logger.error(f"Error setting voice: {e}")
+            self._speak("Error setting voice")
+            return False
     
     def _start_background_scanning(self):
         """
@@ -761,37 +876,43 @@ class SmartKart:
     
     def _display_settings(self):
         """
-        Display settings view
+        Display settings menu
         """
+        # Clear screen and set title
         self._clear_screen()
-        print("=" * 40)
-        print("  SETTINGS")
-        print("=" * 40)
-        print("  1 - Toggle speech on/off")
-        print("  2 - Adjust speech volume")
-        print("  3 - Adjust speech rate")
-        print("  4 - Change camera index")
-        print("  5 - Delete product database")
-        print("  b - Back to main menu")
-        print("=" * 40)
+        print("===== SMARTKART SETTINGS =====")
+        print("")
         
-        # Show current settings
-        speech_volume = self.config.get('audio', 'speech_volume')
-        speech_rate = self.config.get('audio', 'speech_rate')
-        camera_index = self.config.get('barcode', 'camera_index')
+        if hasattr(self, 'settings_mode') and self.settings_mode == "voice_selection":
+            # Display voice selection UI
+            if hasattr(self, 'voice_list') and hasattr(self, 'voice_selection_index'):
+                # Display the voice selection header
+                print("===== VOICE SELECTION =====")
+                print("")
+                
+                # Display log messages which contain the voice list
+                for msg in self.log_messages:
+                    print(msg)
+                    
+                # Display cursor at current selection
+                voices_shown = min(len(self.voice_list), len(self.log_messages) - 5)  # Subtract headers and instructions
+                if voices_shown > 0:
+                    # Position cursor at current selection (add 1 for header)
+                    cursor_pos = 1 + self.voice_selection_index
+                    if 0 <= cursor_pos < len(self.log_messages):
+                        cursor_line = self.log_messages[cursor_pos]
+                        print(f"\nCurrent selection: {cursor_line}")
+            return
+            
+        # Normal settings display
+        print("1. Change Voice")
+        print("2. Speech Volume: {}%".format(int(self.config.get('audio', 'speech_volume') * 100)))
+        print("3. Speech Rate: {}".format(self.config.get('audio', 'speech_rate')))
+        print("4. Reset Product Database")
+        print("5. Back to Main Menu")
+        print("")
+        print("Enter your choice (1-5): ", end="", flush=True)
         
-        print(f"  Current settings:")
-        print(f"  - Speech volume: {int(speech_volume * 100)}%")
-        print(f"  - Speech rate: {speech_rate} words/min")
-        print(f"  - Camera index: {camera_index if camera_index is not None else 'Auto'}")
-        
-        print("=" * 40)
-        
-        # Display log window
-        self._display_log_window()
-        
-        print("  Enter command (1-5/b): ", end='', flush=True)
-        # Mark that we're waiting for input
         self.waiting_for_input = True
     
     def _delete_product_database(self):
@@ -915,213 +1036,163 @@ class SmartKart:
     
     def _handle_menu_input(self, choice=None):
         """
-        Handle user input for menus
+        Handle menu input
+        
+        Parameters:
+        - choice: Optional preconfigured choice to use
         
         Returns:
-        - True to continue, False to exit
+        - True if menu continues, False if user wants to exit menu
         """
-        # First check if we need to refresh the UI (when not waiting for input)
-        if not self.waiting_for_input:
-            self._check_and_refresh_ui()
-        
-        # Check if input is available
-        import select
-        if choice is None and not select.select([sys.stdin], [], [], 0.1)[0]:
-            # No input available, continue processing
-            return True
-        
-        # Mark that we're waiting for input now
-        self.waiting_for_input = True
-        
-        # Get input if not provided
-        if choice is None:
-            try:
-                choice = input().strip().lower()
-            except (KeyboardInterrupt, EOFError):
-                self.waiting_for_input = False  # No longer waiting for input
-                return False
-        
-        # Processing input now, no longer waiting
-        self.waiting_for_input = False
-        
-        # Flag that we need to refresh after processing input
-        self.needs_refresh = True
-        
-        # Main menu
-        if self.current_menu == self.MENU_SCANNER:
-            if choice == 's':
-                if self.scanner_running:
-                    self._stop_background_scanning()
+        try:
+            if choice is None:
+                # Wait for input
+                choice = input().strip()
+            
+            # Parse the choice
+            choice = int(choice) if choice.isdigit() else choice.strip().upper()
+            
+            # Process based on current state
+            if self.current_state == self.STATE_MENU:
+                # Main menu handling
+                if choice == self.MENU_SCANNER or choice == "S":
+                    # Start scanner
+                    self._start_scanning()
+                    # Change return to True to stay in the main loop
+                    return True
+                elif choice == self.MENU_PRODUCT_LIST or choice == "P":
+                    # Show product list
+                    self.current_state = self.STATE_PRODUCT_LIST
+                    # Also update current_menu to match current_state
+                    self.current_menu = self.MENU_PRODUCT_LIST
+                    self.needs_refresh = True
+                    return True
+                elif choice == self.MENU_SETTINGS or choice == "T":
+                    # Show settings
+                    self.current_state = self.STATE_SETTINGS
+                    # Also update current_menu to match current_state
+                    self.current_menu = self.MENU_SETTINGS
+                    self.needs_refresh = True
+                    return True
+                elif choice == self.MENU_EXIT or choice == "X" or choice == "Q":
+                    # Exit program
+                    self._speak("Shutting down SmartKart.")
+                    self.running = False
+                    return False
                 else:
-                    self._start_background_scanning()
-                return True
-            elif choice == 'r':
-                # Repeat last scanned item
-                if self.last_product_name:
-                    # Basic product info
-                    if self.last_product_brand:
-                        basic_info = f"Last scanned item: {self.last_product_name} by {self.last_product_brand}"
-                    else:
-                        basic_info = f"Last scanned item: {self.last_product_name}"
-                    
-                    # Speak basic info
-                    self._speak(basic_info)
-                    
-                    # Also announce allergens if available
-                    if self.last_product_allergens and len(self.last_product_allergens) > 0:
-                        allergen_text = ", ".join(self.last_product_allergens)
-                        self._speak(f"Warning: Contains {allergen_text}.")
-                else:
-                    self._speak("No items have been scanned yet")
-                return True
-            elif choice == 'b':
-                self.current_menu = None  # Go back to main menu
-                self._add_to_log("Returned to main menu")
-                return True
-        
-        # Product list menu
-        elif self.current_menu == self.MENU_PRODUCT_LIST:
-            if choice == 'b':
-                self.current_menu = None  # Go back to main menu
-                self._add_to_log("Returned to main menu")
-                return True
-        
-        # Settings menu
-        elif self.current_menu == self.MENU_SETTINGS:
-            if choice == '1':
-                # Toggle speech
-                if self.speech:
-                    print("Speech toggle not implemented yet.")
-                    self._add_to_log("Speech toggle not implemented")
-                return True
-            elif choice == '2':
-                # Adjust volume
-                try:
-                    print("Enter new volume (10-100): ", end='', flush=True)
-                    self.waiting_for_input = True  # Set waiting flag for volume input
-                    volume = int(input().strip()) / 100.0
-                    self.waiting_for_input = False  # Clear flag after getting input
-                    volume = max(0.1, min(1.0, volume))
-                    self.config.set('audio', 'speech_volume', volume)
-                    self.speech.set_volume(volume)
-                    self._speak(f"Volume set to {int(volume * 100)} percent")
-                    self._add_to_log(f"Volume set to {int(volume * 100)}%")
-                    # Clear screen after setting the volume
-                    time.sleep(1)  # Give user time to see feedback
-                except Exception as e:
-                    self.waiting_for_input = False  # Make sure to clear flag on error
-                    print(f"Error setting volume: {e}")
-                    time.sleep(2)  # Give user time to see error message
-                return True
-            elif choice == '3':
-                # Adjust speech rate
-                try:
-                    print("Enter new speech rate (100-250): ", end='', flush=True)
-                    self.waiting_for_input = True  # Set waiting flag for rate input
-                    rate = int(input().strip())
-                    self.waiting_for_input = False  # Clear flag after getting input
-                    rate = max(100, min(250, rate))
-                    self.config.set('audio', 'speech_rate', rate)
-                    self.speech.set_rate(rate)
-                    self._speak(f"Speech rate set to {rate}")
-                    self._add_to_log(f"Speech rate set to {rate}")
-                    # Clear screen after setting the rate
-                    time.sleep(1)  # Give user time to see feedback
-                except Exception as e:
-                    self.waiting_for_input = False  # Make sure to clear flag on error
-                    print(f"Error setting speech rate: {e}")
-                    time.sleep(2)  # Give user time to see error message
-                return True
-            elif choice == '4':
-                # Change camera index
-                try:
-                    print("Enter new camera index (0-9, or 'auto'): ", end='', flush=True)
-                    self.waiting_for_input = True  # Set waiting flag for camera index input
-                    cam_input = input().strip().lower()
-                    self.waiting_for_input = False  # Clear flag after getting input
-                    
-                    # Check if we need to restart scanner
-                    restart_scanner = self.scanner_running
-                    if restart_scanner:
+                    # Invalid choice
+                    self._speak("Invalid selection. Please try again.")
+                    return True
+            
+            # Handle scanner view commands
+            elif self.current_state == self.STATE_SCANNING:
+                # Scanner view handling
+                if choice == "S":
+                    # Toggle scanner
+                    if self.scanner_running:
                         self._stop_background_scanning()
-                    
-                    if cam_input == 'auto':
-                        self.config.set('barcode', 'camera_index', None)
-                        print("Camera set to auto-detect")
-                        self._add_to_log("Camera set to auto-detect")
+                        self._speak("Scanner stopped.")
                     else:
-                        cam_index = int(cam_input)
-                        self.config.set('barcode', 'camera_index', cam_index)
-                        print(f"Camera index set to {cam_index}")
-                        self._add_to_log(f"Camera index set to {cam_index}")
-                    
-                    # Restart scanner if it was running
-                    if restart_scanner:
-                        # Recreate scanner with new settings
-                        self._init_scanner()
                         self._start_background_scanning()
-                    
-                    # Give user time to see feedback before clearing screen
-                    time.sleep(1)
-                except Exception as e:
-                    self.waiting_for_input = False  # Make sure to clear flag on error
-                    print(f"Error setting camera index: {e}")
-                    time.sleep(2)  # Give user time to see error message
-                return True
-            elif choice == '5':
-                # Delete product database
-                try:
-                    print("Warning: This will delete ALL product data!")
-                    print("Are you sure you want to continue? (y/n): ", end='', flush=True)
-                    self.waiting_for_input = True  # Set waiting flag for confirmation
-                    confirmation = input().strip().lower()
-                    self.waiting_for_input = False  # Clear flag after getting input
-                    
-                    if confirmation == 'y' or confirmation == 'yes':
-                        print("Deleting product database...")
-                        success = self._delete_product_database()
-                        if success:
-                            self._speak("Product database has been deleted.")
-                            self._add_to_log("Product database deleted")
+                        self._speak("Scanner started.")
+                    self.needs_refresh = True
+                    return True
+                elif choice == "R":
+                    # Repeat last scanned item
+                    if self.last_product_name:
+                        if self.last_product_brand:
+                            self._speak(f"Last scanned item: {self.last_product_name} by {self.last_product_brand}")
                         else:
-                            self._speak("There was an error deleting the product database.")
-                        # Clear screen after deleting
-                        time.sleep(2)  # Give user time to see feedback
+                            self._speak(f"Last scanned item: {self.last_product_name}")
+                            
+                        # Also announce allergens if available
+                        if self.last_product_allergens and len(self.last_product_allergens) > 0:
+                            allergen_text = ", ".join(self.last_product_allergens)
+                            self._speak(f"Warning: Contains {allergen_text}.")
                     else:
-                        print("Database deletion cancelled.")
-                        self._add_to_log("Database deletion cancelled")
-                        time.sleep(1)  # Give user time to see feedback
-                except Exception as e:
-                    self.waiting_for_input = False  # Make sure to clear flag on error
-                    print(f"Error deleting database: {e}")
-                    time.sleep(2)  # Give user time to see error message
-                return True
-            elif choice == 'b':
-                self.current_menu = None  # Go back to main menu
-                self._add_to_log("Returned to main menu")
-                return True
+                        self._speak("No items have been scanned yet.")
+                    return True
+                elif choice == "B":
+                    # Back to main menu
+                    self.current_state = self.STATE_MENU
+                    self.current_menu = None  # None represents the main menu
+                    self.needs_refresh = True
+                    return True
+                else:
+                    # Invalid choice
+                    self._speak("Invalid selection. Please try again.")
+                    return True
+            
+            # Handle product list view commands
+            elif self.current_state == self.STATE_PRODUCT_LIST:
+                # Product list view handling
+                if choice == "B":
+                    # Back to main menu
+                    self.current_state = self.STATE_MENU
+                    self.current_menu = None  # None represents the main menu
+                    self.needs_refresh = True
+                    return True
+                else:
+                    # Invalid choice
+                    self._speak("Invalid selection. Please try again.")
+                    return True
+            
+            elif self.current_state == self.STATE_SETTINGS:
+                # Settings menu handling
+                if choice == 1:
+                    # Change voice
+                    self._list_available_voices()
+                    return True
+                elif choice == 2:
+                    # Change volume - already handled through buttons
+                    current_volume = self.config.get('audio', 'speech_volume')
+                    self._speak(f"Current volume is {int(current_volume * 100)} percent. Use Up and Down buttons to adjust.")
+                    return True
+                elif choice == 3:
+                    # Change speech rate
+                    current_rate = self.config.get('audio', 'speech_rate')
+                    
+                    # Prompt for new rate
+                    print("Enter new speech rate (100-250, current: {}): ".format(current_rate), end="", flush=True)
+                    new_rate_str = input().strip()
+                    
+                    try:
+                        new_rate = int(new_rate_str)
+                        if 50 <= new_rate <= 300:
+                            self.config.set('audio', 'speech_rate', new_rate)
+                            self.speech.set_rate(new_rate)
+                            self._speak(f"Speech rate set to {new_rate}")
+                        else:
+                            self._speak("Invalid rate. Must be between 50 and 300.")
+                    except ValueError:
+                        self._speak("Invalid input. Please enter a number.")
+                    
+                    # Make sure we refresh the settings menu
+                    self.needs_refresh = True
+                    # Ensure we return True to continue execution and not exit
+                    return True
+                    
+                elif choice == 4:
+                    # Reset product database
+                    self._delete_product_database()
+                    self.needs_refresh = True
+                    return True
+                elif choice == 5:
+                    # Back to main menu
+                    self.current_state = self.STATE_MENU
+                    # Also update current_menu
+                    self.current_menu = None  # None represents the main menu
+                    self.needs_refresh = True
+                    return True
+                else:
+                    # Invalid choice
+                    self._speak("Invalid selection. Please try again.")
+                    return True
         
-        # Main menu options
-        else:
-            if choice == '1':
-                self.current_menu = self.MENU_SCANNER
-                self._add_to_log("Opened Scanner View")
-                return True
-            elif choice == '2':
-                self.current_menu = self.MENU_PRODUCT_LIST
-                self._add_to_log("Opened Product List")
-                return True
-            elif choice == '3':
-                self.current_menu = self.MENU_SETTINGS
-                self._add_to_log("Opened Settings")
-                return True
-            elif choice == '4':
-                print("Exiting...")
-                self._add_to_log("Exiting application")
-                return False
-        
-        # Invalid input
-        return True
+        except Exception as e:
+            self.logger.error(f"Error handling menu input: {e}")
+            self._speak("An error occurred while processing menu input.")
+            return True
     
     def start(self):
         """
@@ -1156,7 +1227,14 @@ class SmartKart:
                     self._display_menu()
                 
                 # Handle user input (will also handle refresh)
-                self.running = self._handle_menu_input()
+                # Only continue the UI refresh loop if _handle_menu_input returns True
+                # If it returns False, we exit this iteration, but don't exit the program
+                # unless self.running was explicitly set to False inside _handle_menu_input
+                continue_ui_refresh = self._handle_menu_input()
+                
+                # If we don't need to refresh the UI, short pause to prevent CPU spinning
+                if not continue_ui_refresh:
+                    time.sleep(0.1)
                 
         except KeyboardInterrupt:
             self.logger.info("KeyboardInterrupt received, shutting down")
