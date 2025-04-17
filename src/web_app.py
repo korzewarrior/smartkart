@@ -53,16 +53,50 @@ def initialize_systems():
     """Initialize the SmartKart subsystems"""
     global product_db, speech
     
-    # Initialize speech
-    speech_rate = config.get('audio', 'speech_rate')
-    speech_volume = config.get('audio', 'speech_volume')
-    voice = config.get('audio', 'voice')
-    
-    speech = SpeechManager(
-        rate=speech_rate,
-        volume=speech_volume,
-        voice=voice
-    )
+    # Initialize speech (Piper TTS version)
+    try:
+        # Define default paths
+        default_piper_exe = '/home/james/piper/piper' # Adjust if needed
+        default_piper_model = '/home/james/piper/voices/en_US-lessac-medium.onnx' # Adjust if needed
+        
+        # Try to get paths from config
+        piper_exe = None
+        piper_model = None
+        try:
+            piper_exe = config.get('audio', 'piper_executable')
+        except Exception as e: # Catch potential errors from ConfigManager
+            app.logger.warning(f"Error getting 'piper_executable' from config: {e}")
+            
+        try:
+            piper_model = config.get('audio', 'piper_model')
+        except Exception as e:
+            app.logger.warning(f"Error getting 'piper_model' from config: {e}")
+
+        # Use defaults if keys were missing or returned None
+        if piper_exe is None:
+            app.logger.warning(f"'piper_executable' not found or invalid in config [audio], using default: {default_piper_exe}")
+            piper_exe = default_piper_exe
+        if piper_model is None:
+            app.logger.warning(f"'piper_model' not found or invalid in config [audio], using default: {default_piper_model}")
+            piper_model = default_piper_model
+        
+        # Ensure paths are absolute or resolve them (assuming relative to project root if not absolute)
+        project_root = os.path.dirname(os.path.dirname(__file__))
+        if not os.path.isabs(piper_exe):
+            piper_exe = os.path.join(project_root, piper_exe)
+        if not os.path.isabs(piper_model):
+             piper_model = os.path.join(project_root, piper_model)
+
+        app.logger.info(f"Initializing Piper TTS with executable: {piper_exe}")
+        app.logger.info(f"Initializing Piper TTS with model: {piper_model}")
+        speech = SpeechManager(piper_executable=piper_exe, model_path=piper_model)
+        
+    except RuntimeError as e:
+        app.logger.error(f"Failed to initialize SpeechManager (Piper): {e}")
+        speech = None # Ensure speech is None if init fails
+    except Exception as e:
+        app.logger.error(f"Unexpected error initializing SpeechManager (Piper): {e}")
+        speech = None
     
     # Initialize product database
     product_list_file = config.get('database', 'product_list_file')
@@ -286,23 +320,12 @@ def products():
 
 @app.route('/settings')
 def settings():
-    """Render the settings page"""
-    # Get current settings
-    current_settings = {
-        'speech_volume': int(config.get('audio', 'speech_volume') * 100),
-        'speech_rate': config.get('audio', 'speech_rate'),
-    }
-    
-    # Get available voices
-    available_voices = []
-    if speech:
-        voices = speech.get_available_voices()
-        for voice in voices:
-            available_voices.append({
-                'id': voice.id,
-                'name': voice.name
-            })
-    
+    """Render the settings page (PicoTTS version - limited settings)"""
+    # PicoTTS settings (like language) are not currently exposed here.
+    # Volume/Rate/Voice selection are removed as they were for pyttsx3.
+    current_settings = {}
+    available_voices = [] # Pass empty list
+
     return render_template('settings.html', 
                           settings=current_settings, 
                           voices=available_voices)
@@ -368,27 +391,12 @@ def process_barcode():
 
 @app.route('/api/update_settings', methods=['POST'])
 def update_settings():
-    """Update application settings"""
-    data = request.json
-    
-    # Update settings
-    if 'speech_volume' in data:
-        volume = float(data['speech_volume']) / 100.0
-        config.set('audio', 'speech_volume', volume)
-        if speech:
-            speech.set_volume(volume)
-    
-    if 'speech_rate' in data:
-        rate = int(data['speech_rate'])
-        config.set('audio', 'speech_rate', rate)
-        if speech:
-            speech.set_rate(rate)
-    
-    if 'voice' in data:
-        voice = data['voice']
-        config.set('audio', 'voice', voice)
-        if speech and voice:
-            speech.set_voice(voice)
+    """Update application settings (PicoTTS version - no audio settings)"""
+    # No audio settings to update for PicoTTS via this interface currently.
+    # data = request.json
+    # if 'language' in data:
+    #    # Update config and potentially re-init SpeechManager if needed
+    #    pass
     
     return jsonify({'success': True})
 

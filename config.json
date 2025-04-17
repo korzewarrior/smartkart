@@ -6,11 +6,13 @@
         "scan_timeout": 30
     },
     "audio": {
-        "speech_rate": 200,
+        "speech_rate": 175,
         "speech_volume": 1.0,
-        "voice": "english-us",
+        "voice": null,
         "enable_sounds": true,
         "sound_volume": 0.7,
+        "piper_executable": "/home/james/smartkart/webenv/bin/piper",
+        "piper_model": "/home/james/smartkart/piper_voices/en_US-lessac-medium.onnx",
         "bluetooth_speaker": ""
     },
     "buttons": {
@@ -44,5 +46,9 @@
         "log_file": "data/logs/smartkart.log",
         "auto_shutdown": false,
         "shutdown_timeout": 300
+    },
+    "logging": {
+        "log_file": "smartkart.log",
+        "log_level": "INFO"
     }
 }

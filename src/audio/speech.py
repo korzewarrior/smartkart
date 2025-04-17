@@ -1,77 +1,80 @@
 #!/usr/bin/env python3
-import pyttsx3
 import threading
 import time
 import queue
 import os
 import subprocess
+import shlex # Import shlex for safe command construction
+import tempfile # Import tempfile
 
 class SpeechManager:
     """
-    Handles text-to-speech functionality for the SmartKart
+    Handles text-to-speech functionality using Piper TTS.
     """
-    def __init__(self, rate=150, volume=0.8, voice=None):
+    def __init__(self, piper_executable, model_path):
         """
-        Initialize the speech manager
+        Initialize the speech manager using Piper TTS.
         
         Parameters:
-        - rate: Speech rate (words per minute)
-        - volume: Volume level (0.0 to 1.0)
-        - voice: Specific voice to use (None for default)
+        - piper_executable: Full path to the piper executable.
+        - model_path: Full path to the desired .onnx voice model file.
         """
         # Store configuration
-        self.rate = rate
-        self.volume = volume
-        self.voice = voice # Store initially provided voice ID
+        self.piper_executable = piper_executable
+        self.model_path = model_path
         
-        # Initialize text-to-speech engine
-        self.tts_engine = pyttsx3.init()
-        
-        # Configure speech properties
-        self.tts_engine.setProperty('rate', self.rate)
-        self.tts_engine.setProperty('volume', self.volume)
-        
-        # --- DEBUG: List available voices ---
-        try:
-            available_voices = self.tts_engine.getProperty('voices')
-            print("--- Available Voices ---")
-            for i, v in enumerate(available_voices):
-                print(f"  Voice {i}: Name: {v.name}, ID: {v.id}, Lang: {v.languages}")
-            print("------------------------")
-        except Exception as e:
-            print(f"Error getting available voices: {e}")
-        # --- END DEBUG ---
-        
-        # Set voice if specified
-        if self.voice:
-            # Use the internal set_voice method which now handles initialization
-            self.set_voice(self.voice)
-            
-        # For async speech
+        # Check if piper executable and model exist
+        if not self._check_command(self.piper_executable):
+            raise RuntimeError(f"Piper executable not found or not executable at: {self.piper_executable}")
+        if not os.path.isfile(self.model_path):
+             raise RuntimeError(f"Piper model file not found at: {self.model_path}")
+        if not self._check_command("aplay"):
+            raise RuntimeError("aplay command not found. Please install alsa-utils.")
+
+        # For async speech (remains the same)
         self.speech_queue = queue.Queue()
         self.is_speaking = False
         self.speech_thread = None
         self.stop_requested = False
         
-        # Set up the path to the sounds directory
+        # Set up the path to the sounds directory (remains the same)
         self.sounds_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'data', 'sounds')
         self.success_sound_path = os.path.join(self.sounds_dir, 'success.wav')
         self.scanning_sound_path = os.path.join(self.sounds_dir, 'scanning.wav')
         self.not_found_sound_path = os.path.join(self.sounds_dir, 'not_found.wav')
         
-        # For scanning sound background playback
+        # For scanning sound background playback (remains the same)
         self.scanning_sound_process = None
         self.scanning_sound_active = False
         
+        print(f"SpeechManager initialized with Piper model: {self.model_path}")
         # Log the sound file paths
         print(f"Sound file paths: Success={self.success_sound_path}, Scanning={self.scanning_sound_path}, Not found={self.not_found_sound_path}")
         
-        # Ensure sounds exist
+        # Ensure sounds exist (remains the same)
         if not os.path.exists(self.scanning_sound_path):
             self._create_scanning_sound()
         if not os.path.exists(self.not_found_sound_path):
             self._create_not_found_sound()
-    
+
+    def _check_command(self, cmd):
+        """Check if a command/executable exists and is executable."""
+        try:
+            # Check if it exists and is executable
+            if os.path.isfile(cmd) and os.access(cmd, os.X_OK):
+                 return True
+            # Fallback to check PATH using shutil.which if it's just a command name
+            import shutil
+            if shutil.which(cmd):
+                return True
+        except ImportError:
+             # Manual PATH check if shutil unavailable
+             for path in os.environ["PATH"].split(os.pathsep):
+                 if os.path.exists(os.path.join(path, cmd)) and os.access(os.path.join(path, cmd), os.X_OK):
+                     return True
+        print(f"Warning: Command or executable '{cmd}' not found or not executable.")
+        return False
+
     def _create_default_success_sound(self):
         """
         Create a default success sound file using Python
@@ -315,114 +318,71 @@ class SpeechManager:
             except:
                 return False
     
-    def get_available_voices(self):
-        """
-        Get list of available voices
-        
-        Returns:
-        - List of voice objects
-        """
-        voices = self.tts_engine.getProperty('voices')
-        return voices
-    
-    def set_voice(self, voice_id):
-        """
-        Set the voice to use for speech by re-initializing the engine.
-        
-        Parameters:
-        - voice_id: ID of the voice to use
-        """
-        print(f"SpeechManager: Attempting to re-initialize engine for voice ID: {voice_id}") # DEBUG
-        try:
-            # Store the new voice ID
-            self.voice = voice_id
-            
-            # Stop the existing engine if it's running/initialized
-            if hasattr(self, 'tts_engine') and self.tts_engine:
-                try:
-                    # Stop any ongoing speech
-                    self.tts_engine.stop()
-                    # Clean up the old engine instance (necessary? pyttsx3 docs unclear)
-                    # del self.tts_engine 
-                except Exception as e:
-                    print(f"SpeechManager: Error stopping previous engine: {e}")
-            
-            # Re-initialize the engine
-            print("SpeechManager: Initializing new pyttsx3 engine...")
-            self.tts_engine = pyttsx3.init()
-            
-            # Apply all stored properties to the new engine
-            print(f"SpeechManager: Applying rate: {self.rate}")
-            self.tts_engine.setProperty('rate', self.rate)
-            
-            print(f"SpeechManager: Applying volume: {self.volume}")
-            self.tts_engine.setProperty('volume', self.volume)
-            
-            if self.voice:
-                print(f"SpeechManager: Applying voice ID: {self.voice}")
-                self.tts_engine.setProperty('voice', self.voice)
-            
-            print(f"SpeechManager: Engine re-initialized successfully for voice: {self.voice}")
-            return True
-            
-        except Exception as e:
-            print(f"Error re-initializing engine for voice {voice_id}: {e}")
-            # Attempt to revert to a default engine state?
-            try:
-                 self.tts_engine = pyttsx3.init() # Fallback init
-            except:
-                 self.tts_engine = None # Ensure it's None if totally failed
-            return False
-    
-    def set_rate(self, rate):
-        """
-        Set speech rate
-        
-        Parameters:
-        - rate: Speech rate (words per minute)
-        """
-        try:
-            self.rate = rate # Store the rate
-            self.tts_engine.setProperty('rate', self.rate)
-            print(f"SpeechManager: Set rate to {self.rate}") # DEBUG
-            return True
-        except Exception as e:
-            print(f"Error setting speech rate: {e}")
-            return False
-    
-    def set_volume(self, volume):
-        """
-        Set speech volume
-        
-        Parameters:
-        - volume: Volume level (0.0 to 1.0)
-        """
-        if volume < 0 or volume > 1:
-            print("Volume must be between 0.0 and 1.0")
-            return False
-            
-        try:
-            self.volume = volume # Store the volume
-            self.tts_engine.setProperty('volume', self.volume)
-            print(f"SpeechManager: Set volume to {self.volume}") # DEBUG
-            return True
-        except Exception as e:
-            print(f"Error setting volume: {e}")
-            return False
-    
     def speak(self, text):
         """
-        Speak text (blocking)
+        Speak text using Piper TTS, writing to a temporary file and playing with aplay (blocking).
         
         Parameters:
         - text: Text to speak
         """
         try:
-            self.tts_engine.say(text)
-            self.tts_engine.runAndWait()
+            print(f"SpeechManager: Generating speech with Piper for: '{text[:50]}...'") # DEBUG
+            
+            # Create a temporary WAV file (deleted automatically on exit)
+            with tempfile.NamedTemporaryFile(suffix=".wav", delete=True) as temp_wav:
+                temp_wav_path = temp_wav.name
+                # print(f"SpeechManager: Using temporary file: {temp_wav_path}") # DEBUG
+
+                # Construct Piper command 
+                # Using list format for subprocess is safer than f-string concatenation
+                piper_cmd = [
+                    self.piper_executable,
+                    "--model", self.model_path,
+                    "--output_file", temp_wav_path
+                    # Add other Piper flags here if needed, e.g.:
+                    # "--length_scale", "0.9", 
+                    # "--noise_scale", "0.667"
+                ]
+                
+                # Run Piper, passing text via stdin
+                # Use check=True to raise CalledProcessError on failure
+                piper_process = subprocess.run(
+                    piper_cmd, 
+                    input=text.encode('utf-8'), 
+                    check=True, 
+                    capture_output=True # Capture stdout/stderr
+                )
+                # print(f"Piper stdout: {piper_process.stdout.decode()}") # Optional debug
+                # print(f"Piper stderr: {piper_process.stderr.decode()}") # Optional debug
+                
+                print(f"SpeechManager: Piper completed. Playing file...") # DEBUG
+                
+                # Construct aplay command
+                aplay_cmd = ["aplay", "-q", temp_wav_path]
+
+                # Run aplay (use run which blocks until complete)
+                aplay_process = subprocess.run(
+                    aplay_cmd, 
+                    check=False, # Don't error out if aplay fails, just log it
+                    capture_output=True
+                )
+
+                if aplay_process.returncode != 0:
+                    print(f"Error running aplay: {aplay_process.stderr.decode('utf-8', errors='ignore')}")
+                else:
+                    print(f"SpeechManager: Finished speaking.") # DEBUG
+            
             return True
+            
+        except subprocess.CalledProcessError as e:
+            print(f"Error running Piper subprocess: {e}")
+            print(f"Piper stderr: {e.stderr.decode('utf-8', errors='ignore')}")
+            return False
+        except FileNotFoundError as e:
+             print(f"Error: Required command/file not found. Ensure Piper is installed, paths in config are correct, and aplay is installed. {e}")
+             return False
         except Exception as e:
-            print(f"Error speaking text: {e}")
+            print(f"Error speaking text with Piper/aplay: {e}")
             return False
     
     def speak_async(self, text, priority=False):
@@ -481,7 +441,8 @@ class SpeechManager:
     
     def stop_speaking(self):
         """
-        Stop all speech and clear the queue
+        Stop all speech (more difficult with external processes).
+        Currently attempts to kill piper and aplay processes.
         """
         # Request thread to stop
         self.stop_requested = True
@@ -494,11 +455,17 @@ class SpeechManager:
             except queue.Empty:
                 break
         
-        # Stop current speech
+        # Stop current speech by killing player/generator processes
         try:
-            self.tts_engine.stop()
+            # Use pkill to stop any piper and aplay processes (might be too aggressive)
+            if self._check_command("pkill"):
+                subprocess.run(["pkill", self.piper_executable], check=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                subprocess.run(["pkill", "aplay"], check=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                print("SpeechManager: Attempted to stop audio playback via pkill piper/aplay.")
+            else:
+                 print("SpeechManager: pkill not found, cannot force stop audio playback.")
         except Exception as e:
-            print(f"Error stopping speech: {e}")
+            print(f"Error stopping speech playback: {e}")
     
     def speak_product_info(self, product_data, speak_ingredients=False):
         """

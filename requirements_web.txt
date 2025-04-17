@@ -1,6 +1,7 @@
 flask==2.3.3
 flask-cors==4.0.0
-pyttsx3==2.90
+# pyttsx3==2.90 # Removed - Using Piper TTS instead
+# Piper TTS requires separate installation (see Piper TTS docs) and configuration in config.json
 opencv-python==4.8.0.74
 pyzbar==0.1.9
 numpy<2.0 

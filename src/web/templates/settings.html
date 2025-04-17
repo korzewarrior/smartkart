@@ -6,35 +6,25 @@
 <div class="card">
     <div class="card-header">Settings</div>
     
+    <p>Audio settings (like voice, rate, volume) are currently managed by the PicoTTS engine and are not adjustable via this interface.</p>
+    
+    <!-- Remove pyttsx3-specific settings form -->
+    <!-- 
     <form id="settings-form">
         <div class="form-group">
             <label class="form-label" for="speech-volume">Speech Volume</label>
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <input type="range" id="speech-volume" name="speech_volume" min="0" max="100" value="{{ settings.speech_volume }}" class="form-control" style="flex: 1;">
-                <span id="volume-value">{{ settings.speech_volume }}%</span>
-                <button type="button" id="test-volume" class="btn btn-info">Test</button>
-            </div>
+            ...
         </div>
         
         <div class="form-group">
             <label class="form-label" for="speech-rate">Speech Rate</label>
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <input type="range" id="speech-rate" name="speech_rate" min="50" max="300" value="{{ settings.speech_rate }}" class="form-control" style="flex: 1;">
-                <span id="rate-value">{{ settings.speech_rate }}</span>
-                <button type="button" id="test-rate" class="btn btn-info">Test</button>
-            </div>
+            ...
         </div>
         
         {% if voices %}
         <div class="form-group">
             <label class="form-label" for="voice">Voice</label>
-            <select id="voice" name="voice" class="form-control">
-                <option value="">Default Voice</option>
-                {% for voice in voices %}
-                <option value="{{ voice.id }}" {% if settings.voice == voice.id %}selected{% endif %}>{{ voice.name }}</option>
-                {% endfor %}
-            </select>
-            <button type="button" id="test-voice" class="btn btn-info" style="margin-top: 10px;">Test Voice</button>
+            ...
         </div>
         {% endif %}
         
@@ -43,183 +33,113 @@
             <button type="button" id="reset-settings" class="btn btn-danger">Reset to Defaults</button>
         </div>
     </form>
+    -->
+
+    <!-- Optionally keep Reset Database functionality if desired -->
+    <div class="card" style="margin-top: 30px;">
+        <div class="card-header">Database Management</div>
+        <div style="padding: 20px;">
+            <p>Resetting the database will clear the list of scanned products and related files.</p>
+            <button id="reset-db-btn" class="btn btn-danger">Reset Product Database</button>
+        </div>
+    </div>
+
 </div>
 
 <!-- Success Alert -->
 <div id="success-alert" class="alert alert-success" style="display: none; margin-top: 20px;">
-    Settings have been saved successfully.
+    Settings action completed.
 </div>
 
-<!-- Reset Confirmation Modal -->
-<div id="reset-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 100; justify-content: center; align-items: center;">
+<!-- Reset Confirmation Modals -->
+<!-- Settings Reset Modal (Keep or remove based on whether any settings remain) -->
+<!-- 
+<div id="reset-modal" style="display: none; ...">
+    ...
+</div> 
+-->
+
+<!-- Database Reset Modal -->
+<div id="reset-db-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 100; justify-content: center; align-items: center;">
     <div class="card" style="max-width: 400px; width: 90%;">
-        <div class="card-header">Confirm Reset</div>
+        <div class="card-header">Confirm Database Reset</div>
         <div style="padding: 20px;">
-            <p>Are you sure you want to reset all settings to their default values?</p>
+            <p>Are you sure you want to reset the product database? This cannot be undone.</p>
         </div>
         <div style="padding: 15px; display: flex; justify-content: flex-end; gap: 10px; border-top: 2px solid var(--dark);">
-            <button id="cancel-reset-btn" class="btn btn-secondary">Cancel</button>
-            <button id="confirm-reset-btn" class="btn btn-danger">Reset Settings</button>
+            <button id="cancel-reset-db-btn" class="btn btn-secondary">Cancel</button>
+            <button id="confirm-reset-db-btn" class="btn btn-danger">Reset Database</button>
         </div>
     </div>
 </div>
+
 {% endblock %}
 
 {% block scripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const settingsForm = document.getElementById('settings-form');
-        const speechVolume = document.getElementById('speech-volume');
-        const volumeValue = document.getElementById('volume-value');
-        const speechRate = document.getElementById('speech-rate');
-        const rateValue = document.getElementById('rate-value');
-        const testVolumeBtn = document.getElementById('test-volume');
-        const testRateBtn = document.getElementById('test-rate');
-        const testVoiceBtn = document.getElementById('test-voice');
-        const voiceSelect = document.getElementById('voice');
-        const resetSettingsBtn = document.getElementById('reset-settings');
+        // Remove refs to volume/rate/voice elements
         const successAlert = document.getElementById('success-alert');
-        const resetModal = document.getElementById('reset-modal');
-        const cancelResetBtn = document.getElementById('cancel-reset-btn');
-        const confirmResetBtn = document.getElementById('confirm-reset-btn');
         
-        // Update volume value display
-        speechVolume.addEventListener('input', function() {
-            volumeValue.textContent = this.value + '%';
-        });
+        // Database Reset Elements
+        const resetDbBtn = document.getElementById('reset-db-btn');
+        const resetDbModal = document.getElementById('reset-db-modal');
+        const cancelResetDbBtn = document.getElementById('cancel-reset-db-btn');
+        const confirmResetDbBtn = document.getElementById('confirm-reset-db-btn');
         
-        // Update rate value display
-        speechRate.addEventListener('input', function() {
-            rateValue.textContent = this.value;
-        });
+        // Remove pyttsx3 test/save logic
         
-        // Test volume
-        testVolumeBtn.addEventListener('click', function() {
-            if ('speechSynthesis' in window) {
-                const volume = parseFloat(speechVolume.value) / 100;
-                const utterance = new SpeechSynthesisUtterance('Testing volume level');
-                utterance.volume = volume;
-                window.speechSynthesis.speak(utterance);
-            } else {
-                alert('Speech synthesis is not supported in your browser.');
-            }
-        });
+        // --- Database Reset Logic (Keep if needed) --- 
+        if (resetDbBtn) {
+            resetDbBtn.addEventListener('click', function() {
+                resetDbModal.style.display = 'flex';
+            });
+        }
         
-        // Test rate
-        testRateBtn.addEventListener('click', function() {
-            if ('speechSynthesis' in window) {
-                const rate = parseFloat(speechRate.value) / 175; // Adjust to match backend rate
-                const utterance = new SpeechSynthesisUtterance('Testing speech rate');
-                utterance.rate = rate;
-                window.speechSynthesis.speak(utterance);
-            } else {
-                alert('Speech synthesis is not supported in your browser.');
-            }
-        });
-        
-        // Test voice
-        if (testVoiceBtn) {
-            testVoiceBtn.addEventListener('click', function() {
-                if ('speechSynthesis' in window) {
-                    const utterance = new SpeechSynthesisUtterance('This is a test of the selected voice');
-                    
-                    if (voiceSelect && voiceSelect.value) {
-                        // Try to find the voice in the available voices
-                        const voices = window.speechSynthesis.getVoices();
-                        for (let i = 0; i < voices.length; i++) {
-                            if (voices[i].voiceURI === voiceSelect.value) {
-                                utterance.voice = voices[i];
-                                break;
-                            }
-                        }
-                    }
-                    
-                    window.speechSynthesis.speak(utterance);
-                } else {
-                    alert('Speech synthesis is not supported in your browser.');
+        if (cancelResetDbBtn) {
+            cancelResetDbBtn.addEventListener('click', function() {
+                resetDbModal.style.display = 'none';
+            });
+        }
+
+        if (resetDbModal) {
+            resetDbModal.addEventListener('click', function(event) {
+                if (event.target === resetDbModal) {
+                    resetDbModal.style.display = 'none';
                 }
             });
         }
         
-        // Handle form submission
-        settingsForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            // Get form values
-            const settings = {
-                speech_volume: speechVolume.value,
-                speech_rate: speechRate.value
-            };
-            
-            if (voiceSelect) {
-                settings.voice = voiceSelect.value;
-            }
-            
-            // Send settings to server
-            fetch('/api/update_settings', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(settings),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Show success message
-                    successAlert.style.display = 'block';
-                    
-                    // Hide after 3 seconds
-                    setTimeout(() => {
-                        successAlert.style.display = 'none';
-                    }, 3000);
-                } else {
-                    alert('Error saving settings. Please try again.');
-                }
-            })
-            .catch(error => {
-                console.error('Error saving settings:', error);
-                alert('Error saving settings. Please try again.');
+        if (confirmResetDbBtn) {
+            confirmResetDbBtn.addEventListener('click', function() {
+                // Send reset request to server
+                fetch('/api/reset_database', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        successAlert.textContent = 'Product database has been reset.';
+                        successAlert.style.display = 'block';
+                        setTimeout(() => {
+                            successAlert.style.display = 'none';
+                        }, 3000);
+                    } else {
+                        alert('Error resetting database. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error resetting database:', error);
+                    alert('Error resetting database. Please try again.');
+                })
+                .finally(() => {
+                    resetDbModal.style.display = 'none';
+                });
             });
-        });
-        
-        // Show reset confirmation modal
-        resetSettingsBtn.addEventListener('click', function() {
-            resetModal.style.display = 'flex';
-        });
-        
-        // Cancel reset
-        cancelResetBtn.addEventListener('click', function() {
-            resetModal.style.display = 'none';
-        });
-        
-        // Close reset modal when clicking outside of it
-        resetModal.addEventListener('click', function(event) {
-            if (event.target === resetModal) {
-                resetModal.style.display = 'none';
-            }
-        });
-        
-        // Confirm reset
-        confirmResetBtn.addEventListener('click', function() {
-            // Set default values
-            speechVolume.value = 100;
-            volumeValue.textContent = '100%';
-            
-            speechRate.value = 175;
-            rateValue.textContent = '175';
-            
-            if (voiceSelect) {
-                voiceSelect.value = '';
-            }
-            
-            // Submit the form with default values
-            const event = new Event('submit');
-            settingsForm.dispatchEvent(event);
-            
-            // Hide the modal
-            resetModal.style.display = 'none';
-        });
+        }
     });
 </script>
 {% endblock %} 
