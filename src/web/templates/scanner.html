@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+
+{% block title %}SmartKart - Scanner{% endblock %}
+
+{% block styles %}
+<style>
+    #scanner-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 10px;
+        border: 3px solid var(--dark);
+        box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--dark);
+    }
+    
+    #scanner-viewport {
+        width: 100%;
+        /* Let the image determine the aspect ratio */
+        /* padding-bottom: 75%; */ 
+        position: relative;
+        background-color: #000;
+        display: flex; /* Center the image */
+        justify-content: center;
+        align-items: center;
+    }
+    
+    #scanner-viewport img {
+        /* Adjust based on your camera's aspect ratio */
+        max-width: 100%; 
+        max-height: 480px; /* Optional: Limit max height */
+        display: block; /* Remove extra space below image */
+    }
+    
+    #scanner-status {
+       position: absolute;
+       bottom: 10px;
+       left: 10px;
+       background-color: rgba(0,0,0,0.6);
+       color: white;
+       padding: 5px 10px;
+       border-radius: 3px;
+       font-size: 0.9em;
+    }
+    
+    #result-container {
+        margin-top: 20px;
+        /* Initially hidden, shown by JS */
+        display: none; 
+    }
+
+    .spinner {
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top: 4px solid #fff;
+        width: 30px;
+        height: 30px;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">Barcode Scanner</div>
+    <p>The camera feed from the Raspberry Pi should appear below. Hold a barcode steady in front of it.</p>
+    
+    <div id="scanner-container">
+        <div id="scanner-viewport">
+            <!-- Changed from video to img -->
+            <img id="scanner-stream" src="{{ url_for('video_feed') }}" alt="Loading camera feed..." 
+                 onerror="this.onerror=null; this.src='/static/images/camera_error.png'; document.getElementById('scanner-status').textContent='Error loading camera feed.';"/>
+            <div id="scanner-status">Waiting for scan...</div>
+        </div>
+    </div>
+    
+    <!-- Remove start/stop buttons, stream starts automatically -->
+</div>
+
+<div id="result-container" class="card">
+    <div class="card-header">Last Scan Result</div>
+    <div id="result-details">
+        <div class="spinner"></div> <!-- Show spinner initially -->
+    </div>
+    <div id="result-actions" style="margin-top: 15px; display: flex; gap: 10px;">
+        <!-- Button to clear last scan? Or just rely on polling? -->
+        <a href="/products" class="btn btn-info">View All Products</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Remove ZXing library -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const resultContainer = document.getElementById('result-container');
+        const resultDetails = document.getElementById('result-details');
+        const scannerStatus = document.getElementById('scanner-status');
+        const scannerStream = document.getElementById('scanner-stream');
+        
+        let lastProductTimestamp = 0;
+        let pollingInterval = null;
+
+        function pollForLastProduct() {
+            fetch('/api/last_product')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success && data.product) {
+                        // Check if this is a new product since last check
+                        if (data.product.timestamp && data.product.timestamp > lastProductTimestamp) {
+                            console.log("New product detected:", data.product);
+                            lastProductTimestamp = data.product.timestamp;
+                            updateResultDisplay(data.product);
+                            playBeep(); // Play sound on new detection
+                            scannerStatus.textContent = `Scanned: ${data.product.name}`; 
+                        } else if (!data.product.timestamp) {
+                            // Handle case where timestamp might be missing (though added in backend)
+                             if (JSON.stringify(data.product) !== resultDetails.dataset.lastProductJson) {
+                                console.log("Product updated (no timestamp):", data.product);
+                                updateResultDisplay(data.product);
+                                playBeep(); 
+                                scannerStatus.textContent = `Scanned: ${data.product.name}`; 
+                             }
+                        }
+                    } else {
+                         // Keep showing last known product or "no products scanned" 
+                         if (!resultDetails.dataset.lastProductJson && !lastProductTimestamp) {
+                              resultDetails.innerHTML = '<p>No products scanned yet.</p>';
+                              scannerStatus.textContent = 'Waiting for scan...';
+                         }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error polling for last product:', error);
+                    scannerStatus.textContent = 'Error checking scan status.';
+                    // Optionally stop polling on repeated errors
+                    // clearInterval(pollingInterval);
+                });
+        }
+
+        function updateResultDisplay(product) {
+            let allergenText = '';
+            if (product.allergens && product.allergens.length > 0) {
+                allergenText = `<p><strong>Allergens:</strong> ${product.allergens.join(', ')}</p>`;
+            }
+            
+            let content = '';
+            if (product.name === 'Product Not Found') {
+                content = `
+                    <div class="alert alert-warning">
+                        <p><strong>Product Not Found:</strong> Barcode ${product.barcode}</p>
+                        <p>This product is not in our database.</p>
+                    </div>
+                `;
+                 scannerStatus.textContent = `Barcode ${product.barcode} not found`;
+            } else {
+                 content = `
+                    <p><strong>Name:</strong> ${product.name}</p>
+                    <p><strong>Brand:</strong> ${product.brand}</p>
+                    <p><strong>Barcode:</strong> ${product.barcode}</p>
+                    ${allergenText}
+                    <p><strong>Ingredients:</strong> ${product.ingredients || 'N/A'}</p>
+                `;
+                 scannerStatus.textContent = `Scanned: ${product.name}`; 
+                 // Optional: Client-side speech synthesis if preferred over server-side
+                 // speakProductInfo(product); 
+            }
+
+            resultDetails.innerHTML = content;
+            resultDetails.dataset.lastProductJson = JSON.stringify(product); // Store for comparison
+            resultContainer.style.display = 'block'; // Show the results card
+        }
+
+        function playBeep() {
+            try {
+                const context = new (window.AudioContext || window.webkitAudioContext)();
+                if (!context) return; // AudioContext not supported
+                const oscillator = context.createOscillator();
+                const gainNode = context.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(context.destination);
+                
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(800, context.currentTime); // Use setValueAtTime
+                gainNode.gain.setValueAtTime(0.1, context.currentTime);
+                
+                oscillator.start(context.currentTime);
+                oscillator.stop(context.currentTime + 0.1);
+            } catch (e) {
+                console.error("Error playing beep:", e);
+            }
+        }
+
+        // Optional: Client-side speech synthesis function (if needed)
+        /*
+        function speakProductInfo(product) {
+            if ('speechSynthesis' in window) {
+                let message = `${product.name} by ${product.brand}.`;
+                if (product.allergens && product.allergens.length > 0) {
+                    message += ` Warning: Contains ${product.allergens.join(', ')}.`;
+                }
+                const speech = new SpeechSynthesisUtterance(message);
+                // Optional: Configure voice, rate, pitch here if needed
+                window.speechSynthesis.speak(speech);
+            }
+        }
+        */
+       
+        // Check if the stream image loads correctly
+        scannerStream.onload = function() {
+            console.log("Video stream loaded successfully.");
+            scannerStatus.textContent = 'Waiting for scan...';
+            // Start polling only after stream seems to be working
+             if (!pollingInterval) {
+                 pollingInterval = setInterval(pollForLastProduct, 1500); // Poll every 1.5 seconds
+             }
+        };
+        
+        scannerStream.onerror = function() {
+             console.error("Failed to load video stream.");
+             scannerStatus.textContent = 'Error loading camera feed.';
+             resultDetails.innerHTML = '<p>Could not load video stream from the server.</p>';
+             resultContainer.style.display = 'block';
+             if (pollingInterval) {
+                 clearInterval(pollingInterval);
+             }
+        };
+
+        // Initial call to populate status
+        // pollForLastProduct(); 
+        // Polling now starts in scannerStream.onload
+
+        // Stop polling when the user navigates away (optional but good practice)
+        window.addEventListener('beforeunload', () => {
+            if (pollingInterval) {
+                clearInterval(pollingInterval);
+            }
+        });
+
+    });
+</script>
+{% endblock %} 

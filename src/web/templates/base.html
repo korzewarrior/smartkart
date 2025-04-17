@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SmartKart{% endblock %}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap">
+    <style>
+        :root {
+            --primary: #4A8FE7;
+            --secondary: #FF9966;
+            --success: #66CC99;
+            --danger: #FF6666;
+            --warning: #FFCC66;
+            --info: #66CCFF;
+            --light: #F8F9FA;
+            --dark: #343A40;
+            --shadow-offset: 4px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: white;
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--dark);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-shadow: 2px 2px 0 var(--dark);
+        }
+        
+        .nav {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.1s ease-in-out;
+            position: relative;
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--dark);
+            border: 3px solid var(--dark);
+        }
+        
+        .btn:hover {
+            transform: translate(2px, 2px);
+            box-shadow: var(--shadow-offset)/2 var(--shadow-offset)/2 0 0 var(--dark);
+        }
+        
+        .btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+            color: var(--dark);
+        }
+        
+        .btn-info {
+            background-color: var(--info);
+            color: var(--dark);
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 3px solid var(--dark);
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--dark);
+        }
+        
+        .card-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--dark);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 3px solid var(--dark);
+            border-radius: 5px;
+            font-size: 1rem;
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--dark);
+        }
+        
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 3px solid var(--dark);
+            border-radius: 5px;
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--dark);
+        }
+        
+        .alert-success {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .alert-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .alert-warning {
+            background-color: var(--warning);
+            color: var(--dark);
+        }
+        
+        .alert-info {
+            background-color: var(--info);
+            color: var(--dark);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-bottom: 20px;
+        }
+        
+        table th, table td {
+            padding: 10px;
+            border: 3px solid var(--dark);
+        }
+        
+        table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        table tr:nth-child(even) {
+            background-color: var(--light);
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav {
+                margin-top: 10px;
+                flex-wrap: wrap;
+            }
+            
+            .btn {
+                font-size: 0.9rem;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">SmartKart</div>
+            <nav class="nav">
+                <a href="/" class="btn btn-primary">Home</a>
+                <a href="/scanner" class="btn btn-success">Scanner</a>
+                <a href="/products" class="btn btn-info">Products</a>
+                <a href="/settings" class="btn btn-warning">Settings</a>
+            </nav>
+        </header>
+        
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+        
+        <footer style="margin-top: 50px; text-align: center; font-size: 0.9rem;">
+            <p>SmartKart Web Interface &copy; {{ current_year }}</p>
+        </footer>
+    </div>
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html> 

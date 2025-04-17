@@ -1,0 +1,17 @@
+[Unit]
+Description=SmartKart Web Interface
+After=network.target
+
+[Service]
+Type=simple
+User=james
+WorkingDirectory=/home/james/smartkart
+ExecStart=/home/james/smartkart/start_web.sh
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=smartkart-web
+
+[Install]
+WantedBy=multi-user.target 

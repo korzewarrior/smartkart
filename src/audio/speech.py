@@ -19,16 +19,33 @@ class SpeechManager:
         - volume: Volume level (0.0 to 1.0)
         - voice: Specific voice to use (None for default)
         """
+        # Store configuration
+        self.rate = rate
+        self.volume = volume
+        self.voice = voice # Store initially provided voice ID
+        
         # Initialize text-to-speech engine
         self.tts_engine = pyttsx3.init()
         
         # Configure speech properties
-        self.tts_engine.setProperty('rate', rate)
-        self.tts_engine.setProperty('volume', volume)
+        self.tts_engine.setProperty('rate', self.rate)
+        self.tts_engine.setProperty('volume', self.volume)
+        
+        # --- DEBUG: List available voices ---
+        try:
+            available_voices = self.tts_engine.getProperty('voices')
+            print("--- Available Voices ---")
+            for i, v in enumerate(available_voices):
+                print(f"  Voice {i}: Name: {v.name}, ID: {v.id}, Lang: {v.languages}")
+            print("------------------------")
+        except Exception as e:
+            print(f"Error getting available voices: {e}")
+        # --- END DEBUG ---
         
         # Set voice if specified
-        if voice:
-            self.set_voice(voice)
+        if self.voice:
+            # Use the internal set_voice method which now handles initialization
+            self.set_voice(self.voice)
             
         # For async speech
         self.speech_queue = queue.Queue()
@@ -310,16 +327,51 @@ class SpeechManager:
     
     def set_voice(self, voice_id):
         """
-        Set the voice to use for speech
+        Set the voice to use for speech by re-initializing the engine.
         
         Parameters:
         - voice_id: ID of the voice to use
         """
+        print(f"SpeechManager: Attempting to re-initialize engine for voice ID: {voice_id}") # DEBUG
         try:
-            self.tts_engine.setProperty('voice', voice_id)
+            # Store the new voice ID
+            self.voice = voice_id
+            
+            # Stop the existing engine if it's running/initialized
+            if hasattr(self, 'tts_engine') and self.tts_engine:
+                try:
+                    # Stop any ongoing speech
+                    self.tts_engine.stop()
+                    # Clean up the old engine instance (necessary? pyttsx3 docs unclear)
+                    # del self.tts_engine 
+                except Exception as e:
+                    print(f"SpeechManager: Error stopping previous engine: {e}")
+            
+            # Re-initialize the engine
+            print("SpeechManager: Initializing new pyttsx3 engine...")
+            self.tts_engine = pyttsx3.init()
+            
+            # Apply all stored properties to the new engine
+            print(f"SpeechManager: Applying rate: {self.rate}")
+            self.tts_engine.setProperty('rate', self.rate)
+            
+            print(f"SpeechManager: Applying volume: {self.volume}")
+            self.tts_engine.setProperty('volume', self.volume)
+            
+            if self.voice:
+                print(f"SpeechManager: Applying voice ID: {self.voice}")
+                self.tts_engine.setProperty('voice', self.voice)
+            
+            print(f"SpeechManager: Engine re-initialized successfully for voice: {self.voice}")
             return True
+            
         except Exception as e:
-            print(f"Error setting voice: {e}")
+            print(f"Error re-initializing engine for voice {voice_id}: {e}")
+            # Attempt to revert to a default engine state?
+            try:
+                 self.tts_engine = pyttsx3.init() # Fallback init
+            except:
+                 self.tts_engine = None # Ensure it's None if totally failed
             return False
     
     def set_rate(self, rate):
@@ -330,7 +382,9 @@ class SpeechManager:
         - rate: Speech rate (words per minute)
         """
         try:
-            self.tts_engine.setProperty('rate', rate)
+            self.rate = rate # Store the rate
+            self.tts_engine.setProperty('rate', self.rate)
+            print(f"SpeechManager: Set rate to {self.rate}") # DEBUG
             return True
         except Exception as e:
             print(f"Error setting speech rate: {e}")
@@ -348,7 +402,9 @@ class SpeechManager:
             return False
             
         try:
-            self.tts_engine.setProperty('volume', volume)
+            self.volume = volume # Store the volume
+            self.tts_engine.setProperty('volume', self.volume)
+            print(f"SpeechManager: Set volume to {self.volume}") # DEBUG
             return True
         except Exception as e:
             print(f"Error setting volume: {e}")

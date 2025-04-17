@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block title %}SmartKart - Products{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">Product List</div>
+    
+    {% if products %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Barcode</th>
+                    <th>Product Name</th>
+                    <th>Brand</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.barcode }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.brand }}</td>
+                    <td>
+                        <button class="btn btn-info btn-sm product-details-btn" 
+                                data-barcode="{{ product.barcode }}"
+                                data-name="{{ product.name }}"
+                                data-brand="{{ product.brand }}">
+                            Details
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info">
+            <p>No products have been scanned yet.</p>
+            <p>Use the Scanner to add products to your list.</p>
+        </div>
+        <p style="margin-top: 15px;">
+            <a href="/scanner" class="btn btn-success">Go to Scanner</a>
+        </p>
+    {% endif %}
+    
+    {% if products %}
+        <div style="margin-top: 20px;">
+            <button id="reset-database-btn" class="btn btn-danger">Reset Product Database</button>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Product Details Modal -->
+<div id="product-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 100; justify-content: center; align-items: center;">
+    <div class="card" style="max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto;">
+        <div class="card-header">Product Details</div>
+        <div id="product-modal-content" style="padding: 20px;">
+            Loading...
+        </div>
+        <div style="padding: 15px; text-align: right; border-top: 2px solid var(--dark);">
+            <button id="close-modal-btn" class="btn btn-secondary">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- Reset Confirmation Modal -->
+<div id="reset-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 100; justify-content: center; align-items: center;">
+    <div class="card" style="max-width: 400px; width: 90%;">
+        <div class="card-header">Confirm Reset</div>
+        <div style="padding: 20px;">
+            <p>Are you sure you want to reset the product database?</p>
+            <p>This will delete all scanned products and cannot be undone.</p>
+        </div>
+        <div style="padding: 15px; display: flex; justify-content: flex-end; gap: 10px; border-top: 2px solid var(--dark);">
+            <button id="cancel-reset-btn" class="btn btn-secondary">Cancel</button>
+            <button id="confirm-reset-btn" class="btn btn-danger">Reset Database</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Product Details Modal functionality
+        const productModal = document.getElementById('product-modal');
+        const productModalContent = document.getElementById('product-modal-content');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        
+        // Reset Database Modal functionality
+        const resetDatabaseBtn = document.getElementById('reset-database-btn');
+        const resetModal = document.getElementById('reset-modal');
+        const cancelResetBtn = document.getElementById('cancel-reset-btn');
+        const confirmResetBtn = document.getElementById('confirm-reset-btn');
+        
+        // Add click event to all product details buttons
+        document.querySelectorAll('.product-details-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const barcode = this.getAttribute('data-barcode');
+                const name = this.getAttribute('data-name');
+                const brand = this.getAttribute('data-brand');
+                
+                // Display basic info while loading full details
+                productModalContent.innerHTML = `
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Brand:</strong> ${brand}</p>
+                    <p><strong>Barcode:</strong> ${barcode}</p>
+                    <p class="loading-text">Loading additional details...</p>
+                `;
+                
+                // Show the modal
+                productModal.style.display = 'flex';
+                
+                // Create a dummy request since we don't have a dedicated API endpoint for this
+                // In a production app, you'd fetch product details from the server
+                // This simulates that process
+                setTimeout(() => {
+                    productModalContent.innerHTML = `
+                        <p><strong>Name:</strong> ${name}</p>
+                        <p><strong>Brand:</strong> ${brand}</p>
+                        <p><strong>Barcode:</strong> ${barcode}</p>
+                        <p><strong>Category:</strong> Food (example)</p>
+                        <p><strong>Ingredients:</strong> Information not available in this view. 
+                           Scan the product again for full details.</p>
+                        <div style="margin-top: 15px;">
+                            <a href="/scanner" class="btn btn-success">Scan Again</a>
+                        </div>
+                    `;
+                }, 500);
+            });
+        });
+        
+        // Close the product details modal
+        closeModalBtn.addEventListener('click', function() {
+            productModal.style.display = 'none';
+        });
+        
+        // Close modal when clicking outside of it
+        productModal.addEventListener('click', function(event) {
+            if (event.target === productModal) {
+                productModal.style.display = 'none';
+            }
+        });
+        
+        // Show reset confirmation modal
+        if (resetDatabaseBtn) {
+            resetDatabaseBtn.addEventListener('click', function() {
+                resetModal.style.display = 'flex';
+            });
+        }
+        
+        // Cancel reset
+        cancelResetBtn.addEventListener('click', function() {
+            resetModal.style.display = 'none';
+        });
+        
+        // Close reset modal when clicking outside of it
+        resetModal.addEventListener('click', function(event) {
+            if (event.target === resetModal) {
+                resetModal.style.display = 'none';
+            }
+        });
+        
+        // Confirm reset
+        confirmResetBtn.addEventListener('click', function() {
+            // Send request to reset database
+            fetch('/api/reset_database', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Reload the page to show empty product list
+                    window.location.reload();
+                } else {
+                    alert('Error resetting database. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error resetting database:', error);
+                alert('Error resetting database. Please try again.');
+            })
+            .finally(() => {
+                resetModal.style.display = 'none';
+            });
+        });
+    });
+</script>
+{% endblock %} 

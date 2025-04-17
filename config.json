@@ -1,14 +1,14 @@
 {
     "barcode": {
-        "camera_index": null,
+        "camera_index": 0,
         "save_images": false,
         "image_quality": 85,
         "scan_timeout": 30
     },
     "audio": {
-        "speech_rate": 150,
+        "speech_rate": 200,
         "speech_volume": 1.0,
-        "voice": null,
+        "voice": "english-us",
         "enable_sounds": true,
         "sound_volume": 0.7,
         "bluetooth_speaker": ""

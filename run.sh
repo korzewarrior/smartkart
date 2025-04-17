@@ -15,7 +15,7 @@ fi
 source venv/bin/activate
 
 # Run SmartKart with headless mode
-python src/main.py --headless
+python run.py --headless
 
 # Deactivate when done
 deactivate 

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}SmartKart - Home{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">Welcome to SmartKart</div>
+    <p>SmartKart is a shopping assistant designed to help visually impaired users identify products by scanning barcodes.</p>
+    <p>This web interface allows you to access all SmartKart features through your browser.</p>
+</div>
+
+<div class="row" style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 30px;">
+    <div class="card" style="flex: 1; min-width: 250px;">
+        <div class="card-header">Scanner</div>
+        <p>Scan product barcodes using your device camera. Get detailed information about products.</p>
+        <p style="margin-top: 15px;"><a href="/scanner" class="btn btn-success">Open Scanner</a></p>
+    </div>
+    
+    <div class="card" style="flex: 1; min-width: 250px;">
+        <div class="card-header">Product List</div>
+        <p>View a list of all products you've scanned. Review product details at any time.</p>
+        <p style="margin-top: 15px;"><a href="/products" class="btn btn-info">View Products</a></p>
+    </div>
+    
+    <div class="card" style="flex: 1; min-width: 250px;">
+        <div class="card-header">Settings</div>
+        <p>Configure speech volume, rate, voice, and other settings for the SmartKart system.</p>
+        <p style="margin-top: 15px;"><a href="/settings" class="btn btn-warning">Open Settings</a></p>
+    </div>
+</div>
+
+<div id="last-product-container" class="card" style="margin-top: 30px; display: none;">
+    <div class="card-header">Last Scanned Product</div>
+    <div id="last-product-details">
+        <p>Loading...</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Check if there's a last scanned product
+    fetch('/api/last_product')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const container = document.getElementById('last-product-container');
+                const details = document.getElementById('last-product-details');
+                
+                const product = data.product;
+                let allergenText = '';
+                
+                if (product.allergens && product.allergens.length > 0) {
+                    allergenText = `<p><strong>Allergens:</strong> ${product.allergens.join(', ')}</p>`;
+                }
+                
+                details.innerHTML = `
+                    <p><strong>Name:</strong> ${product.name}</p>
+                    <p><strong>Brand:</strong> ${product.brand}</p>
+                    <p><strong>Barcode:</strong> ${product.barcode}</p>
+                    ${allergenText}
+                    <p style="margin-top: 15px;">
+                        <a href="/scanner" class="btn btn-primary">Scan Again</a>
+                    </p>
+                `;
+                
+                container.style.display = 'block';
+            }
+        })
+        .catch(error => console.error('Error fetching last product:', error));
+</script>
+{% endblock %} 

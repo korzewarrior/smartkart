@@ -4323,3 +4323,1417 @@
 2025-04-16 18:40:23,588 - SmartKart - INFO - KeyboardInterrupt received, shutting down
 2025-04-16 18:40:23,769 - SmartKart - INFO - Stopping SmartKart application
 2025-04-16 18:40:23,874 - SmartKart - INFO - SmartKart application stopped
+2025-04-16 19:08:43,164 - SmartKart - INFO - Logging initialized
+2025-04-16 19:08:43,164 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 19:08:43,164 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 19:08:43,165 - SmartKart - INFO - SmartKart initializing
+2025-04-16 19:08:43,165 - SmartKart - INFO - Initializing subsystems
+2025-04-16 19:08:43,165 - SmartKart - INFO - Initializing speech system
+2025-04-16 19:08:43,194 - SmartKart - INFO - Speech system initialized
+2025-04-16 19:08:43,194 - SmartKart - INFO - Initializing barcode scanner
+2025-04-16 19:08:43,194 - SmartKart - INFO - Barcode scanner initialized
+2025-04-16 19:08:43,195 - SmartKart - INFO - Initializing product database
+2025-04-16 19:08:43,195 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 19:08:43,195 - SmartKart - INFO - Product database initialized
+2025-04-16 19:08:43,195 - SmartKart - INFO - Initializing button controller
+2025-04-16 19:08:43,197 - SmartKart - INFO - Button controller initialized
+2025-04-16 19:08:43,198 - SmartKart - INFO - Starting SmartKart application
+2025-04-16 19:08:43,198 - SmartKart - INFO - Initial setup with STATE_PRODUCT_LIST properly defined
+2025-04-16 19:08:46,501 - SmartKart - INFO - KeyboardInterrupt received, shutting down
+2025-04-16 19:08:47,768 - SmartKart - INFO - Stopping SmartKart application
+2025-04-16 19:08:47,873 - SmartKart - INFO - SmartKart application stopped
+2025-04-16 19:08:51,076 - SmartKart - INFO - Logging initialized
+2025-04-16 19:08:51,076 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 19:08:51,076 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 19:08:51,076 - SmartKart - INFO - SmartKart initializing
+2025-04-16 19:08:51,076 - SmartKart - INFO - Initializing subsystems
+2025-04-16 19:08:51,076 - SmartKart - INFO - Initializing speech system
+2025-04-16 19:08:51,099 - SmartKart - INFO - Speech system initialized
+2025-04-16 19:08:51,099 - SmartKart - INFO - Initializing barcode scanner
+2025-04-16 19:08:51,100 - SmartKart - INFO - Barcode scanner initialized
+2025-04-16 19:08:51,100 - SmartKart - INFO - Initializing product database
+2025-04-16 19:08:51,100 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 19:08:51,100 - SmartKart - INFO - Product database initialized
+2025-04-16 19:08:51,100 - SmartKart - INFO - Initializing button controller
+2025-04-16 19:08:51,101 - SmartKart - INFO - Button controller initialized
+2025-04-16 19:08:51,101 - SmartKart - INFO - Starting SmartKart application
+2025-04-16 19:08:51,101 - SmartKart - INFO - Initial setup with STATE_PRODUCT_LIST properly defined
+2025-04-16 19:14:30,471 - SmartKart - INFO - Starting scanning mode
+2025-04-16 19:14:31,689 - SmartKart - INFO - Starting background scanner
+2025-04-16 19:14:31,689 - SmartKart.Scanner - INFO - Initializing camera...
+2025-04-16 19:14:31,689 - SmartKart.Scanner - INFO - Trying to open camera at index 0...
+2025-04-16 19:14:33,281 - SmartKart.Scanner - INFO - Trying to open camera at index 1...
+2025-04-16 19:14:33,355 - SmartKart.Scanner - INFO - Trying to open camera at index 2...
+2025-04-16 19:14:33,431 - SmartKart.Scanner - INFO - Trying to open camera at index 3...
+2025-04-16 19:14:33,506 - SmartKart.Scanner - INFO - Error: Could not open any webcam
+2025-04-16 19:14:37,325 - SmartKart - INFO - Logging initialized
+2025-04-16 19:14:37,326 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 19:14:37,326 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 19:14:37,326 - SmartKart - INFO - SmartKart initializing
+2025-04-16 19:14:37,326 - SmartKart - INFO - Initializing subsystems
+2025-04-16 19:14:37,326 - SmartKart - INFO - Initializing speech system
+2025-04-16 19:14:37,374 - SmartKart - INFO - Speech system initialized
+2025-04-16 19:14:37,375 - SmartKart - INFO - Initializing barcode scanner
+2025-04-16 19:14:37,375 - SmartKart - INFO - Barcode scanner initialized
+2025-04-16 19:14:37,375 - SmartKart - INFO - Initializing product database
+2025-04-16 19:14:37,375 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 19:14:37,375 - SmartKart - INFO - Product database initialized
+2025-04-16 19:14:37,375 - SmartKart - INFO - Initializing button controller
+2025-04-16 19:14:37,377 - SmartKart - INFO - Button controller initialized
+2025-04-16 19:14:37,378 - SmartKart - ERROR - Error displaying product list: 'SmartKart' object has no attribute 'log_buffer'
+2025-04-16 19:14:43,394 - SmartKart - INFO - KeyboardInterrupt received, shutting down
+2025-04-16 19:14:43,576 - SmartKart - INFO - Stopping SmartKart application
+2025-04-16 19:14:43,576 - SmartKart - INFO - Stopping background scanner
+2025-04-16 19:14:43,843 - SmartKart - INFO - SmartKart application stopped
+2025-04-16 19:14:57,754 - SmartKart - INFO - Logging initialized
+2025-04-16 19:14:57,755 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 19:14:57,755 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 19:14:57,755 - SmartKart - INFO - SmartKart initializing
+2025-04-16 19:14:57,755 - SmartKart - INFO - Initializing subsystems
+2025-04-16 19:14:57,755 - SmartKart - INFO - Initializing speech system
+2025-04-16 19:14:57,789 - SmartKart - INFO - Speech system initialized
+2025-04-16 19:14:57,790 - SmartKart - INFO - Initializing barcode scanner
+2025-04-16 19:14:57,790 - SmartKart - INFO - Barcode scanner initialized
+2025-04-16 19:14:57,790 - SmartKart - INFO - Initializing product database
+2025-04-16 19:14:57,790 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 19:14:57,790 - SmartKart - INFO - Product database initialized
+2025-04-16 19:14:57,790 - SmartKart - INFO - Initializing button controller
+2025-04-16 19:14:57,792 - SmartKart - INFO - Button controller initialized
+2025-04-16 19:14:57,793 - SmartKart - INFO - Starting SmartKart application
+2025-04-16 19:14:57,793 - SmartKart - INFO - Initial setup with STATE_PRODUCT_LIST properly defined
+2025-04-16 19:16:08,767 - SmartKart - INFO - Stopping SmartKart application
+2025-04-16 19:16:08,872 - SmartKart - INFO - SmartKart application stopped
+2025-04-16 19:16:10,612 - SmartKart - INFO - Logging initialized
+2025-04-16 19:16:10,612 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 19:16:10,612 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 19:16:10,612 - SmartKart - INFO - SmartKart initializing
+2025-04-16 19:16:10,612 - SmartKart - INFO - Initializing subsystems
+2025-04-16 19:16:10,612 - SmartKart - INFO - Initializing speech system
+2025-04-16 19:16:10,649 - SmartKart - INFO - Speech system initialized
+2025-04-16 19:16:10,649 - SmartKart - INFO - Initializing barcode scanner
+2025-04-16 19:16:10,649 - SmartKart - INFO - Barcode scanner initialized
+2025-04-16 19:16:10,649 - SmartKart - INFO - Initializing product database
+2025-04-16 19:16:10,649 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 19:16:10,649 - SmartKart - INFO - Product database initialized
+2025-04-16 19:16:10,649 - SmartKart - INFO - Initializing button controller
+2025-04-16 19:16:10,651 - SmartKart - INFO - Button controller initialized
+2025-04-16 19:16:10,652 - SmartKart - INFO - Starting SmartKart application
+2025-04-16 19:16:10,652 - SmartKart - INFO - Initial setup with STATE_PRODUCT_LIST properly defined
+2025-04-16 19:16:10,667 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:16:13,922 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:16:17,166 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:16:20,408 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:16:23,650 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:16:26,893 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:16:29,523 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:16:32,781 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:16:36,023 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:16:39,266 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:16:42,509 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:16:45,752 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:16:48,996 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:16:52,236 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:16:55,635 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:16:58,903 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:17:02,136 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:17:05,380 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:17:08,620 - SmartKart - ERROR - Error handling menu input: EOF when reading a line
+2025-04-16 19:20:49,258 - SmartKart - INFO - Logging initialized
+2025-04-16 19:20:49,259 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 19:20:49,259 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 19:20:49,259 - SmartKart - INFO - SmartKart initializing
+2025-04-16 19:20:49,259 - SmartKart - INFO - Initializing subsystems
+2025-04-16 19:20:49,259 - SmartKart - INFO - Initializing speech system
+2025-04-16 19:20:49,289 - SmartKart - INFO - Speech system initialized
+2025-04-16 19:20:49,289 - SmartKart - INFO - Initializing barcode scanner
+2025-04-16 19:20:49,289 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-16 19:20:49,289 - SmartKart - INFO - Barcode scanner initialized
+2025-04-16 19:20:49,290 - SmartKart - INFO - Initializing product database
+2025-04-16 19:20:49,290 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 19:20:49,290 - SmartKart - INFO - Product database initialized
+2025-04-16 19:20:49,290 - SmartKart - INFO - Initializing button controller
+2025-04-16 19:20:49,292 - SmartKart - INFO - Button controller initialized
+2025-04-16 19:20:49,292 - SmartKart - INFO - Starting SmartKart application
+2025-04-16 19:20:49,292 - SmartKart - INFO - Initial setup with STATE_PRODUCT_LIST properly defined
+2025-04-16 19:21:08,950 - SmartKart - INFO - KeyboardInterrupt received, shutting down
+2025-04-16 19:21:10,167 - SmartKart - INFO - Stopping SmartKart application
+2025-04-16 19:21:10,273 - SmartKart - INFO - SmartKart application stopped
+2025-04-16 19:21:25,073 - SmartKart - INFO - Logging initialized
+2025-04-16 19:21:25,074 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 19:21:25,074 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 19:21:25,074 - SmartKart - INFO - SmartKart initializing
+2025-04-16 19:21:25,074 - SmartKart - INFO - Initializing subsystems
+2025-04-16 19:21:25,074 - SmartKart - INFO - Initializing speech system
+2025-04-16 19:21:25,103 - SmartKart - INFO - Speech system initialized
+2025-04-16 19:21:25,103 - SmartKart - INFO - Initializing barcode scanner
+2025-04-16 19:21:25,104 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-16 19:21:25,104 - SmartKart - INFO - Barcode scanner initialized
+2025-04-16 19:21:25,104 - SmartKart - INFO - Initializing product database
+2025-04-16 19:21:25,104 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 19:21:25,104 - SmartKart - INFO - Product database initialized
+2025-04-16 19:21:25,104 - SmartKart - INFO - Initializing button controller
+2025-04-16 19:21:25,106 - SmartKart - INFO - Button controller initialized
+2025-04-16 19:21:25,106 - SmartKart - INFO - Starting SmartKart application
+2025-04-16 19:21:25,106 - SmartKart - INFO - Initial setup with STATE_PRODUCT_LIST properly defined
+2025-04-16 19:21:28,347 - SmartKart - INFO - Logging initialized
+2025-04-16 19:21:28,348 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 19:21:28,348 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 19:21:28,348 - SmartKart - INFO - SmartKart initializing
+2025-04-16 19:21:28,348 - SmartKart - INFO - Initializing subsystems
+2025-04-16 19:21:28,348 - SmartKart - INFO - Initializing speech system
+2025-04-16 19:21:28,388 - SmartKart - INFO - Speech system initialized
+2025-04-16 19:21:28,389 - SmartKart - INFO - Initializing barcode scanner
+2025-04-16 19:21:28,389 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-16 19:21:28,389 - SmartKart - INFO - Barcode scanner initialized
+2025-04-16 19:21:28,389 - SmartKart - INFO - Initializing product database
+2025-04-16 19:21:28,389 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 19:21:28,389 - SmartKart - INFO - Product database initialized
+2025-04-16 19:21:28,389 - SmartKart - INFO - Initializing button controller
+2025-04-16 19:21:28,391 - SmartKart - INFO - Button controller initialized
+2025-04-16 19:21:28,391 - SmartKart - INFO - Starting SmartKart application
+2025-04-16 19:21:28,391 - SmartKart - INFO - Initial setup with STATE_PRODUCT_LIST properly defined
+2025-04-16 19:21:43,358 - SmartKart - INFO - Found 131 available voices
+2025-04-16 19:21:56,532 - SmartKart - INFO - Found 131 available voices
+2025-04-16 19:22:08,751 - SmartKart - INFO - KeyboardInterrupt received, shutting down
+2025-04-16 19:22:08,882 - SmartKart - INFO - Stopping SmartKart application
+2025-04-16 19:22:08,987 - SmartKart - INFO - SmartKart application stopped
+2025-04-16 19:22:14,532 - SmartKart - INFO - Logging initialized
+2025-04-16 19:22:14,532 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 19:22:14,532 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 19:22:14,533 - SmartKart - INFO - SmartKart initializing
+2025-04-16 19:22:14,533 - SmartKart - INFO - Initializing subsystems
+2025-04-16 19:22:14,533 - SmartKart - INFO - Initializing speech system
+2025-04-16 19:22:14,556 - SmartKart - INFO - Speech system initialized
+2025-04-16 19:22:14,556 - SmartKart - INFO - Initializing barcode scanner
+2025-04-16 19:22:14,556 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-16 19:22:14,556 - SmartKart - INFO - Barcode scanner initialized
+2025-04-16 19:22:14,556 - SmartKart - INFO - Initializing product database
+2025-04-16 19:22:14,557 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 19:22:14,557 - SmartKart - INFO - Product database initialized
+2025-04-16 19:22:14,557 - SmartKart - INFO - Initializing button controller
+2025-04-16 19:22:14,558 - SmartKart - INFO - Button controller initialized
+2025-04-16 19:22:14,558 - SmartKart - INFO - Starting SmartKart application
+2025-04-16 19:22:14,558 - SmartKart - INFO - Initial setup with STATE_PRODUCT_LIST properly defined
+2025-04-16 19:22:22,281 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 19:22:26,989 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 19:22:31,821 - SmartKart - INFO - Attempting to delete product database
+2025-04-16 19:22:31,821 - SmartKart - INFO - Cleared product list file: data/product_list.txt
+2025-04-16 19:22:31,823 - SmartKart - INFO - Deleted 1 product files from data/scan_results
+2025-04-16 19:22:31,823 - SmartKart - INFO - Reset product tracking database
+2025-04-16 19:22:37,815 - SmartKart - INFO - Attempting to delete product database
+2025-04-16 19:22:37,815 - SmartKart - INFO - Cleared product list file: data/product_list.txt
+2025-04-16 19:22:37,815 - SmartKart - INFO - Deleted 0 product files from data/scan_results
+2025-04-16 19:22:37,815 - SmartKart - INFO - Reset product tracking database
+2025-04-16 19:22:47,477 - SmartKart - INFO - Starting scanning mode
+2025-04-16 19:22:48,695 - SmartKart - INFO - Starting background scanner
+2025-04-16 19:22:48,696 - SmartKart.Scanner - INFO - Initializing camera...
+2025-04-16 19:22:48,696 - SmartKart.Scanner - INFO - Trying to open camera at index 0...
+2025-04-16 19:22:49,026 - SmartKart.Scanner - INFO - Trying to open camera at index 1...
+2025-04-16 19:22:49,100 - SmartKart.Scanner - INFO - Trying to open camera at index 2...
+2025-04-16 19:22:49,175 - SmartKart.Scanner - INFO - Trying to open camera at index 3...
+2025-04-16 19:22:49,251 - SmartKart.Scanner - INFO - Error: Could not open any webcam
+2025-04-16 19:26:53,891 - SmartKart - INFO - Logging initialized
+2025-04-16 19:26:53,891 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 19:26:53,891 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 19:26:53,891 - SmartKart - INFO - SmartKart initializing
+2025-04-16 19:26:53,891 - SmartKart - INFO - Initializing subsystems
+2025-04-16 19:26:53,891 - SmartKart - INFO - Initializing speech system
+2025-04-16 19:26:53,928 - SmartKart - INFO - Speech system initialized
+2025-04-16 19:26:53,928 - SmartKart - INFO - Initializing barcode scanner
+2025-04-16 19:26:53,928 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-16 19:26:53,928 - SmartKart - INFO - Barcode scanner initialized
+2025-04-16 19:26:53,928 - SmartKart - INFO - Initializing product database
+2025-04-16 19:26:53,928 - SmartKart.ProductLookup - INFO - Loaded 0 products from existing list
+2025-04-16 19:26:53,928 - SmartKart - INFO - Product database initialized
+2025-04-16 19:26:53,928 - SmartKart - INFO - Initializing button controller
+2025-04-16 19:26:53,931 - SmartKart - INFO - Button controller initialized
+2025-04-16 19:26:53,932 - SmartKart - INFO - Starting SmartKart application
+2025-04-16 19:26:53,932 - SmartKart - INFO - Initial setup with STATE_PRODUCT_LIST properly defined
+2025-04-16 19:27:14,465 - SmartKart - INFO - Starting scanning mode
+2025-04-16 19:27:14,576 - SmartKart - INFO - Starting background scanner
+2025-04-16 19:27:14,577 - SmartKart.Scanner - INFO - Initializing camera...
+2025-04-16 19:27:14,577 - SmartKart.Scanner - INFO - Using specified camera index: 0
+2025-04-16 19:27:15,746 - SmartKart.Scanner - INFO - Successfully opened camera at index 0
+2025-04-16 19:27:15,749 - SmartKart.Scanner - INFO - Successfully read a test frame from camera 0
+2025-04-16 19:27:15,749 - SmartKart.Scanner - INFO - Setting camera properties...
+2025-04-16 19:27:19,474 - SmartKart - INFO - Background scanner thread started
+2025-04-16 19:27:32,185 - SmartKart - INFO - Verified barcode: 0041570015902 (EAN13)
+2025-04-16 19:27:32,185 - SmartKart - INFO - Looking up product information for barcode: 0041570015902
+2025-04-16 19:27:32,185 - SmartKart.ProductLookup - INFO - Looking up barcode 0041570015902 in Open Food Facts database...
+2025-04-16 19:27:40,134 - SmartKart.ProductLookup - INFO - Product info saved to data/scan_results/0041570015902_20250416_192740.json
+2025-04-16 19:27:40,135 - SmartKart - INFO - Saved new product info to data/scan_results/0041570015902_20250416_192740.json
+2025-04-16 19:27:40,899 - SmartKart - INFO - Played success sound for new product
+2025-04-16 19:27:40,899 - SmartKart.ProductLookup - INFO - Added product to tracking list: 0041570015902
+2025-04-16 19:27:40,899 - SmartKart - INFO - Added new product to tracking list: 0041570015902
+2025-04-16 21:39:02,077 - SmartKart - INFO - Logging initialized
+2025-04-16 21:39:02,078 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 21:39:02,081 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 21:39:02,081 - SmartKart - INFO - SmartKart initializing
+2025-04-16 21:39:02,081 - SmartKart - INFO - Initializing subsystems
+2025-04-16 21:39:02,081 - SmartKart - INFO - Initializing speech system
+2025-04-16 21:39:02,112 - SmartKart - INFO - Speech system initialized
+2025-04-16 21:39:02,113 - SmartKart - INFO - Initializing barcode scanner
+2025-04-16 21:39:02,113 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-16 21:39:02,113 - SmartKart - INFO - Barcode scanner initialized
+2025-04-16 21:39:02,113 - SmartKart - INFO - Initializing product database
+2025-04-16 21:39:02,113 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 21:39:02,113 - SmartKart - INFO - Product database initialized
+2025-04-16 21:39:02,113 - SmartKart - INFO - Initializing button controller
+2025-04-16 21:39:02,114 - SmartKart - INFO - Button controller initialized
+2025-04-16 21:39:02,115 - SmartKart - INFO - Starting SmartKart application
+2025-04-16 21:39:02,115 - SmartKart - INFO - Initial setup with STATE_PRODUCT_LIST properly defined
+2025-04-16 21:39:09,609 - SmartKart - INFO - Starting scanning mode
+2025-04-16 21:39:09,720 - SmartKart - INFO - Starting background scanner
+2025-04-16 21:39:09,720 - SmartKart.Scanner - INFO - Initializing camera...
+2025-04-16 21:39:09,720 - SmartKart.Scanner - INFO - Using specified camera index: 0
+2025-04-16 21:39:10,929 - SmartKart.Scanner - INFO - Successfully opened camera at index 0
+2025-04-16 21:39:10,931 - SmartKart.Scanner - INFO - Successfully read a test frame from camera 0
+2025-04-16 21:39:10,932 - SmartKart.Scanner - INFO - Setting camera properties...
+2025-04-16 21:39:14,702 - SmartKart - INFO - Background scanner thread started
+2025-04-16 21:39:55,730 - SmartKart - INFO - KeyboardInterrupt received, shutting down
+2025-04-16 21:39:55,893 - SmartKart - INFO - Stopping SmartKart application
+2025-04-16 21:39:55,893 - SmartKart - INFO - Stopping background scanner
+2025-04-16 21:39:55,916 - SmartKart - INFO - Background scanner thread stopped
+2025-04-16 21:39:56,174 - SmartKart.Scanner - INFO - Camera released
+2025-04-16 21:39:56,280 - SmartKart - INFO - SmartKart application stopped
+2025-04-16 21:39:59,612 - SmartKart - INFO - Logging initialized
+2025-04-16 21:39:59,612 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 21:39:59,613 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 21:39:59,613 - SmartKart - INFO - SmartKart initializing
+2025-04-16 21:39:59,613 - SmartKart - INFO - Initializing subsystems
+2025-04-16 21:39:59,613 - SmartKart - INFO - Initializing speech system
+2025-04-16 21:39:59,643 - SmartKart - INFO - Speech system initialized
+2025-04-16 21:39:59,643 - SmartKart - INFO - Initializing barcode scanner
+2025-04-16 21:39:59,644 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-16 21:39:59,644 - SmartKart - INFO - Barcode scanner initialized
+2025-04-16 21:39:59,644 - SmartKart - INFO - Initializing product database
+2025-04-16 21:39:59,644 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 21:39:59,644 - SmartKart - INFO - Product database initialized
+2025-04-16 21:39:59,644 - SmartKart - INFO - Initializing button controller
+2025-04-16 21:39:59,645 - SmartKart - INFO - Button controller initialized
+2025-04-16 21:39:59,645 - SmartKart - INFO - Starting SmartKart application
+2025-04-16 21:39:59,645 - SmartKart - INFO - Initial setup with STATE_PRODUCT_LIST properly defined
+2025-04-16 21:40:02,095 - SmartKart - INFO - Starting scanning mode
+2025-04-16 21:40:02,246 - SmartKart - INFO - Starting background scanner
+2025-04-16 21:40:02,246 - SmartKart.Scanner - INFO - Initializing camera...
+2025-04-16 21:40:02,246 - SmartKart.Scanner - INFO - Using specified camera index: 0
+2025-04-16 21:40:03,435 - SmartKart.Scanner - INFO - Successfully opened camera at index 0
+2025-04-16 21:40:03,444 - SmartKart.Scanner - INFO - Successfully read a test frame from camera 0
+2025-04-16 21:40:03,444 - SmartKart.Scanner - INFO - Setting camera properties...
+2025-04-16 21:40:07,216 - SmartKart - INFO - Background scanner thread started
+2025-04-16 21:40:09,555 - SmartKart - INFO - KeyboardInterrupt received, shutting down
+2025-04-16 21:40:09,717 - SmartKart - INFO - Stopping SmartKart application
+2025-04-16 21:40:09,717 - SmartKart - INFO - Stopping background scanner
+2025-04-16 21:40:09,762 - SmartKart - INFO - Background scanner thread stopped
+2025-04-16 21:40:09,999 - SmartKart.Scanner - INFO - Camera released
+2025-04-16 21:40:12,152 - SmartKart - INFO - Logging initialized
+2025-04-16 21:40:12,152 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 21:40:12,153 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 21:40:12,153 - SmartKart - INFO - SmartKart initializing
+2025-04-16 21:40:12,153 - SmartKart - INFO - Initializing subsystems
+2025-04-16 21:40:12,153 - SmartKart - INFO - Initializing speech system
+2025-04-16 21:40:12,182 - SmartKart - INFO - Speech system initialized
+2025-04-16 21:40:12,182 - SmartKart - INFO - Initializing barcode scanner
+2025-04-16 21:40:12,183 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-16 21:40:12,183 - SmartKart - INFO - Barcode scanner initialized
+2025-04-16 21:40:12,183 - SmartKart - INFO - Initializing product database
+2025-04-16 21:40:12,183 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 21:40:12,183 - SmartKart - INFO - Product database initialized
+2025-04-16 21:40:12,183 - SmartKart - INFO - Initializing button controller
+2025-04-16 21:40:12,185 - SmartKart - INFO - Button controller initialized
+2025-04-16 21:40:12,185 - SmartKart - INFO - Starting SmartKart application
+2025-04-16 21:40:12,185 - SmartKart - INFO - Initial setup with STATE_PRODUCT_LIST properly defined
+2025-04-16 21:40:12,610 - SmartKart - INFO - Starting scanning mode
+2025-04-16 21:40:14,411 - SmartKart - INFO - Starting background scanner
+2025-04-16 21:40:14,411 - SmartKart.Scanner - INFO - Initializing camera...
+2025-04-16 21:40:14,412 - SmartKart.Scanner - INFO - Using specified camera index: 0
+2025-04-16 21:40:15,595 - SmartKart.Scanner - INFO - Successfully opened camera at index 0
+2025-04-16 21:40:15,604 - SmartKart.Scanner - INFO - Successfully read a test frame from camera 0
+2025-04-16 21:40:15,604 - SmartKart.Scanner - INFO - Setting camera properties...
+2025-04-16 21:40:19,378 - SmartKart - INFO - Background scanner thread started
+2025-04-16 21:40:24,145 - SmartKart - INFO - KeyboardInterrupt received, shutting down
+2025-04-16 21:40:24,334 - SmartKart - INFO - Stopping SmartKart application
+2025-04-16 21:40:24,334 - SmartKart - INFO - Stopping background scanner
+2025-04-16 21:40:24,382 - SmartKart - INFO - Background scanner thread stopped
+2025-04-16 21:40:24,608 - SmartKart.Scanner - INFO - Camera released
+2025-04-16 21:40:26,265 - SmartKart - INFO - SmartKart application stopped
+2025-04-16 21:40:29,781 - SmartKart - INFO - Logging initialized
+2025-04-16 21:40:29,781 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 21:40:29,781 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 21:40:29,782 - SmartKart - INFO - SmartKart initializing
+2025-04-16 21:40:29,782 - SmartKart - INFO - Initializing subsystems
+2025-04-16 21:40:29,782 - SmartKart - INFO - Initializing speech system
+2025-04-16 21:40:29,806 - SmartKart - INFO - Speech system initialized
+2025-04-16 21:40:29,806 - SmartKart - INFO - Initializing barcode scanner
+2025-04-16 21:40:29,806 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-16 21:40:29,806 - SmartKart - INFO - Barcode scanner initialized
+2025-04-16 21:40:29,806 - SmartKart - INFO - Initializing product database
+2025-04-16 21:40:29,806 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 21:40:29,807 - SmartKart - INFO - Product database initialized
+2025-04-16 21:40:29,807 - SmartKart - INFO - Initializing button controller
+2025-04-16 21:40:29,808 - SmartKart - INFO - Button controller initialized
+2025-04-16 21:40:29,808 - SmartKart - INFO - Starting SmartKart application
+2025-04-16 21:40:29,808 - SmartKart - INFO - Initial setup with STATE_PRODUCT_LIST properly defined
+2025-04-16 21:40:35,286 - SmartKart - INFO - Starting scanning mode
+2025-04-16 21:40:35,437 - SmartKart - INFO - Starting background scanner
+2025-04-16 21:40:35,438 - SmartKart.Scanner - INFO - Initializing camera...
+2025-04-16 21:40:35,438 - SmartKart.Scanner - INFO - Using specified camera index: 0
+2025-04-16 21:40:36,620 - SmartKart.Scanner - INFO - Successfully opened camera at index 0
+2025-04-16 21:40:36,628 - SmartKart.Scanner - INFO - Successfully read a test frame from camera 0
+2025-04-16 21:40:36,628 - SmartKart.Scanner - INFO - Setting camera properties...
+2025-04-16 21:40:40,435 - SmartKart - INFO - Background scanner thread started
+2025-04-16 22:03:17,230 - SmartKart - INFO - KeyboardInterrupt received, shutting down
+2025-04-16 22:03:17,391 - SmartKart - INFO - Stopping SmartKart application
+2025-04-16 22:03:17,392 - SmartKart - INFO - Stopping background scanner
+2025-04-16 22:03:17,410 - SmartKart - INFO - Background scanner thread stopped
+2025-04-16 22:03:21,051 - SmartKart - INFO - Logging initialized
+2025-04-16 22:03:21,051 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 22:03:21,093 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:03:21,093 - SmartKart - INFO - SmartKart initializing
+2025-04-16 22:03:21,093 - SmartKart - INFO - Initializing subsystems
+2025-04-16 22:03:21,093 - SmartKart - INFO - Initializing speech system
+2025-04-16 22:03:21,119 - SmartKart - INFO - Speech system initialized
+2025-04-16 22:03:21,119 - SmartKart - INFO - Initializing barcode scanner
+2025-04-16 22:03:21,119 - SmartKart.Scanner - INFO - Barcode scanner running in headless mode
+2025-04-16 22:03:21,119 - SmartKart - INFO - Barcode scanner initialized
+2025-04-16 22:03:21,119 - SmartKart - INFO - Initializing product database
+2025-04-16 22:03:21,119 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 22:03:21,120 - SmartKart - INFO - Product database initialized
+2025-04-16 22:03:21,120 - SmartKart - INFO - Initializing button controller
+2025-04-16 22:03:21,122 - SmartKart - INFO - Button controller initialized
+2025-04-16 22:03:21,122 - SmartKart - INFO - Starting SmartKart application
+2025-04-16 22:03:21,122 - SmartKart - INFO - Initial setup with STATE_PRODUCT_LIST properly defined
+2025-04-16 22:03:29,754 - SmartKart - INFO - Starting scanning mode
+2025-04-16 22:03:29,866 - SmartKart - INFO - Starting background scanner
+2025-04-16 22:03:29,867 - SmartKart.Scanner - INFO - Initializing camera...
+2025-04-16 22:03:29,867 - SmartKart.Scanner - INFO - Using specified camera index: 0
+2025-04-16 22:03:30,975 - SmartKart.Scanner - INFO - Successfully opened camera at index 0
+2025-04-16 22:03:30,977 - SmartKart.Scanner - INFO - Successfully read a test frame from camera 0
+2025-04-16 22:03:30,977 - SmartKart.Scanner - INFO - Setting camera properties...
+2025-04-16 22:03:34,577 - SmartKart - INFO - Background scanner thread started
+2025-04-16 22:03:46,339 - SmartKart - INFO - KeyboardInterrupt received, shutting down
+2025-04-16 22:03:46,471 - SmartKart - INFO - Stopping SmartKart application
+2025-04-16 22:03:46,471 - SmartKart - INFO - Stopping background scanner
+2025-04-16 22:03:46,475 - SmartKart - INFO - Background scanner thread stopped
+2025-04-16 22:03:46,778 - SmartKart.Scanner - INFO - Camera released
+2025-04-16 22:03:46,882 - SmartKart - INFO - SmartKart application stopped
+2025-04-16 22:10:15,977 - SmartKart - INFO - Logging initialized
+2025-04-16 22:10:15,978 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 22:10:15,978 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:10:16,009 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 22:10:16,192 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.100.0.66:5000
+2025-04-16 22:10:16,192 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-16 22:10:18,815 - src.web_app - ERROR - Exception on / [GET]
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/james/smartkart/src/web_app.py", line 66, in index
+    return render_template('index.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/templating.py", line 147, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/templating.py", line 130, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/usr/lib/python3/dist-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/james/smartkart/src/web/templates/index.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/usr/lib/python3/dist-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/james/smartkart/src/web/templates/base.html", line 239, in template
+    <p>SmartKart Web Interface &copy; {% now year %}</p>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'now'.
+2025-04-16 22:10:18,820 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:10:18] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-04-16 22:10:18,902 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:10:18] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-16 22:15:04,155 - SmartKart - INFO - Logging initialized
+2025-04-16 22:15:04,155 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 22:15:04,156 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:15:44,219 - SmartKart - INFO - Logging initialized
+2025-04-16 22:15:44,219 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 22:15:44,220 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:15:44,475 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 22:15:44,485 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.100.0.66:5000
+2025-04-16 22:15:44,485 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-16 22:15:51,262 - src.web_app - ERROR - Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/james/smartkart/webenv/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/james/smartkart/webenv/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/james/smartkart/webenv/lib/python3.11/site-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/home/james/smartkart/webenv/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/james/smartkart/webenv/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/james/smartkart/src/web_app.py", line 81, in index
+    return render_template('index.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/james/smartkart/webenv/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/james/smartkart/webenv/lib/python3.11/site-packages/flask/templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/james/smartkart/webenv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/home/james/smartkart/webenv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/james/smartkart/src/web/templates/index.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/james/smartkart/webenv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/james/smartkart/src/web/templates/base.html", line 239, in template
+    <p>SmartKart Web Interface &copy; {% now year %}</p>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'now'.
+2025-04-16 22:15:51,264 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:15:51] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-04-16 22:16:01,541 - werkzeug - ERROR - 100.77.6.36 - - [16/Apr/2025 22:16:01] code 400, message Bad request version ('èäÖÞc¡õ³WÞ_Æ\x0fÍn.')
+2025-04-16 22:16:01,541 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:16:01] "[31m[1m\x16\x03\x01\x07O\x01\x00\x07K\x03\x03\x8eüò\x08\x85>T¾¤\x87\x81gI¾¡ÀÜ+NÍ\x92v;/\x1bËSë.\x01àÏ èäÖÞc¡õ³WÞ_Æ\x0fÍn.[0m" 400 -
+2025-04-16 22:16:01,547 - werkzeug - ERROR - 100.77.6.36 - - [16/Apr/2025 22:16:01] code 400, message Bad request version ('\x13\x11ßg\x0f/.ª½\x8b÷8s\x03\x8dNß\x91üÊë¶ñ\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+2025-04-16 22:16:01,547 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:16:01] "[31m[1m\x16\x03\x01\x02~\x01\x00\x02z\x03\x03\x119\x08\x8e\x91¶LÃ\x8eõþÎ\x88¨ ÿ|\x13ÎlA;\x90\x8aÁ\x91²kÎ!Ë; k¤¬:Ë\x81Í\x90\x1e\x13\x11ßg\x0f/.ª½\x8b÷8s\x03\x8dNß\x91üÊë¶ñ\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À[0m" 400 -
+2025-04-16 22:18:10,972 - SmartKart - INFO - Logging initialized
+2025-04-16 22:18:10,972 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 22:18:10,973 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:18:11,084 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 22:18:11,095 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.100.0.66:5000
+2025-04-16 22:18:11,095 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-16 22:18:12,323 - werkzeug - ERROR - 100.77.6.36 - - [16/Apr/2025 22:18:12] code 400, message Bad request version ('\x89\x8f.Á"SÁ6Ô21ú¨¡\x8c\x18ð\x92\x95ä¬ås\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+2025-04-16 22:18:12,323 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:18:12] "[31m[1m\x16\x03\x01\x07O\x01\x00\x07K\x03\x03Z\x82æ¨\x18©tó2k\x06\x9f\x93a1nu\x9e^ÿÉ®ùë\x8cØ¢\x03OÈ9\x8e ´6\x1cÄÜ\x85ùì\x1e\x89\x8f.Á"SÁ6Ô21ú¨¡\x8c\x18ð\x92\x95ä¬ås\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À[0m" 400 -
+2025-04-16 22:18:12,332 - werkzeug - ERROR - 100.77.6.36 - - [16/Apr/2025 22:18:12] code 400, message Bad request version ('\x03>\x8aéê\x90\x8dX|\x9bûjëE\x0fV\x92²8jj\x15Ø"ý"Öò{ëàì\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+2025-04-16 22:18:12,332 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:18:12] "[31m[1m\x16\x03\x01\x02~\x01\x00\x02z\x03\x03©;L_\x01¦ýË$\x1f`o\x81ZÊG< \x862\x00«ÃJÛ%´\x1c\x89põ\x0c \x03>\x8aéê\x90\x8dX|\x9bûjëE\x0fV\x92²8jj\x15Ø"ý"Öò{ëàì\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À[0m" 400 -
+2025-04-16 22:18:13,047 - werkzeug - ERROR - 100.77.6.36 - - [16/Apr/2025 22:18:13] code 400, message Bad request version ('\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+2025-04-16 22:18:13,047 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:18:13] "[31m[1m\x16\x03\x01\x07O\x01\x00\x07K\x03\x03\x14·\x05Ã\x86Â¹x-\x00\x04\x07\x0c¦\x1dªý4\x9fñR\x0bz!0Â\x9bé\x06\x8erÔ n%*ís5îf\x93\x93\x97\x9eªPm\x17\x14HçØ*5¯Ð\x00Â]FLÚL \x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À[0m" 400 -
+2025-04-16 22:18:13,054 - werkzeug - ERROR - 100.77.6.36 - - [16/Apr/2025 22:18:13] code 400, message Bad request version ('Bs\x01â\x19ìüºzI[%ó\x195¢7!»TCgÿ\x8dïy}')
+2025-04-16 22:18:13,054 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:18:13] "[31m[1m\x16\x03\x01\x02~\x01\x00\x02z\x03\x03è1\x8eá7Ó\x10¾ÀÏ\x12ÊÎ&\x1cm\x95ê\x9a\x99ï$\x98\x8eb\x8a\x04\x8d\x0f\x9d¦¹ Bs\x01â\x19ìüºzI[%ó\x195¢7!»TCgÿ\x8dïy}[0m" 400 -
+2025-04-16 22:18:13,244 - werkzeug - ERROR - 100.77.6.36 - - [16/Apr/2025 22:18:13] code 400, message Bad request version ('*¥3&±_À\xad")R¡\x18TX\x1b7Ä=ÆI\x93ô\x028\x8eª>\x10±äð\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+2025-04-16 22:18:13,244 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:18:13] "[31m[1m\x16\x03\x01\x07O\x01\x00\x07K\x03\x03Ð{\x8eó\x8b®aíu\x07)Ow<\x04Ã\x1c\x8dy\x89\x83Ja\x0e6V\x1c\x94Ò¡3\x0c *¥3&±_À­")R¡\x18TX\x1b7Ä=ÆI\x93ô\x028\x8eª>\x10±äð\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À[0m" 400 -
+2025-04-16 22:18:13,251 - werkzeug - ERROR - 100.77.6.36 - - [16/Apr/2025 22:18:13] code 400, message Bad request version ('bàÍû\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+2025-04-16 22:18:13,251 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:18:13] "[31m[1m\x16\x03\x01\x02~\x01\x00\x02z\x03\x03\x1cÙ.\x91ã£\x86ÜZ±{<Å^A\x89lc|¤F"BéÛä\x16"D~í. vO}\x0eñ\x94\x1aöP\x01|¸}Û\x1c¥\x11tð\x94Úü>'\x02æü\x1ebàÍû\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À[0m" 400 -
+2025-04-16 22:18:13,423 - werkzeug - ERROR - 100.77.6.36 - - [16/Apr/2025 22:18:13] code 400, message Bad request version ('\x93ÄÖ\x0e¡\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+2025-04-16 22:18:13,424 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:18:13] "[31m[1m\x16\x03\x01\x07O\x01\x00\x07K\x03\x03ä\x9c\x0f\x87\x8fðÕßú¹\x05Ï\x0fÈítTÑY³jB\x7f\x0cÚîw\x8a1\x128\x93 >ÚépÿïÄ£\x9dV[*9\x01îb¶\x87à\x93ý?¾Ê¤\x92\x09\x93ÄÖ\x0e¡\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À[0m" 400 -
+2025-04-16 22:18:13,431 - werkzeug - ERROR - 100.77.6.36 - - [16/Apr/2025 22:18:13] code 400, message Bad request version ('ä§LD\x95á\x9etåìMdî¹ï¤¶Û[)\x1bºS\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+2025-04-16 22:18:13,431 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:18:13] "[31m[1m\x16\x03\x01\x02~\x01\x00\x02z\x03\x03ÔË\x10vìvµ\x1cÓ_Ã¥øQL½Öq\x07a\x17\x8aË6µ\x12%\x80Îò\x9f\x99 .ù\x09\x7fká\x96²\x85ä§LD\x95á\x9etåìMdî¹ï¤¶Û[)\x1bºS\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À[0m" 400 -
+2025-04-16 22:18:13,636 - werkzeug - ERROR - 100.77.6.36 - - [16/Apr/2025 22:18:13] code 400, message Bad request syntax ('\x16\x03\x01\x07O\x01\x00\x07K\x03\x03!¬\x9aj\x90ï/3¯¦ï\xad8¦äÜH\x93ä``öb¼dþ¸¿\x9bô¦')
+2025-04-16 22:18:13,636 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:18:13] "[31m[1m\x16\x03\x01\x07O\x01\x00\x07K\x03\x03!¬\x9aj\x90ï/3¯¦ï­8¦äÜH\x93ä``öb¼dþ¸¿\x9bô¦[0m" 400 -
+2025-04-16 22:18:13,641 - werkzeug - ERROR - 100.77.6.36 - - [16/Apr/2025 22:18:13] code 400, message Bad request version ('\x07\x04à?\x97VÒn')
+2025-04-16 22:18:13,642 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:18:13] "[31m[1m\x16\x03\x01\x02~\x01\x00\x02z\x03\x03\x03¤\x1c4&\x0e \x07\x04à?\x97VÒn[0m" 400 -
+2025-04-16 22:18:13,801 - werkzeug - ERROR - 100.77.6.36 - - [16/Apr/2025 22:18:13] code 400, message Bad request version ('¶á\x8b\x97\x92\x7fd\x8cÛm:ÊÐLxwp\x80ªßkÝ\x10J\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+2025-04-16 22:18:13,801 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:18:13] "[31m[1m\x16\x03\x01\x07O\x01\x00\x07K\x03\x03ø°\x97Ò8Rt¤©+ª\x0cûíå(O\x92Í\x90\x06|,ÿù\x10*5\x8cr3: R\x02\x99k£õi\x0d¶á\x8b\x97\x92\x7fd\x8cÛm:ÊÐLxwp\x80ªßkÝ\x10J\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À[0m" 400 -
+2025-04-16 22:18:13,806 - werkzeug - ERROR - 100.77.6.36 - - [16/Apr/2025 22:18:13] code 400, message Bad request version ('/qsí\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+2025-04-16 22:18:13,806 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:18:13] "[31m[1m\x16\x03\x01\x02~\x01\x00\x02z\x03\x03¿ýÃ\x82:^G\x91â»¿t;\x9fç\x00èGéé6ú\x9f\x86Ä8\x94Ç&B\x02z \x19\x16Ù[\x95ó:Ë­h'\x9bÖu\\\\D\x8bt]\x93\x8d,²v®B\x09/qsí\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À[0m" 400 -
+2025-04-16 22:18:16,992 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:18:16] "GET / HTTP/1.1" 200 -
+2025-04-16 22:18:17,313 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:18:17] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:26:43,697 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:26:43] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:26:58,032 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:26:58] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:27:07,801 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:27:07] "GET / HTTP/1.1" 200 -
+2025-04-16 22:27:07,867 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:27:07] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:27:09,370 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:27:09] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:29:19,269 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:29:19] "GET / HTTP/1.1" 200 -
+2025-04-16 22:29:19,319 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:29:19] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:29:31,044 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:29:31] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:29:32,971 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:29:32] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:29:42,447 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:29:42] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:34:49,430 - SmartKart - INFO - Logging initialized
+2025-04-16 22:34:49,430 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 22:34:49,431 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:34:49,539 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 22:34:49,549 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.100.0.66:5000
+2025-04-16 22:34:49,549 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-16 22:34:50,613 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:34:50] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:34:52,000 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:34:52] "GET / HTTP/1.1" 200 -
+2025-04-16 22:34:52,068 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:34:52] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:34:53,791 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:34:53] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:34:53,847 - src.web_app - INFO - Camera initialized successfully on index 0.
+2025-04-16 22:34:54,994 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:34:54] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:34:56,628 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:34:56] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:34:58,121 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:34:58] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:34:59,621 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:34:59] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:01,129 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:01] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:02,623 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:02] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:04,130 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:04] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:05,631 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:05] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:07,123 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:07] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:08,655 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:08] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:10,129 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:10] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:11,622 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:11] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:13,124 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:13] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:14,627 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:14] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:16,124 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:16] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:17,626 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:17] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:19,132 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:19] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:20,666 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:20] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:21,542 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:21] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:35:23,950 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:23] "POST /api/reset_database HTTP/1.1" 200 -
+2025-04-16 22:35:23,984 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:23] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:35:26,492 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:26] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:35:26,550 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:26] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:35:28,074 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:28] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:29,577 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:29] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:31,074 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:31] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:32,583 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:32] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:34,084 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:34] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:35,581 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:35] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:37,076 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:37] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:38,584 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:38] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:40,075 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:40] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:41,579 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:41] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:43,079 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:43] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:44,580 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:44] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:46,079 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:46] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:47,580 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:47] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:49,079 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:49] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:50,580 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:50] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:52,083 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:52] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:53,580 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:53] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:55,083 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:55] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:56,585 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:56] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:58,083 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:58] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:35:59,585 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:35:59] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:01,086 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:01] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:02,589 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:02] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:04,083 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:04] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:05,595 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:05] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:07,086 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:07] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:08,582 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:08] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:10,085 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:10] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:10,546 - src.web_app - INFO - Detected new barcode: 0041570015902
+2025-04-16 22:36:10,546 - SmartKart.ProductLookup - INFO - Looking up barcode 0041570015902 in Open Food Facts database...
+2025-04-16 22:36:11,541 - SmartKart.ProductLookup - INFO - Product info saved to data/scan_results/0041570015902_20250416_223611.json
+2025-04-16 22:36:11,542 - SmartKart.ProductLookup - INFO - Added product to tracking list: 0041570015902
+2025-04-16 22:36:11,542 - src.web_app - INFO - Updated last_scanned_product: Almonds, smokehouse
+2025-04-16 22:36:11,585 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:11] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:13,087 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:13] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:14,595 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:14] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:16,088 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:16] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:17,587 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:17] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:19,088 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:19] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:20,586 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:20] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:22,085 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:22] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:23,589 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:23] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:25,086 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:25] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:26,587 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:26] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:28,090 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:28] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:29,587 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:29] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:31,085 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:31] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:32,594 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:32] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:34,085 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:34] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:35,591 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:35] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:37,166 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:37] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:38,589 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:38] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:40,098 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:40] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:41,587 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:41] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:43,089 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:43] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:44,591 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:44] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:46,093 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:46] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:47,594 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:47] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:49,093 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:49] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:50,595 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:50] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:52,107 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:52] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:53,602 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:53] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:55,095 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:55] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:56,600 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:56] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:36:57,086 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:57] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:36:59,127 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:36:59] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:37:05,419 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:05] "POST /api/reset_database HTTP/1.1" 200 -
+2025-04-16 22:37:05,444 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:05] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:37:06,822 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:06] "GET / HTTP/1.1" 200 -
+2025-04-16 22:37:06,872 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:06] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:37:10,781 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:10] "GET / HTTP/1.1" 200 -
+2025-04-16 22:37:10,946 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:10] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:37:11,038 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:11] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-16 22:37:13,922 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:13] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:37:15,202 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:15] "GET / HTTP/1.1" 200 -
+2025-04-16 22:37:15,248 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:15] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:37:22,189 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:22] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:37:22,236 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:22] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:37:23,786 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:23] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:37:23,977 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:23] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:37:25,480 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:25] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:37:27,586 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:27] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:37:27,624 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:27] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:37:29,154 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:29] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:37:30,657 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:30] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:37:31,962 - src.web_app - INFO - Detected new barcode: 0041570015902
+2025-04-16 22:37:31,963 - SmartKart.ProductLookup - INFO - Looking up barcode 0041570015902 in Open Food Facts database...
+2025-04-16 22:37:32,161 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:32] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:37:32,786 - SmartKart.ProductLookup - INFO - Product info saved to data/scan_results/0041570015902_20250416_223732.json
+2025-04-16 22:37:32,786 - SmartKart.ProductLookup - INFO - Added product to tracking list: 0041570015902
+2025-04-16 22:37:32,786 - src.web_app - INFO - Updated last_scanned_product: Almonds, smokehouse
+2025-04-16 22:37:33,663 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:33] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:37:35,159 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:35] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:37:36,662 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:36] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:37:38,156 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:38] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:37:39,664 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:39] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:37:41,161 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:41] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:37:41,618 - src.web_app - WARNING - Camera not available or not opened, attempting reinitialization...
+2025-04-16 22:37:48,212 - SmartKart - INFO - Logging initialized
+2025-04-16 22:37:48,213 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 22:37:48,216 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:37:48,327 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 22:37:48,337 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.100.0.66:5000
+2025-04-16 22:37:48,338 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-16 22:37:48,664 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:48] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:37:49,698 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:49] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:37:49,749 - src.web_app - INFO - Camera initialized successfully on index 0.
+2025-04-16 22:37:50,872 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:50] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:37:52,459 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:52] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:37:53,284 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:53] "GET / HTTP/1.1" 200 -
+2025-04-16 22:37:53,331 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:53] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:37:59,126 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:37:59] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:38:01,283 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:01] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:38:05,806 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:05] "POST /api/reset_database HTTP/1.1" 200 -
+2025-04-16 22:38:05,832 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:05] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:38:07,353 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:07] "GET / HTTP/1.1" 200 -
+2025-04-16 22:38:07,422 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:07] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:10,674 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:10] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:38:11,822 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:11] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:38:13,205 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:13] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:38:13,253 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:13] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:38:14,794 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:14] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:16,301 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:16] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:17,797 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:17] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:19,289 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:19] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:19,997 - src.web_app - INFO - Detected new barcode: 0041570015902
+2025-04-16 22:38:19,997 - SmartKart.ProductLookup - INFO - Looking up barcode 0041570015902 in Open Food Facts database...
+2025-04-16 22:38:20,638 - SmartKart.ProductLookup - INFO - Product info saved to data/scan_results/0041570015902_20250416_223820.json
+2025-04-16 22:38:20,638 - SmartKart.ProductLookup - INFO - Added product to tracking list: 0041570015902
+2025-04-16 22:38:20,638 - src.web_app - INFO - Updated last_scanned_product: Almonds, smokehouse
+2025-04-16 22:38:20,793 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:20] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:22,289 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:22] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:23,865 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:23] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:25,292 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:25] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:26,790 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:26] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:28,290 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:28] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:29,795 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:29] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:31,290 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:31] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:32,796 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:32] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:34,302 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:34] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:35,793 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:35] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:37,297 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:37] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:38,793 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:38] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:40,295 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:40] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:41,794 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:41] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:43,294 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:43] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:44,800 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:44] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:46,294 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:46] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:47,793 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:47] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:49,295 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:49] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:50,798 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:50] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:52,303 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:52] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:53,799 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:53] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:55,304 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:55] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:56,804 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:56] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:58,299 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:58] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:38:59,803 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:38:59] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:01,297 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:01] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:02,800 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:02] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:04,296 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:04] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:05,809 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:05] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:07,317 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:07] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:08,796 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:08] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:10,304 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:10] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:11,798 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:11] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:13,301 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:13] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:14,809 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:14] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:16,307 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:16] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:17,806 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:17] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:19,305 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:19] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:20,816 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:20] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:23,044 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:23] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:25,051 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:25] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:27,045 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:27] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:29,047 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:29] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:31,087 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:31] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:33,044 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:33] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:35,046 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:35] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:37,044 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:37] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:39,052 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:39] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:41,046 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:41] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:43,120 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:43] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:45,168 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:45] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:47,191 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:47] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:49,200 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:49] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:51,255 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:51] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:53,249 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:53] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:55,334 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:55] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:57,322 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:57] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:39:59,329 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:39:59] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:01,328 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:01] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:03,339 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:03] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:05,346 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:05] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:07,355 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:07] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:09,371 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:09] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:11,468 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:11] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:13,385 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:13] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:15,375 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:15] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:17,374 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:17] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:19,381 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:19] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:21,375 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:21] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:23,376 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:23] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:25,394 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:25] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:27,391 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:27] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:29,390 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:29] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:31,402 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:31] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:33,394 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:33] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:35,397 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:35] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:37,396 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:37] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:39,392 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:39] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:41,394 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:41] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:43,394 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:43] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:45,395 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:45] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:47,432 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:47] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:49,434 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:49] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:51,441 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:51] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:53,441 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:53] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:55,448 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:55] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:57,434 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:57] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:40:59,450 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:40:59] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:01,439 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:01] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:03,446 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:03] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:05,465 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:05] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:07,537 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:07] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:09,538 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:09] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:11,583 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:11] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:13,594 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:13] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:15,651 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:15] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:17,653 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:17] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:19,717 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:19] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:21,719 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:21] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:23,791 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:23] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:25,715 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:25] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:27,743 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:27] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:29,823 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:29] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:31,822 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:31] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:33,924 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:33] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:35,935 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:35] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:37,989 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:37] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:40,003 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:40] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:42,051 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:42] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:44,059 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:44] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:46,116 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:46] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:48,116 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:48] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:50,143 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:50] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:52,130 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:52] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:54,139 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:54] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:56,131 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:56] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:41:58,140 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:41:58] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:00,134 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:00] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:02,278 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:02] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:04,138 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:04] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:06,133 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:06] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:08,127 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:08] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:10,131 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:10] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:12,161 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:12] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:14,162 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:14] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:16,158 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:16] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:18,186 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:18] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:20,168 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:20] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:22,164 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:22] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:23,886 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:23] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:25,383 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:25] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:26,875 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:26] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:28,384 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:28] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:29,880 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:29] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:31,387 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:31] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:32,882 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:32] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:42:33,588 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:42:33] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:43:28,870 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:28] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:43:28,921 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:28] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:43:29,969 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:29] "GET / HTTP/1.1" 200 -
+2025-04-16 22:43:30,019 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:30] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:43:31,054 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:31] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:43:31,108 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:31] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:43:32,563 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:32] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:43:35,608 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:35] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:43:35,658 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:35] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:43:37,207 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:37] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:43:38,705 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:38] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:43:40,219 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:40] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:43:41,717 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:41] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:43:43,211 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:43] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:43:44,715 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:44] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:43:45,347 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:45] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:43:48,001 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:48] "POST /api/reset_database HTTP/1.1" 200 -
+2025-04-16 22:43:48,027 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:48] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:43:49,301 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:49] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:43:49,350 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:49] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:43:50,902 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:50] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:43:51,951 - src.web_app - INFO - Detected new barcode: 0041570015902
+2025-04-16 22:43:51,951 - SmartKart.ProductLookup - INFO - Looking up barcode 0041570015902 in Open Food Facts database...
+2025-04-16 22:43:52,401 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:52] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:43:52,776 - SmartKart.ProductLookup - INFO - Product info saved to data/scan_results/0041570015902_20250416_224352.json
+2025-04-16 22:43:52,776 - SmartKart.ProductLookup - INFO - Added product to tracking list: 0041570015902
+2025-04-16 22:43:52,776 - src.web_app - INFO - Updated last_scanned_product: Almonds, smokehouse
+2025-04-16 22:43:53,898 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:53] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:43:54,970 - src.web_app - WARNING - Camera not available or not opened, attempting reinitialization...
+2025-04-16 22:43:58,588 - SmartKart - INFO - Logging initialized
+2025-04-16 22:43:58,588 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 22:43:58,588 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:43:58,697 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 22:43:58,708 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.100.0.66:5000
+2025-04-16 22:43:58,708 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-16 22:43:59,897 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:43:59] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:00,931 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:00] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:44:00,978 - src.web_app - INFO - Camera initialized successfully on index 0.
+2025-04-16 22:44:02,093 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:02] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:44:03,639 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:03] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:05,148 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:05] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:06,651 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:06] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:08,144 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:08] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:08,943 - src.web_app - INFO - Detected new barcode: 0041570015902
+2025-04-16 22:44:08,943 - SmartKart.ProductLookup - INFO - Looking up barcode 0041570015902 in Open Food Facts database...
+2025-04-16 22:44:09,598 - SmartKart.ProductLookup - INFO - Product info saved to data/scan_results/0041570015902_20250416_224409.json
+2025-04-16 22:44:09,599 - SmartKart.ProductLookup - INFO - Product 0041570015902 already in list - skipping
+2025-04-16 22:44:09,599 - src.web_app - INFO - Updated last_scanned_product: Almonds, smokehouse
+2025-04-16 22:44:09,641 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:09] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:11,158 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:11] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:12,661 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:12] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:14,143 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:14] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:15,323 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:15] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:44:16,903 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:16] "POST /api/reset_database HTTP/1.1" 200 -
+2025-04-16 22:44:16,922 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:16] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:44:18,559 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:18] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:44:31,858 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:31] "GET / HTTP/1.1" 200 -
+2025-04-16 22:44:31,903 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:31] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:34,056 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:34] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:44:40,804 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:40] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:44:40,861 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:40] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:44:42,395 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:42] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:43,204 - src.web_app - INFO - Detected new barcode: 0041570015902
+2025-04-16 22:44:43,204 - SmartKart.ProductLookup - INFO - Looking up barcode 0041570015902 in Open Food Facts database...
+2025-04-16 22:44:43,875 - SmartKart.ProductLookup - INFO - Product info saved to data/scan_results/0041570015902_20250416_224443.json
+2025-04-16 22:44:43,875 - SmartKart.ProductLookup - INFO - Added product to tracking list: 0041570015902
+2025-04-16 22:44:43,875 - src.web_app - INFO - Updated last_scanned_product: Almonds, smokehouse
+2025-04-16 22:44:43,893 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:43] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:45,394 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:45] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:46,902 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:46] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:48,395 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:48] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:49,899 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:49] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:51,398 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:51] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:52,899 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:52] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:54,398 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:54] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:55,901 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:55] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:57,401 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:57] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:44:58,899 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:44:58] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:00,402 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:00] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:01,899 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:01] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:03,403 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:03] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:04,899 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:04] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:06,402 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:06] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:07,900 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:07] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:09,407 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:09] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:10,900 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:10] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:12,404 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:12] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:13,917 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:13] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:15,414 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:15] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:16,917 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:16] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:18,434 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:18] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:19,922 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:19] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:21,415 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:21] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:22,965 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:22] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:24,430 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:24] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:25,918 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:25] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:27,421 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:27] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:28,922 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:28] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:30,417 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:30] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:31,924 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:31] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:33,426 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:33] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:34,928 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:34] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:36,417 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:36] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:37,921 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:37] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:39,420 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:39] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:40,926 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:40] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:42,422 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:42] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:43,922 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:43] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:45,422 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:45] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:46,931 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:46] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:48,423 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:48] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:49,928 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:49] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:51,419 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:51] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:52,928 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:52] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:54,433 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:54] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:55,928 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:55] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:57,428 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:57] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:45:58,936 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:45:58] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:00,431 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:00] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:01,942 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:01] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:03,430 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:03] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:04,924 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:04] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:06,443 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:06] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:07,925 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:07] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:09,434 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:09] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:10,925 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:10] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:12,428 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:12] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:13,925 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:13] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:15,426 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:15] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:16,926 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:16] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:18,428 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:18] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:19,927 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:19] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:21,429 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:21] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:22,930 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:22] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:24,430 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:24] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:25,930 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:25] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:27,430 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:27] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:28,929 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:28] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:30,429 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:30] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:31,937 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:31] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:33,431 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:33] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:34,947 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:34] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:36,430 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:36] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:37,936 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:37] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:39,431 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:39] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:40,931 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:40] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:42,431 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:42] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:43,932 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:43] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:45,433 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:45] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:46,934 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:46] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:48,438 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:48] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:49,935 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:49] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:51,438 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:51] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:52,935 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:52] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:54,436 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:54] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:55,938 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:55] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:57,447 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:57] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:46:58,937 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:46:58] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:00,443 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:00] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:01,937 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:01] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:03,446 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:03] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:04,937 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:04] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:06,442 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:06] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:07,938 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:07] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:09,443 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:09] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:11,100 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:11] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:13,101 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:13] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:15,107 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:15] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:17,104 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:17] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:19,103 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:19] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:21,108 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:21] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:23,103 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:23] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:25,104 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:25] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:27,105 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:27] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:29,107 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:29] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:31,110 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:31] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:33,167 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:33] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:35,170 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:35] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:37,292 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:37] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:39,175 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:39] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:41,218 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:41] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:43,205 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:43] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:45,214 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:45] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:47,215 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:47] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:49,207 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:49] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:51,209 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:51] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:53,259 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:53] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:55,259 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:55] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:57,262 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:57] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:47:59,260 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:47:59] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:01,264 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:01] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:03,264 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:03] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:05,265 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:05] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:07,286 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:07] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:09,355 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:09] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:11,362 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:11] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:13,356 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:13] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:15,419 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:15] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:16,909 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:16] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:18,416 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:18] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:19,913 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:19] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:21,415 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:21] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:22,919 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:22] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:24,412 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:24] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:25,918 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:25] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:27,411 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:27] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:28,913 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:28] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:30,412 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:30] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:31,912 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:31] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:33,259 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:33] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:48:48,525 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:48:48,527 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:48:48,528 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:48:48,528 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:48] "POST /api/update_settings HTTP/1.1" 200 -
+2025-04-16 22:48:51,830 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:51] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:48:53,670 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:53] "POST /api/reset_database HTTP/1.1" 200 -
+2025-04-16 22:48:53,684 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:53] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:48:55,852 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:55] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:48:55,895 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:55] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:48:57,427 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:57] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:48:58,936 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:48:58] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:00,439 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:00] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:01,931 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:01] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:03,474 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:03] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:04,934 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:04] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:05,315 - src.web_app - INFO - Detected new barcode: 0041570015902
+2025-04-16 22:49:05,315 - SmartKart.ProductLookup - INFO - Looking up barcode 0041570015902 in Open Food Facts database...
+2025-04-16 22:49:06,142 - SmartKart.ProductLookup - INFO - Product info saved to data/scan_results/0041570015902_20250416_224906.json
+2025-04-16 22:49:06,142 - SmartKart.ProductLookup - INFO - Added product to tracking list: 0041570015902
+2025-04-16 22:49:06,142 - src.web_app - INFO - Updated last_scanned_product: Almonds, smokehouse
+2025-04-16 22:49:06,442 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:06] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:07,935 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:07] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:09,440 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:09] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:10,966 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:10] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:12,371 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:12] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:49:18,435 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:49:18,437 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:49:18,439 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:49:18,439 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:18] "POST /api/update_settings HTTP/1.1" 200 -
+2025-04-16 22:49:19,671 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:19] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:49:21,377 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:21] "POST /api/reset_database HTTP/1.1" 200 -
+2025-04-16 22:49:21,391 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:21] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:49:22,125 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:22] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:49:22,160 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:22] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:49:23,718 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:23] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:25,209 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:25] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:26,693 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:26] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:27,378 - src.web_app - INFO - Detected new barcode: 0041570015902
+2025-04-16 22:49:27,378 - SmartKart.ProductLookup - INFO - Looking up barcode 0041570015902 in Open Food Facts database...
+2025-04-16 22:49:28,017 - SmartKart.ProductLookup - INFO - Product info saved to data/scan_results/0041570015902_20250416_224928.json
+2025-04-16 22:49:28,017 - SmartKart.ProductLookup - INFO - Added product to tracking list: 0041570015902
+2025-04-16 22:49:28,017 - src.web_app - INFO - Updated last_scanned_product: Almonds, smokehouse
+2025-04-16 22:49:28,191 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:28] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:29,695 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:29] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:31,197 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:31] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:32,691 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:32] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:34,191 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:34] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:35,691 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:35] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:37,199 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:37] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:38,701 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:38] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:40,195 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:40] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:41,704 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:41] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:43,192 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:43] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:44,693 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:44] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:46,193 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:46] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:47,697 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:47] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:49,193 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:49] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:50,705 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:50] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:52,258 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:52] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:53,699 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:53] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:55,201 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:55] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:56,788 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:56] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:58,196 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:58] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:49:59,703 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:49:59] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:01,198 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:01] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:02,720 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:02] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:04,196 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:04] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:05,700 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:05] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:07,196 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:07] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:08,698 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:08] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:10,197 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:10] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:11,705 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:11] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:13,198 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:13] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:14,707 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:14] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:16,205 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:16] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:17,698 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:17] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:19,232 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:19] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:20,699 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:20] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:22,202 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:22] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:23,699 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:23] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:25,201 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:25] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:26,698 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:26] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:28,202 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:28] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:29,700 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:29] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:31,162 - src.web_app - INFO - Camera released.
+2025-04-16 22:50:35,421 - SmartKart - INFO - Logging initialized
+2025-04-16 22:50:35,422 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 22:50:35,424 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:50:35,532 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 22:50:35,542 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.100.0.66:5000
+2025-04-16 22:50:35,542 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-16 22:50:35,701 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:35] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:37,210 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:37] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:38,705 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:38] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:40,207 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:40] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:41,710 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:41] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:50:42,521 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:42] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:50:57,595 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:50:57,596 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:50:57,597 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:50:57,598 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:50:57] "POST /api/update_settings HTTP/1.1" 200 -
+2025-04-16 22:51:10,779 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:10] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:51:10,829 - src.web_app - INFO - Camera initialized successfully on index 0.
+2025-04-16 22:51:11,953 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:11] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:51:13,530 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:13] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:15,021 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:15] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:15,263 - src.web_app - INFO - Detected new barcode: 0041570015902
+2025-04-16 22:51:15,263 - SmartKart.ProductLookup - INFO - Looking up barcode 0041570015902 in Open Food Facts database...
+2025-04-16 22:51:16,152 - SmartKart.ProductLookup - INFO - Product info saved to data/scan_results/0041570015902_20250416_225116.json
+2025-04-16 22:51:16,152 - SmartKart.ProductLookup - INFO - Product 0041570015902 already in list - skipping
+2025-04-16 22:51:16,152 - src.web_app - INFO - Updated last_scanned_product: Almonds, smokehouse
+2025-04-16 22:51:16,527 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:16] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:18,028 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:18] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:19,526 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:19] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:21,030 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:21] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:21,418 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:21] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:51:21,965 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:21] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:51:24,924 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:24] "POST /api/reset_database HTTP/1.1" 200 -
+2025-04-16 22:51:24,940 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:24] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:51:25,875 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:25] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:51:27,843 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:27] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:51:32,621 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:51:32,623 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:51:32,624 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:51:32,625 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:32] "POST /api/update_settings HTTP/1.1" 200 -
+2025-04-16 22:51:35,664 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:35] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:51:35,911 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:35] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:51:38,640 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:38] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:39,473 - src.web_app - INFO - Detected new barcode: 0041570015902
+2025-04-16 22:51:39,473 - SmartKart.ProductLookup - INFO - Looking up barcode 0041570015902 in Open Food Facts database...
+2025-04-16 22:51:40,146 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:40] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:40,223 - SmartKart.ProductLookup - INFO - Product info saved to data/scan_results/0041570015902_20250416_225140.json
+2025-04-16 22:51:40,223 - SmartKart.ProductLookup - INFO - Added product to tracking list: 0041570015902
+2025-04-16 22:51:40,227 - src.web_app - INFO - Updated last_scanned_product: Almonds, smokehouse
+2025-04-16 22:51:41,645 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:41] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:43,145 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:43] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:44,639 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:44] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:46,140 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:46] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:47,641 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:47] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:49,148 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:49] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:50,644 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:50] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:52,160 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:52] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:53,647 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:53] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:55,150 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:55] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:56,644 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:56] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:58,151 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:58] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:51:59,647 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:51:59] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:01,154 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:01] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:02,648 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:02] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:04,151 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:04] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:05,650 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:05] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:07,238 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:07] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:08,652 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:08] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:11,012 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:11] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:13,014 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:13] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:14,789 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:14] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:16,291 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:16] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:17,787 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:17] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:19,295 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:19] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:20,790 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:20] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:22,288 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:22] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:23,810 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:23] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:25,298 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:25] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:26,801 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:26] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:28,295 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:28] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:29,800 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:29] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:31,293 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:31] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:32,800 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:32] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:34,295 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:34] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:35,799 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:35] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:37,332 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:37] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:38,806 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:38] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:40,299 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:40] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:41,804 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:41] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:43,301 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:43] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:44,804 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:44] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:46,301 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:46] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:47,805 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:47] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:49,300 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:49] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:50,812 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:50] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:52,315 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:52] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:52:52,473 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:52] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:52:54,505 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:54] "POST /api/reset_database HTTP/1.1" 200 -
+2025-04-16 22:52:54,523 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:54] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:52:55,470 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:55] "GET / HTTP/1.1" 200 -
+2025-04-16 22:52:55,531 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:52:55] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:53:14,285 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:14] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:53:27,648 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:27] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:53:28,934 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:28] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:53:28,975 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:28] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:53:30,508 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:30] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:53:32,006 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:32] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:53:33,506 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:33] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:53:34,141 - src.web_app - INFO - Detected new barcode: 0041570015902
+2025-04-16 22:53:34,141 - SmartKart.ProductLookup - INFO - Looking up barcode 0041570015902 in Open Food Facts database...
+2025-04-16 22:53:35,005 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:35] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:53:35,112 - SmartKart.ProductLookup - INFO - Product info saved to data/scan_results/0041570015902_20250416_225335.json
+2025-04-16 22:53:35,112 - SmartKart.ProductLookup - INFO - Added product to tracking list: 0041570015902
+2025-04-16 22:53:35,112 - src.web_app - INFO - Updated last_scanned_product: Almonds, smokehouse
+2025-04-16 22:53:36,511 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:36] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:53:38,012 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:38] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:53:39,507 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:39] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:53:41,010 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:41] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:53:42,511 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:42] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:53:42,567 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:42] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:53:54,667 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:54] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:53:54,701 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:54] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:53:56,227 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:56] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:53:57,733 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:57] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:53:59,236 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:53:59] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:00,731 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:00] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:02,238 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:02] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:03,731 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:03] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:03,863 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:03] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:54:04,875 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:04] "GET / HTTP/1.1" 200 -
+2025-04-16 22:54:04,932 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:04] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:09,740 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:09] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:54:10,447 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:10] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:54:10,767 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:10] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:54:10,797 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:10] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:54:11,163 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:11] "GET / HTTP/1.1" 200 -
+2025-04-16 22:54:11,209 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:11] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:12,083 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:12] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:54:13,019 - src.web_app - INFO - Camera released.
+2025-04-16 22:54:18,620 - SmartKart - INFO - Logging initialized
+2025-04-16 22:54:18,620 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 22:54:18,620 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:54:18,729 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 22:54:18,739 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.100.0.66:5000
+2025-04-16 22:54:18,740 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-16 22:54:20,384 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:20] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:54:23,865 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:54:23,866 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:54:23,868 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:54:23,868 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:23] "POST /api/update_settings HTTP/1.1" 200 -
+2025-04-16 22:54:26,274 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:26] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:54:28,032 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:28] "POST /api/reset_database HTTP/1.1" 200 -
+2025-04-16 22:54:28,054 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:28] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:54:28,864 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:28] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:54:28,909 - src.web_app - INFO - Camera initialized successfully on index 0.
+2025-04-16 22:54:30,031 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:30] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:54:31,491 - src.web_app - INFO - Detected new barcode: 0041570015902
+2025-04-16 22:54:31,491 - SmartKart.ProductLookup - INFO - Looking up barcode 0041570015902 in Open Food Facts database...
+2025-04-16 22:54:31,598 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:31] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:32,130 - SmartKart.ProductLookup - INFO - Product info saved to data/scan_results/0041570015902_20250416_225432.json
+2025-04-16 22:54:32,130 - SmartKart.ProductLookup - INFO - Added product to tracking list: 0041570015902
+2025-04-16 22:54:32,130 - src.web_app - INFO - Updated last_scanned_product: Almonds, smokehouse
+2025-04-16 22:54:33,086 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:33] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:34,583 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:34] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:36,080 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:36] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:37,582 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:37] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:39,081 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:39] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:40,580 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:40] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:42,088 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:42] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:43,587 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:43] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:45,081 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:45] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:46,585 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:46] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:48,086 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:48] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:49,582 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:49] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:51,081 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:51] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:52,588 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:52] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:54,082 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:54] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:55,586 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:55] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:57,097 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:57] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:54:58,582 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:54:58] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:00,083 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:00] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:01,585 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:01] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:03,084 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:03] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:04,588 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:04] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:06,090 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:06] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:07,934 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:07] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:09,945 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:09] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:12,015 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:12] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:14,015 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:14] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:16,012 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:16] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:18,032 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:18] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:20,035 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:20] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:22,029 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:22] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:24,138 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:24] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:26,028 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:26] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:28,033 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:28] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:30,056 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:30] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:32,134 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:32] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:34,145 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:34] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:36,134 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:36] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:38,128 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:38] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:40,130 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:40] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:41,669 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:41] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:43,133 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:43] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:44,634 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:44] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:46,130 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:46] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:46,929 - src.web_app - WARNING - Camera not available or not opened, attempting reinitialization...
+2025-04-16 22:55:52,593 - SmartKart - INFO - Logging initialized
+2025-04-16 22:55:52,593 - SmartKart - INFO - Configuration loaded from config.json
+2025-04-16 22:55:52,595 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:55:52,705 - SmartKart.ProductLookup - INFO - Loaded 1 products from existing list
+2025-04-16 22:55:52,716 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.100.0.66:5000
+2025-04-16 22:55:52,716 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-16 22:55:53,633 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:53] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:55,136 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:55] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:56,636 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:56] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:58,138 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:58] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:55:59,644 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:55:59] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:01,133 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:01] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:02,637 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:02] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:04,138 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:04] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:05,633 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:05] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:07,370 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:07] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:08,637 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:08] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:08,736 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:08] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:56:10,697 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:10] "POST /api/reset_database HTTP/1.1" 200 -
+2025-04-16 22:56:10,727 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:10] "GET /products HTTP/1.1" 200 -
+2025-04-16 22:56:11,940 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:11] "GET /scanner HTTP/1.1" 200 -
+2025-04-16 22:56:11,990 - src.web_app - INFO - Camera initialized successfully on index 0.
+2025-04-16 22:56:13,111 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:13] "GET /video_feed HTTP/1.1" 200 -
+2025-04-16 22:56:14,697 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:14] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:16,196 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:16] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:17,320 - src.web_app - INFO - Detected new barcode: 0041570015902
+2025-04-16 22:56:17,320 - SmartKart.ProductLookup - INFO - Looking up barcode 0041570015902 in Open Food Facts database...
+2025-04-16 22:56:17,700 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:17] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:18,147 - SmartKart.ProductLookup - INFO - Product info saved to data/scan_results/0041570015902_20250416_225618.json
+2025-04-16 22:56:18,147 - SmartKart.ProductLookup - INFO - Added product to tracking list: 0041570015902
+2025-04-16 22:56:18,147 - src.web_app - INFO - Updated last_scanned_product: Almonds, smokehouse
+2025-04-16 22:56:19,202 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:19] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:20,706 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:20] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:22,198 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:22] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:23,701 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:23] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:25,210 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:25] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:26,701 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:26] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:28,201 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:28] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:29,705 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:29] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:31,201 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:31] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:32,702 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:32] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:34,205 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:34] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:35,709 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:35] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:37,207 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:37] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:38,700 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:38] "GET /api/last_product HTTP/1.1" 200 -
+2025-04-16 22:56:38,836 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:38] "GET /settings HTTP/1.1" 200 -
+2025-04-16 22:56:43,180 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:56:43,181 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:56:43,182 - SmartKart - INFO - Configuration saved to config.json
+2025-04-16 22:56:43,182 - werkzeug - INFO - 100.77.6.36 - - [16/Apr/2025 22:56:43] "POST /api/update_settings HTTP/1.1" 200 -

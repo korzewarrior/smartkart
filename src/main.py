@@ -14,14 +14,14 @@ import logging
 import queue  # For thread-safe communication
 
 # Import our modules - updated to use relative imports
-from barcode.scanner import BarcodeScanner
-from database.product_lookup import ProductInfoLookup
-from audio.speech import SpeechManager
-from utils.config import ConfigManager
+from src.barcode.scanner import BarcodeScanner
+from src.database.product_lookup import ProductInfoLookup
+from src.audio.speech import SpeechManager
+from src.utils.config import ConfigManager
 
 # Try to import button controller (may fail on non-Raspberry Pi)
 try:
-    from interface.button_controller import ButtonController
+    from src.interface.button_controller import ButtonController
     BUTTON_CONTROL_AVAILABLE = True
 except (ImportError, RuntimeError):
     print("Button control not available - running in keyboard mode")
@@ -64,6 +64,7 @@ class SmartKart:
     STATE_MENU = 4
     STATE_SETTINGS = 5
     STATE_SHUTDOWN = 6
+    STATE_PRODUCT_LIST = 7  # Added missing state for product list view
     
     # Main menu options
     MENU_SCANNER = 1
@@ -92,6 +93,10 @@ class SmartKart:
         
         # Menu variables
         self.current_menu = self.MENU_SCANNER
+        
+        # Initialize log buffer
+        self.log_buffer = []
+        self.max_log_lines = 8  # Maximum number of log lines to show
         
         # For communication between threads
         self.scan_results_queue = queue.Queue()
@@ -181,12 +186,20 @@ class SmartKart:
         Initialize product database
         """
         self.logger.info("Initializing product database")
+        
         try:
+            # Get configuration
             product_list_file = self.config.get('database', 'product_list_file')
+            scan_results_dir = self.config.get('database', 'scan_results_dir')
             
-            self.product_db = ProductInfoLookup(
-                product_list_file=product_list_file
-            )
+            # Create directories if they don't exist
+            for path in [os.path.dirname(product_list_file), scan_results_dir]:
+                if path and not os.path.exists(path):
+                    os.makedirs(path, exist_ok=True)
+                    self.logger.info(f"Created directory: {path}")
+            
+            # Initialize product database
+            self.product_db = ProductInfoLookup(product_list_file)
             
             self.logger.info("Product database initialized")
         except Exception as e:
@@ -254,13 +267,6 @@ class SmartKart:
             if self.current_product:
                 ingredients = self.current_product.get('ingredients_text', 'No ingredients available')
                 self._speak(f"Ingredients: {ingredients}")
-        elif self.current_state == self.STATE_SETTINGS and self.settings_mode == "voice_selection":
-            # Select the current voice
-            self._set_voice(self.voice_selection_index)
-            
-            # Return to idle state
-            self.current_state = self.STATE_IDLE
-            self.settings_mode = None
     
     def _on_up_pressed(self, button_idx):
         """
@@ -268,21 +274,6 @@ class SmartKart:
         """
         self.logger.info("Up button pressed")
         
-        # Check if we're in voice selection mode
-        if self.current_state == self.STATE_SETTINGS and self.settings_mode == "voice_selection":
-            # Navigate to previous voice
-            if hasattr(self, 'voice_list') and self.voice_list:
-                # Move selection up
-                self.voice_selection_index = max(0, self.voice_selection_index - 1)
-                
-                # Speak the selected voice name
-                selected_voice = self.voice_list[self.voice_selection_index]
-                self._speak(f"Voice sample: {selected_voice.name}")
-                
-                # Request UI refresh
-                self.needs_refresh = True
-                return
-                
         # If in any mode, pressing Up will repeat the last scanned item
         if self.last_product_name:
             # Basic product info
@@ -318,21 +309,6 @@ class SmartKart:
         """
         self.logger.info("Down button pressed")
         
-        # Check if we're in voice selection mode
-        if self.current_state == self.STATE_SETTINGS and self.settings_mode == "voice_selection":
-            # Navigate to next voice
-            if hasattr(self, 'voice_list') and self.voice_list:
-                # Move selection down
-                self.voice_selection_index = min(len(self.voice_list) - 1, self.voice_selection_index + 1)
-                
-                # Speak the selected voice name
-                selected_voice = self.voice_list[self.voice_selection_index]
-                self._speak(f"Voice sample: {selected_voice.name}")
-                
-                # Request UI refresh
-                self.needs_refresh = True
-                return
-        
         if self.current_state == self.STATE_PRODUCT_DETAILS:
             # Decrease volume
             current_volume = self.config.get('audio', 'speech_volume')
@@ -356,11 +332,6 @@ class SmartKart:
             # Go back to idle mode
             self.current_state = self.STATE_IDLE
             self._speak("Returning to ready mode.")
-        elif self.current_state == self.STATE_SETTINGS and self.settings_mode == "voice_selection":
-            # Exit voice selection without changing
-            self.current_state = self.STATE_IDLE
-            self.settings_mode = None
-            self._speak("Voice selection cancelled.")
     
     def _speak(self, text):
         """
@@ -370,79 +341,6 @@ class SmartKart:
             self.speech.speak(text)
         else:
             print(f"[SPEECH] {text}")
-    
-    def _list_available_voices(self):
-        """
-        List all available voices
-        """
-        if not self.speech:
-            return
-            
-        voices = self.speech.get_available_voices()
-        self.logger.info(f"Found {len(voices)} available voices")
-        
-        # Clear the log to use for displaying voices
-        self.log_messages = []
-        self._add_to_log("===== AVAILABLE VOICES =====")
-        
-        # Add each voice to the log
-        for i, voice in enumerate(voices):
-            voice_name = voice.name
-            voice_id = voice.id
-            voice_lang = ", ".join(voice.languages) if voice.languages else "Unknown"
-            self._add_to_log(f"{i}: {voice_name} ({voice_lang})")
-            
-        # Add instructions to the log
-        self._add_to_log("")
-        self._add_to_log("Press UP/DOWN to navigate")
-        self._add_to_log("Press SELECT to choose a voice")
-        self._add_to_log("Press BACK to cancel")
-        
-        # Set up navigation variables
-        self.voice_list = voices
-        self.voice_selection_index = 0
-        self.current_state = self.STATE_SETTINGS
-        self.settings_mode = "voice_selection"
-        self.needs_refresh = True
-        
-        # Announce the first voice
-        if voices:
-            first_voice = voices[0]
-            self._speak(f"Voice sample: {first_voice.name}. Use UP and DOWN to navigate voices.")
-            
-    def _set_voice(self, voice_index):
-        """
-        Set the selected voice
-        
-        Parameters:
-        - voice_index: Index of the voice to set
-        """
-        if not self.speech or not hasattr(self, 'voice_list') or voice_index >= len(self.voice_list):
-            return False
-            
-        try:
-            # Get the selected voice
-            selected_voice = self.voice_list[voice_index]
-            
-            # Set the voice
-            success = self.speech.set_voice(selected_voice.id)
-            
-            if success:
-                # Update the configuration
-                self.config.set('audio', 'voice', selected_voice.id)
-                self.config.save()
-                
-                # Speak using the new voice
-                self._speak(f"Voice changed to {selected_voice.name}")
-                return True
-            else:
-                self._speak("Failed to set the selected voice.")
-                return False
-                
-        except Exception as e:
-            self.logger.error(f"Error setting voice: {e}")
-            self._speak("Error setting voice")
-            return False
     
     def _start_background_scanning(self):
         """
@@ -829,50 +727,66 @@ class SmartKart:
         """
         Display product list view
         """
-        self._clear_screen()
-        print("=" * 40)
-        print("  PRODUCT LIST")
-        print("=" * 40)
-        print("  b - Back to main menu")
-        print("=" * 40)
-        
-        # Show all tracked products from the product list file
-        product_list_file = self.config.get('database', 'product_list_file')
-        if os.path.exists(product_list_file):
-            print(f"  Products from {product_list_file}:")
-            try:
-                with open(product_list_file, 'r') as file:
-                    count = 0
-                    for line in file:
-                        if count >= 10:  # Limit display to 10 products
-                            print(f"  ... and more ...")
-                            break
-                            
-                        if line.startswith('#') or line.startswith('-'):
-                            continue  # Skip comment and header lines
-                        parts = line.strip().split('|')
-                        if len(parts) >= 3:
-                            barcode = parts[0].strip()
-                            product_name = parts[1].strip()
-                            brand = parts[2].strip()
-                            print(f"  - {product_name} by {brand} (Barcode: {barcode})")
-                            count += 1
-                    
-                    if count == 0:
-                        print("  No products in the list.")
-            except Exception as e:
-                print(f"  Error reading product list: {e}")
-        else:
-            print(f"  Product list file not found: {product_list_file}")
+        try:
+            self._clear_screen()
+            print("=" * 40)
+            print("  PRODUCT LIST")
+            print("=" * 40)
+            print("  b - Back to main menu")
+            print("=" * 40)
             
-        print("=" * 40)
-        
-        # Display log window
-        self._display_log_window()
-        
-        print("  Enter command (b): ", end='', flush=True)
-        # Mark that we're waiting for input
-        self.waiting_for_input = True
+            # Show all tracked products from the product list file
+            product_list_file = self.config.get('database', 'product_list_file')
+            if os.path.exists(product_list_file):
+                print(f"  Products from {product_list_file}:")
+                try:
+                    with open(product_list_file, 'r') as file:
+                        count = 0
+                        for line in file:
+                            if count >= 10:  # Limit display to 10 products
+                                print(f"  ... and more ...")
+                                break
+                                
+                            if line.startswith('#') or line.startswith('-'):
+                                continue  # Skip comment and header lines
+                            parts = line.strip().split('|')
+                            if len(parts) >= 3:
+                                barcode = parts[0].strip()
+                                product_name = parts[1].strip()
+                                brand = parts[2].strip()
+                                print(f"  - {product_name} by {brand} (Barcode: {barcode})")
+                                count += 1
+                        
+                        if count == 0:
+                            print("  No products in the list.")
+                except Exception as e:
+                    self.logger.error(f"Error reading product list: {e}")
+                    print(f"  Error reading product list: {e}")
+            else:
+                print(f"  Product list file not found: {product_list_file}")
+                # Create the directory if it doesn't exist
+                product_list_dir = os.path.dirname(product_list_file)
+                if product_list_dir and not os.path.exists(product_list_dir):
+                    try:
+                        os.makedirs(product_list_dir, exist_ok=True)
+                        print(f"  Created directory: {product_list_dir}")
+                    except Exception as e:
+                        self.logger.error(f"Error creating directory {product_list_dir}: {e}")
+                        print(f"  Error creating directory: {e}")
+                
+            print("=" * 40)
+            
+            # Display log window
+            self._display_log_window()
+            
+            print("  Enter command (b): ", end='', flush=True)
+            # Mark that we're waiting for input
+            self.waiting_for_input = True
+        except Exception as e:
+            self.logger.error(f"Error displaying product list: {e}")
+            print(f"Error displaying product list: {e}")
+            print("Enter 'b' to return to main menu: ", end='', flush=True)
+            self.waiting_for_input = True
     
     def _display_settings(self):
         """
@@ -883,35 +797,13 @@ class SmartKart:
         print("===== SMARTKART SETTINGS =====")
         print("")
         
-        if hasattr(self, 'settings_mode') and self.settings_mode == "voice_selection":
-            # Display voice selection UI
-            if hasattr(self, 'voice_list') and hasattr(self, 'voice_selection_index'):
-                # Display the voice selection header
-                print("===== VOICE SELECTION =====")
-                print("")
-                
-                # Display log messages which contain the voice list
-                for msg in self.log_messages:
-                    print(msg)
-                    
-                # Display cursor at current selection
-                voices_shown = min(len(self.voice_list), len(self.log_messages) - 5)  # Subtract headers and instructions
-                if voices_shown > 0:
-                    # Position cursor at current selection (add 1 for header)
-                    cursor_pos = 1 + self.voice_selection_index
-                    if 0 <= cursor_pos < len(self.log_messages):
-                        cursor_line = self.log_messages[cursor_pos]
-                        print(f"\nCurrent selection: {cursor_line}")
-            return
-            
         # Normal settings display
-        print("1. Change Voice")
-        print("2. Speech Volume: {}%".format(int(self.config.get('audio', 'speech_volume') * 100)))
-        print("3. Speech Rate: {}".format(self.config.get('audio', 'speech_rate')))
-        print("4. Reset Product Database")
-        print("5. Back to Main Menu")
+        print("1. Speech Volume: {}%".format(int(self.config.get('audio', 'speech_volume') * 100)))
+        print("2. Speech Rate: {}".format(self.config.get('audio', 'speech_rate')))
+        print("3. Reset Product Database")
+        print("4. Back to Main Menu")
         print("")
-        print("Enter your choice (1-5): ", end="", flush=True)
+        print("Enter your choice (1-4): ", end="", flush=True)
         
         self.waiting_for_input = True
     
@@ -1030,7 +922,7 @@ class SmartKart:
             elif self.current_menu == self.MENU_PRODUCT_LIST:
                 print("  Enter command (b): ", end='', flush=True)
             elif self.current_menu == self.MENU_SETTINGS:
-                print("  Enter command (1-5/b): ", end='', flush=True)
+                print("  Enter command (1-4/b): ", end='', flush=True)
             else:
                 print("  Enter your choice (1-4): ", end='', flush=True)
     
@@ -1045,6 +937,8 @@ class SmartKart:
         - True if menu continues, False if user wants to exit menu
         """
         try:
+            self._debug_log_state("Before menu input handling")
+            
             if choice is None:
                 # Wait for input
                 choice = input().strip()
@@ -1058,6 +952,10 @@ class SmartKart:
                 if choice == self.MENU_SCANNER or choice == "S":
                     # Start scanner
                     self._start_scanning()
+                    # Change state and menu
+                    self.current_state = self.STATE_SCANNING
+                    self.current_menu = self.MENU_SCANNER
+                    self._debug_log_state("After selecting Scanner option")
                     # Change return to True to stay in the main loop
                     return True
                 elif choice == self.MENU_PRODUCT_LIST or choice == "P":
@@ -1065,6 +963,7 @@ class SmartKart:
                     self.current_state = self.STATE_PRODUCT_LIST
                     # Also update current_menu to match current_state
                     self.current_menu = self.MENU_PRODUCT_LIST
+                    self._debug_log_state("After selecting Product List option")
                     self.needs_refresh = True
                     return True
                 elif choice == self.MENU_SETTINGS or choice == "T":
@@ -1140,15 +1039,11 @@ class SmartKart:
             elif self.current_state == self.STATE_SETTINGS:
                 # Settings menu handling
                 if choice == 1:
-                    # Change voice
-                    self._list_available_voices()
-                    return True
-                elif choice == 2:
                     # Change volume - already handled through buttons
                     current_volume = self.config.get('audio', 'speech_volume')
                     self._speak(f"Current volume is {int(current_volume * 100)} percent. Use Up and Down buttons to adjust.")
                     return True
-                elif choice == 3:
+                elif choice == 2:
                     # Change speech rate
                     current_rate = self.config.get('audio', 'speech_rate')
                     
@@ -1172,12 +1067,12 @@ class SmartKart:
                     # Ensure we return True to continue execution and not exit
                     return True
                     
-                elif choice == 4:
+                elif choice == 3:
                     # Reset product database
                     self._delete_product_database()
                     self.needs_refresh = True
                     return True
-                elif choice == 5:
+                elif choice == 4:
                     # Back to main menu
                     self.current_state = self.STATE_MENU
                     # Also update current_menu
@@ -1194,6 +1089,37 @@ class SmartKart:
             self._speak("An error occurred while processing menu input.")
             return True
     
+    def _debug_log_state(self, message):
+        """
+        Log a debug message about the current state
+        
+        Parameters:
+        - message: Message to log
+        """
+        state_names = {
+            self.STATE_STARTUP: "STARTUP",
+            self.STATE_IDLE: "IDLE",
+            self.STATE_SCANNING: "SCANNING",
+            self.STATE_PRODUCT_DETAILS: "PRODUCT_DETAILS",
+            self.STATE_MENU: "MENU",
+            self.STATE_SETTINGS: "SETTINGS",
+            self.STATE_SHUTDOWN: "SHUTDOWN",
+            self.STATE_PRODUCT_LIST: "PRODUCT_LIST"
+        }
+        
+        menu_names = {
+            None: "MAIN_MENU",
+            self.MENU_SCANNER: "SCANNER",
+            self.MENU_PRODUCT_LIST: "PRODUCT_LIST",
+            self.MENU_SETTINGS: "SETTINGS",
+            self.MENU_EXIT: "EXIT"
+        }
+        
+        state_name = state_names.get(self.current_state, f"Unknown State ({self.current_state})")
+        menu_name = menu_names.get(self.current_menu, f"Unknown Menu ({self.current_menu})")
+        
+        self.logger.debug(f"{message} - State: {state_name}, Menu: {menu_name}")
+    
     def start(self):
         """
         Start the SmartKart application
@@ -1202,6 +1128,9 @@ class SmartKart:
         
         # Set running flag
         self.running = True
+        
+        # Log initial state
+        self.logger.info("Initial setup with STATE_PRODUCT_LIST properly defined")
         
         # Welcome message
         self._speak("SmartKart shopping assistant initialized and ready.")
@@ -1212,6 +1141,7 @@ class SmartKart:
         
         # Set initial menu to main menu (not scanner)
         self.current_menu = None  # None represents the main menu
+        self.current_state = self.STATE_MENU  # Initialize to menu state
         
         try:
             # Main application loop
