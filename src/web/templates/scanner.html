@@ -65,190 +65,362 @@
         100% { transform: rotate(360deg); }
     }
 
+    /* Status Area Styles */
+    #status-area {
+        margin-top: 15px;
+        padding: 10px;
+        background-color: #eee;
+        border: 2px solid var(--dark);
+        border-radius: 5px;
+        text-align: center;
+    }
+    #status-area span {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    /* Button Area Styles */
+    #button-controls {
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+    #button-controls button {
+         min-width: 120px; /* Ensure buttons have some width */
+    }
+    
+    /* Cart Display Area */
+    #cart-display {
+        margin-top: 20px;
+        padding: 15px;
+        border: 2px solid var(--info);
+        border-radius: 5px;
+        background-color: #f0f8ff;
+        display: none; /* Hidden until CART_REVIEW mode */
+    }
+     #cart-display ul {
+         list-style: none;
+         padding: 0;
+         margin: 0;
+     }
+      #cart-display li {
+          padding: 5px 0;
+          border-bottom: 1px dashed #ccc;
+      }
+      #cart-display li.selected {
+          font-weight: bold;
+          background-color: #d6eaff;
+      }
+
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="card">
     <div class="card-header">Barcode Scanner</div>
-    <p>The camera feed from the Raspberry Pi should appear below. Hold a barcode steady in front of it.</p>
+    <p>Camera feed from the Raspberry Pi:</p>
     
     <div id="scanner-container">
         <div id="scanner-viewport">
-            <!-- Changed from video to img -->
             <img id="scanner-stream" src="{{ url_for('video_feed') }}" alt="Loading camera feed..." 
                  onerror="this.onerror=null; this.src='/static/images/camera_error.png'; document.getElementById('scanner-status').textContent='Error loading camera feed.';"/>
-            <div id="scanner-status">Waiting for scan...</div>
+            <!-- Status text removed from overlay -->
         </div>
     </div>
-    
-    <!-- Remove start/stop buttons, stream starts automatically -->
 </div>
 
-<div id="result-container" class="card">
-    <div class="card-header">Last Scan Result</div>
-    <div id="result-details">
-        <div class="spinner"></div> <!-- Show spinner initially -->
-    </div>
-    <div id="result-actions" style="margin-top: 15px; display: flex; gap: 10px;">
-        <!-- Button to clear last scan? Or just rely on polling? -->
-        <a href="/products" class="btn btn-info">View All Products</a>
-    </div>
+<!-- Status Display Area -->
+<div id="status-area" class="card">
+    <span>Mode: <strong id="current-mode">Loading...</strong></span>
+    <span id="last-scan-status">Last Scan: ---</span>
+    <span id="cart-status">Cart: 0 items</span>
+    <span id="cart-item-status" style="display: none;">Selected: ---</span>
 </div>
+
+<!-- Virtual Button Controls -->
+<div id="button-controls">
+    <!-- Row 1 -->
+    <button id="btn-1" data-action="SELECT_CONFIRM" class="btn btn-primary">Action 1</button>
+    <button id="btn-2" data-action="INFO_ALLERGENS" class="btn btn-info">Action 2</button>
+    <button id="btn-3" data-action="BACK_CANCEL_DELETE" class="btn btn-secondary">Back/Cancel/Remove</button>
+    <!-- Row 2 -->
+    <button id="btn-4" data-action="MODE_TOGGLE" class="btn btn-warning">Action 4</button>
+    <button id="btn-5" data-action="UNUSED_B5" class="btn btn-light">Action 5</button>
+    <button id="btn-6" data-action="HELP_CLEAR" class="btn btn-light">Action 6</button>
+    <!-- Dial Simulation -->
+    <button id="btn-prev" data-action="dial_previous" class="btn btn-dark">Prev Item</button>
+    <button id="btn-next" data-action="dial_next" class="btn btn-dark">Next Item</button>
+</div>
+
+<!-- Cart Display Area -->
+<div id="cart-display" class="card">
+    <div class="card-header">Shopping Cart</div>
+    <ul id="cart-list"></ul>
+</div>
+
+<!-- Result container reused for last scanned item -->
+<div id="result-container" class="card" style="display:none; margin-top: 20px;">
+    <div class="card-header">Last Scanned Item Details</div>
+    <div id="result-details"></div>
+</div>
+
 {% endblock %}
 
 {% block scripts %}
-<!-- Remove ZXing library -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // UI Elements
+        const currentModeDisplay = document.getElementById('current-mode');
+        const lastScanStatus = document.getElementById('last-scan-status');
+        const cartStatus = document.getElementById('cart-status');
+        const cartItemStatus = document.getElementById('cart-item-status');
         const resultContainer = document.getElementById('result-container');
         const resultDetails = document.getElementById('result-details');
-        const scannerStatus = document.getElementById('scanner-status');
         const scannerStream = document.getElementById('scanner-stream');
-        
-        let lastProductTimestamp = 0;
-        let pollingInterval = null;
+        const buttonControls = document.getElementById('button-controls');
+        const cartDisplay = document.getElementById('cart-display');
+        const cartList = document.getElementById('cart-list');
 
-        function pollForLastProduct() {
-            fetch('/api/last_product')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
+        // State Variables
+        let appState = { mode: 'Loading...' };
+        let cartItems = [];
+        let pollingInterval = null;
+        let statePollingInterval = 1000; // Check state every second
+        let cartPollingInterval = 3000; // Check cart less often when visible
+        let cartPollingTimer = null;
+
+        // --- API Interaction ---
+        function sendButtonAction(buttonId, isLongPress = false) {
+            console.log(`Sending button action: ${buttonId}, Long: ${isLongPress}`);
+            fetch('/api/action/button_press', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ button_id: buttonId, long_press: isLongPress })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Button action response:', data);
+                // Trigger immediate state update after action
+                fetchAppState(); 
+            })
+            .catch(error => console.error('Error sending button action:', error));
+        }
+
+        function sendDialAction(direction) {
+            console.log(`Sending dial action: ${direction}`);
+            fetch('/api/action/dial_change', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ direction: direction })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dial action response:', data);
+                // Trigger immediate state update after action
+                fetchAppState(); 
+            })
+            .catch(error => console.error('Error sending dial action:', error));
+        }
+        
+        function fetchAppState() {
+            fetch('/api/state')
+                .then(response => response.ok ? response.json() : Promise.reject(`HTTP ${response.status}`))
                 .then(data => {
-                    if (data.success && data.product) {
-                        // Check if this is a new product since last check
-                        if (data.product.timestamp && data.product.timestamp > lastProductTimestamp) {
-                            console.log("New product detected:", data.product);
-                            lastProductTimestamp = data.product.timestamp;
-                            updateResultDisplay(data.product);
-                            playBeep(); // Play sound on new detection
-                            scannerStatus.textContent = `Scanned: ${data.product.name}`; 
-                        } else if (!data.product.timestamp) {
-                            // Handle case where timestamp might be missing (though added in backend)
-                             if (JSON.stringify(data.product) !== resultDetails.dataset.lastProductJson) {
-                                console.log("Product updated (no timestamp):", data.product);
-                                updateResultDisplay(data.product);
-                                playBeep(); 
-                                scannerStatus.textContent = `Scanned: ${data.product.name}`; 
-                             }
-                        }
-                    } else {
-                         // Keep showing last known product or "no products scanned" 
-                         if (!resultDetails.dataset.lastProductJson && !lastProductTimestamp) {
-                              resultDetails.innerHTML = '<p>No products scanned yet.</p>';
-                              scannerStatus.textContent = 'Waiting for scan...';
-                         }
-                    }
+                    appState = data;
+                    updateUI();
+                    // Schedule cart fetch if needed
+                    scheduleCartFetchIfNeeded(); 
                 })
                 .catch(error => {
-                    console.error('Error polling for last product:', error);
-                    scannerStatus.textContent = 'Error checking scan status.';
-                    // Optionally stop polling on repeated errors
-                    // clearInterval(pollingInterval);
+                    console.error('Error fetching state:', error);
+                    currentModeDisplay.textContent = 'Error';
+                    // Consider stopping polling on error
                 });
         }
+        
+        function fetchCartItems() {
+            if (appState.mode !== 'CART_REVIEW') return; // Only fetch if relevant
+            
+            fetch('/api/cart/items')
+                .then(response => response.ok ? response.json() : Promise.reject(`HTTP ${response.status}`))
+                .then(data => {
+                    cartItems = data.cart || [];
+                    updateCartDisplay(); 
+                })
+                .catch(error => {
+                    console.error('Error fetching cart items:', error);
+                });
+        }
+        
+        function scheduleCartFetchIfNeeded() {
+             if (appState.mode === 'CART_REVIEW') {
+                 if (!cartPollingTimer) { // Start if not running
+                     fetchCartItems(); // Fetch immediately
+                     cartPollingTimer = setInterval(fetchCartItems, cartPollingInterval);
+                     console.log("Started cart polling.");
+                 }
+             } else {
+                 if (cartPollingTimer) { // Stop if running
+                     clearInterval(cartPollingTimer);
+                     cartPollingTimer = null;
+                     console.log("Stopped cart polling.");
+                 }
+                 cartDisplay.style.display = 'none'; // Hide cart display when not in review mode
+             }
+         }
 
-        function updateResultDisplay(product) {
-            let allergenText = '';
-            if (product.allergens && product.allergens.length > 0) {
-                allergenText = `<p><strong>Allergens:</strong> ${product.allergens.join(', ')}</p>`;
+        // --- UI Updates ---
+        function updateUI() {
+            currentModeDisplay.textContent = appState.mode || 'Unknown';
+            cartStatus.textContent = `Cart: ${appState.cart_item_count || 0} items`;
+
+            // Update last scanned item display
+            if (appState.mode === 'ITEM_SCANNED' && appState.last_scanned) {
+                const product = appState.last_scanned;
+                let content = '';
+                 if (product.name === 'Product Not Found') {
+                    content = `<div class="alert alert-warning"><p><strong>Product Not Found:</strong> Barcode ${product.barcode}</p></div>`;
+                    lastScanStatus.textContent = `Last Scan: Product Not Found (${product.barcode})`;
+                 } else {
+                    content = `<p><strong>Name:</strong> ${product.name}</p><p><strong>Brand:</strong> ${product.brand}</p><p><strong>Barcode:</strong> ${product.barcode}</p>`;
+                    lastScanStatus.textContent = `Last Scan: ${product.name}`;
+                 }
+                 resultDetails.innerHTML = content;
+                 resultContainer.style.display = 'block';
+            } else {
+                 resultContainer.style.display = 'none';
+                 lastScanStatus.textContent = 'Last Scan: ---';
+            }
+
+            // Update cart item status display
+            if (appState.mode === 'CART_REVIEW') {
+                 if (appState.cart_item_count > 0 && appState.cart_current_index >= 0) {
+                    cartItemStatus.textContent = `Selected: Item ${appState.cart_current_index + 1}/${appState.cart_item_count}`;
+                 } else {
+                    cartItemStatus.textContent = 'Selected: Cart Empty';
+                 }
+                 cartItemStatus.style.display = 'block';
+            } else {
+                 cartItemStatus.style.display = 'none';
             }
             
-            let content = '';
-            if (product.name === 'Product Not Found') {
-                content = `
-                    <div class="alert alert-warning">
-                        <p><strong>Product Not Found:</strong> Barcode ${product.barcode}</p>
-                        <p>This product is not in our database.</p>
-                    </div>
-                `;
-                 scannerStatus.textContent = `Barcode ${product.barcode} not found`;
-            } else {
-                 content = `
-                    <p><strong>Name:</strong> ${product.name}</p>
-                    <p><strong>Brand:</strong> ${product.brand}</p>
-                    <p><strong>Barcode:</strong> ${product.barcode}</p>
-                    ${allergenText}
-                    <p><strong>Ingredients:</strong> ${product.ingredients || 'N/A'}</p>
-                `;
-                 scannerStatus.textContent = `Scanned: ${product.name}`; 
-                 // Optional: Client-side speech synthesis if preferred over server-side
-                 // speakProductInfo(product); 
-            }
-
-            resultDetails.innerHTML = content;
-            resultDetails.dataset.lastProductJson = JSON.stringify(product); // Store for comparison
-            resultContainer.style.display = 'block'; // Show the results card
+            updateButtonStates();
         }
 
-        function playBeep() {
-            try {
-                const context = new (window.AudioContext || window.webkitAudioContext)();
-                if (!context) return; // AudioContext not supported
-                const oscillator = context.createOscillator();
-                const gainNode = context.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(context.destination);
-                
-                oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(800, context.currentTime); // Use setValueAtTime
-                gainNode.gain.setValueAtTime(0.1, context.currentTime);
-                
-                oscillator.start(context.currentTime);
-                oscillator.stop(context.currentTime + 0.1);
-            } catch (e) {
-                console.error("Error playing beep:", e);
+        function updateCartDisplay() {
+             cartList.innerHTML = ''; // Clear previous list
+             if (cartItems.length === 0) {
+                 cartList.innerHTML = '<li>Cart is empty.</li>';
+                 cartDisplay.style.display = 'block';
+                 return;
+             }
+
+             cartItems.forEach((item, index) => {
+                 const li = document.createElement('li');
+                 li.textContent = `${index + 1}: ${item.name || 'Unknown Item'} (${item.brand || 'N/A'})`;
+                 if (index === appState.cart_current_index) {
+                     li.classList.add('selected');
+                 }
+                 cartList.appendChild(li);
+             });
+             cartDisplay.style.display = 'block';
+         }
+         
+        function updateButtonStates() {
+            const mode = appState.mode;
+            const isProductFound = appState.last_scanned && appState.last_scanned.name !== 'Product Not Found';
+            const isCartNotEmpty = appState.cart_item_count > 0;
+
+            // Button mapping based on the revised plan
+            const btn1 = document.getElementById('btn-1'); // Confirm/Add/Details
+            const btn2 = document.getElementById('btn-2'); // Allergens (placeholder name)
+            const btn3 = document.getElementById('btn-3'); // Back/Cancel/Remove
+            const btn4 = document.getElementById('btn-4'); // Mode Toggle
+            const btn5 = document.getElementById('btn-5'); // Unused
+            const btn6 = document.getElementById('btn-6'); // Help/Clear
+            const btnPrev = document.getElementById('btn-prev');
+            const btnNext = document.getElementById('btn-next');
+            
+            // Default: Disable most buttons
+            [btn1, btn2, btn3, btn5, btn6, btnPrev, btnNext].forEach(btn => btn.disabled = true);
+            btn4.disabled = false; // Mode toggle always available?
+
+            if (mode === 'SCANNING') {
+                 btn1.textContent = 'N/A';
+                 btn2.textContent = 'N/A';
+                 btn3.textContent = 'N/A';
+                 btn4.textContent = 'Enter Cart';
+                 btn5.textContent = 'N/A';
+                 btn6.textContent = 'Help'; btn6.disabled = false;
+                 btnPrev.disabled = true;
+                 btnNext.disabled = true;
+            } else if (mode === 'ITEM_SCANNED') {
+                 btn1.textContent = isProductFound ? 'Add to Cart' : 'N/A'; btn1.disabled = !isProductFound;
+                 btn2.textContent = 'Allergens'; btn2.disabled = !appState.last_scanned;
+                 btn3.textContent = 'Cancel Scan'; btn3.disabled = false;
+                 btn4.textContent = 'Enter Cart'; 
+                 btn5.textContent = 'N/A';
+                 btn6.textContent = 'Help'; btn6.disabled = false;
+                 btnPrev.disabled = true;
+                 btnNext.disabled = true;
+            } else if (mode === 'CART_REVIEW') {
+                 btn1.textContent = 'Speak Details'; btn1.disabled = !isCartNotEmpty;
+                 btn2.textContent = 'N/A';
+                 btn3.textContent = 'Remove Item'; btn3.disabled = !isCartNotEmpty;
+                 btn4.textContent = 'Exit Cart'; 
+                 btn5.textContent = 'N/A';
+                 btn6.textContent = 'Help/Clear'; btn6.disabled = false; // Clear needs long press
+                 btnPrev.disabled = !isCartNotEmpty;
+                 btnNext.disabled = !isCartNotEmpty;
             }
         }
 
-        // Optional: Client-side speech synthesis function (if needed)
-        /*
-        function speakProductInfo(product) {
-            if ('speechSynthesis' in window) {
-                let message = `${product.name} by ${product.brand}.`;
-                if (product.allergens && product.allergens.length > 0) {
-                    message += ` Warning: Contains ${product.allergens.join(', ')}.`;
+        // --- Event Listeners ---
+        buttonControls.addEventListener('click', function(event) {
+            if (event.target.tagName === 'BUTTON') {
+                const action = event.target.dataset.action;
+                if (action === 'dial_previous') {
+                    sendDialAction('previous');
+                } else if (action === 'dial_next') {
+                    sendDialAction('next');
+                } else if (action) {
+                    // Basic implementation - add long-press detection later if needed
+                    const isLongPress = false; // For now
+                    sendButtonAction(action, isLongPress);
                 }
-                const speech = new SpeechSynthesisUtterance(message);
-                // Optional: Configure voice, rate, pitch here if needed
-                window.speechSynthesis.speak(speech);
             }
-        }
-        */
-       
-        // Check if the stream image loads correctly
+        });
+        
+        // Stream handling (remains the same)
         scannerStream.onload = function() {
             console.log("Video stream loaded successfully.");
-            scannerStatus.textContent = 'Waiting for scan...';
-            // Start polling only after stream seems to be working
+            // Start polling
              if (!pollingInterval) {
-                 pollingInterval = setInterval(pollForLastProduct, 1500); // Poll every 1.5 seconds
+                 fetchAppState(); // Initial fetch
+                 pollingInterval = setInterval(fetchAppState, statePollingInterval);
              }
         };
         
         scannerStream.onerror = function() {
              console.error("Failed to load video stream.");
-             scannerStatus.textContent = 'Error loading camera feed.';
-             resultDetails.innerHTML = '<p>Could not load video stream from the server.</p>';
-             resultContainer.style.display = 'block';
+             currentModeDisplay.textContent = 'Error';
              if (pollingInterval) {
                  clearInterval(pollingInterval);
+                 pollingInterval = null;
+             }
+             if (cartPollingTimer) {
+                  clearInterval(cartPollingTimer);
+                  cartPollingTimer = null;
              }
         };
 
-        // Initial call to populate status
-        // pollForLastProduct(); 
-        // Polling now starts in scannerStream.onload
-
-        // Stop polling when the user navigates away (optional but good practice)
+        // Stop polling when navigating away
         window.addEventListener('beforeunload', () => {
-            if (pollingInterval) {
-                clearInterval(pollingInterval);
-            }
+            if (pollingInterval) clearInterval(pollingInterval);
+            if (cartPollingTimer) clearInterval(cartPollingTimer);
         });
 
     });

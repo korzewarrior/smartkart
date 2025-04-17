@@ -44,10 +44,18 @@ def add_security_headers(response):
 config = ConfigManager()
 product_db = None
 speech = None
-last_scanned_product = None
-processed_barcodes = set()
+last_scanned_product = None # Holds the data of the *most recently scanned* item
+processed_barcodes = set() # Tracks barcodes processed *in this session* (cleared on reset)
 camera = None
 camera_lock = threading.Lock()
+
+# --- New State Management Variables ---
+# Application Modes: SCANNING, ITEM_SCANNED, CART_REVIEW
+current_mode = "SCANNING" 
+shopping_cart = [] # List to hold scanned items (dictionaries)
+cart_index = -1    # Index of the currently selected item in cart view (-1 if cart is empty or not in focus)
+state_lock = threading.Lock() # Lock for modifying shared state variables
+# ------------------------------------
 
 def initialize_systems():
     """Initialize the SmartKart subsystems"""
@@ -147,7 +155,7 @@ def release_camera():
 
 def generate_frames():
     """Generate video frames with barcode detection."""
-    global last_scanned_product, processed_barcodes
+    global last_scanned_product, processed_barcodes, current_mode
     
     initialize_camera() # Ensure camera is initialized
 
@@ -205,49 +213,93 @@ def generate_frames():
                 barcode_data = barcode.data.decode('utf-8')
                 detected_this_frame.add(barcode_data)
 
+                # --- Check Mode Before Processing Barcode ---
+                with state_lock: # Lock needed for checking mode/last_scanned
+                    if current_mode == "ITEM_SCANNED":
+                        # Already waiting for action on a scanned item
+                        if barcode_data not in processed_barcodes:
+                            # Only announce if it's a potentially *new* barcode being ignored
+                            item_name = last_scanned_product.get('name', 'the previous item') if last_scanned_product else 'the previous item'
+                            _speak(f"Waiting for action on {item_name}.")
+                            processed_barcodes.add(barcode_data) # Add to prevent immediate re-announce
+                        continue # Skip further processing for this barcode
+                    
+                    elif current_mode == "CART_REVIEW":
+                        # In cart view, ignore new scans
+                         if barcode_data not in processed_barcodes:
+                            _speak("Currently in Cart View. Exit cart to scan.")
+                            processed_barcodes.add(barcode_data) # Add to prevent immediate re-announce
+                         continue # Skip further processing for this barcode
+                # --- End Mode Check ---
+
+                # Process barcode only if in SCANNING mode and not recently processed/ignored
                 if barcode_data not in processed_barcodes:
-                    app.logger.info(f"Detected new barcode: {barcode_data}")
-                    processed_barcodes.add(barcode_data) # Mark as processed immediately
-
-                    # Look up product (runs in this thread, could be moved if slow)
-                    product_data = product_db.lookup_barcode(barcode_data)
-
-                    if product_data.get('found', False):
-                        product_name = product_data.get('product_name', 'Unknown product')
-                        brand = product_data.get('brand', 'Unknown brand')
+                    # Original logic now only runs if mode was SCANNING and not already in cart
+                    with state_lock:
+                         # Check if item is already in the cart first
+                        item_in_cart = False
+                        item_name_in_cart = "Item"
+                        for item in shopping_cart:
+                            if item.get('barcode') == barcode_data:
+                                item_in_cart = True
+                                item_name_in_cart = item.get('name', 'Item')
+                                break
+                                
+                        if item_in_cart:
+                            app.logger.info(f"Barcode {barcode_data} ({item_name_in_cart}) already in cart. Skipping.")
+                            processed_barcodes.add(barcode_data) # Add to prevent immediate rescan message
+                            _speak(f"{item_name_in_cart} is already in the cart.")
+                            # --- Important: Need a way to clear processed_barcodes eventually ---
+                            # Maybe clear it when switching modes or after a timeout?
+                            # For now, it prevents immediate re-announce.
                         
-                        # Save product info
-                        output_dir = config.get('database', 'scan_results_dir')
-                        product_db.save_product_info(product_data, output_dir)
-                        
-                        # Track product
-                        product_db.track_product(barcode_data, product_name, brand)
+                        # Only process if we are currently in SCANNING mode AND item not in cart
+                        elif current_mode == "SCANNING": 
+                            processed_barcodes.add(barcode_data) # Mark as processed for this scan attempt
+                            product_data = product_db.lookup_barcode(barcode_data)
 
-                        # Update last_scanned_product for polling
-                        last_scanned_product = {
-                            'barcode': barcode_data,
-                            'name': product_name,
-                            'brand': brand,
-                            'allergens': product_data.get('allergens', []),
-                            'ingredients': product_data.get('ingredients_text', 'No ingredients available'),
-                            'timestamp': time.time() # Add timestamp for freshness check
-                        }
-                        app.logger.info(f"Updated last_scanned_product: {product_name}")
-                        
-                        # Optional: Speak info (consider if speech manager is thread-safe)
-                        if speech:
-                           speech.speak(f"Found {product_name} by {brand}")
-                    else:
-                         # Update last_scanned_product even if not found
-                         last_scanned_product = {
-                            'barcode': barcode_data,
-                            'name': 'Product Not Found',
-                            'brand': '',
-                            'allergens': [],
-                            'ingredients': '',
-                            'timestamp': time.time() # Add timestamp
-                         }
-                         app.logger.info(f"Barcode {barcode_data} not found in database.")
+                            if product_data.get('found', False):
+                                product_name = product_data.get('product_name', 'Unknown product')
+                                brand = product_data.get('brand', 'Unknown brand')
+                                
+                                # Update last_scanned_product for potential actions
+                                last_scanned_product = {
+                                    'barcode': barcode_data,
+                                    'name': product_name,
+                                    'brand': brand,
+                                    'allergens': product_data.get('allergens', []),
+                                    'ingredients': product_data.get('ingredients_text', 'No ingredients available'),
+                                    'timestamp': time.time() 
+                                }
+                                app.logger.info(f"Updated last_scanned_product: {product_name}")
+                                current_mode = "ITEM_SCANNED" # Change mode
+                                app.logger.info("Switched mode to ITEM_SCANNED")
+                                
+                                # Initial announcement only
+                                if speech:
+                                   speech.speak(f"Found {product_name} by {brand}")
+                                
+                                # Don't save/track product here - do it when added to cart
+                                # output_dir = config.get('database', 'scan_results_dir')
+                                # product_db.save_product_info(product_data, output_dir)
+                                # product_db.track_product(barcode_data, product_name, brand)
+
+                            else:
+                                 # Product not found in DB
+                                 last_scanned_product = {
+                                    'barcode': barcode_data,
+                                    'name': 'Product Not Found',
+                                    'brand': '',
+                                    'allergens': [],
+                                    'ingredients': '',
+                                    'timestamp': time.time()
+                                 }
+                                 app.logger.info(f"Barcode {barcode_data} not found in database.")
+                                 current_mode = "ITEM_SCANNED" # Still switch mode
+                                 app.logger.info("Switched mode to ITEM_SCANNED (Product Not Found)")
+                                 if speech:
+                                     speech.speak(f"Product not found for barcode {barcode_data}")
+                    # --- End Mode Change Logic ---
 
                 # Draw bounding box (optional)
                 (x, y, w, h) = barcode.rect
@@ -455,17 +507,408 @@ def get_last_product():
 @app.route('/video_feed')
 def video_feed():
     """Video streaming route."""
-    # Ensure camera is initialized before starting stream
-    initialize_camera() 
-    # If camera failed to initialize, return an error response or placeholder
-    with camera_lock:
-        if not camera or not camera.isOpened():
-             app.logger.error("Camera not available for video feed.")
-             # Optionally return a static image or an error message
-             return Response("Error: Camera not available.", status=503) # Service Unavailable
+    # Let generate_frames handle camera initialization lazily
+    # initialize_camera() 
+    # Check if camera could be initialized by generate_frames maybe?
+    # For now, rely on generate_frames handling the error and sending placeholder
+    # with camera_lock:
+    #     if not camera or not camera.isOpened():
+    #          app.logger.error("Camera not available for video feed.")
+    #          return Response("Error: Camera not available.", status=503)
 
     return Response(generate_frames(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
+
+# --- Action Helper Functions ---
+
+def _speak(text, priority=False):
+    """Helper to safely call speech manager."""
+    if speech:
+        # Consider using speak_async for responsiveness, esp. for longer text
+        # For now, using blocking speak for simplicity
+        try:
+            app.logger.debug(f"Triggering speech: '{text[:50]}...'")
+            speech.speak(text)
+        except Exception as e:
+            app.logger.error(f"Error during speech call: {e}")
+    else:
+        app.logger.warning("Speech manager not available, cannot speak.")
+
+def _add_item_to_cart():
+    """Adds the last scanned item to the cart if valid."""
+    global current_mode, shopping_cart, last_scanned_product
+    if current_mode != "ITEM_SCANNED" or not last_scanned_product:
+        app.logger.warning("Add to cart called in wrong mode or without scanned product.")
+        _speak("No item scanned to add.")
+        return False
+        
+    # Check if product was actually found
+    if last_scanned_product.get('name') == 'Product Not Found':
+        app.logger.warning("Attempted to add 'Product Not Found' to cart.")
+        _speak("Cannot add unknown product.")
+        # Optionally switch back to scanning mode here?
+        # current_mode = "SCANNING"
+        return False
+
+    # Add a *copy* of the product data to the cart
+    item_to_add = last_scanned_product.copy()
+    shopping_cart.append(item_to_add)
+    app.logger.info(f"Added item to cart: {item_to_add.get('name')}")
+    
+    # Save/track product info now that it's added
+    try:
+        output_dir = config.get('database', 'scan_results_dir')
+        product_db.save_product_info(item_to_add, output_dir)
+        product_db.track_product(item_to_add['barcode'], item_to_add['name'], item_to_add['brand'])
+    except Exception as e:
+        app.logger.error(f"Error saving/tracking product info after adding to cart: {e}")
+
+    # Announce and switch back to scanning mode
+    _speak(f"Added {item_to_add.get('name', 'item')} to cart.")
+    current_mode = "SCANNING"
+    last_scanned_product = None # Clear last scanned after adding
+    app.logger.info("Switched mode to SCANNING")
+    return True
+
+def _speak_allergens():
+    """Announces allergens for the last scanned item."""
+    if current_mode != "ITEM_SCANNED" or not last_scanned_product:
+        app.logger.warning("Speak allergens called in wrong mode or without scanned product.")
+        return False
+        
+    allergens = last_scanned_product.get('allergens', [])
+    if allergens:
+        allergen_text = ", ".join(allergens)
+        _speak(f"Allergens: {allergen_text}.")
+    else:
+        _speak("No known allergens listed.")
+    return True
+
+def _speak_ingredients():
+    """Announces ingredients for the currently selected cart item."""
+    global cart_index
+    if current_mode != "CART_REVIEW" or not shopping_cart or cart_index < 0:
+        app.logger.warning("Speak ingredients called in wrong mode or cart empty/index invalid.")
+        return False
+        
+    try:
+        item = shopping_cart[cart_index]
+        ingredients = item.get('ingredients', 'Ingredients not available')
+        if ingredients and ingredients != 'Ingredients not available':
+             _speak("Ingredients: " + ingredients)
+        else:
+             _speak("Ingredients information not available.")
+    except IndexError:
+         app.logger.error(f"Cart index {cart_index} out of bounds for cart size {len(shopping_cart)}.")
+         _speak("Error retrieving item information.")
+         return False
+    return True
+
+def _navigate_cart(direction):
+    """Navigates the cart (next/previous) and announces the item."""
+    global cart_index
+    if current_mode != "CART_REVIEW" or not shopping_cart:
+        _speak("Cart is empty.")
+        return False
+
+    cart_len = len(shopping_cart)
+    if direction == "next":
+        cart_index = (cart_index + 1) % cart_len
+    elif direction == "previous":
+        cart_index = (cart_index - 1) % cart_len
+    else:
+        return False # Should not happen
+        
+    try:
+        item = shopping_cart[cart_index]
+        item_name = item.get('name', 'Unknown Item')
+        _speak(f"Item {cart_index + 1}: {item_name}")
+    except IndexError:
+         app.logger.error(f"Cart index {cart_index} out of bounds after navigation.")
+         _speak("Error retrieving item name.")
+         # Reset index?
+         cart_index = 0 if cart_len > 0 else -1
+         return False
+    return True
+
+def _enter_cart_mode():
+    """Switches mode to CART_REVIEW and announces first item."""
+    global current_mode, cart_index
+    current_mode = "CART_REVIEW"
+    cart_len = len(shopping_cart)
+    app.logger.info(f"Switched mode to CART_REVIEW with {cart_len} items.")
+    
+    if cart_len > 0:
+        cart_index = 0 # Start at the first item
+        item = shopping_cart[cart_index]
+        item_name = item.get('name', 'Unknown Item')
+        _speak(f"Cart View. {cart_len} items. Item {cart_index + 1}: {item_name}.")
+    else:
+        cart_index = -1 # Indicate empty cart
+        _speak("Cart is empty.")
+    return True
+
+def _exit_cart_mode():
+    """Switches mode back to SCANNING."""
+    global current_mode, cart_index
+    current_mode = "SCANNING"
+    cart_index = -1 # Reset cart index when leaving
+    app.logger.info("Switched mode to SCANNING")
+    _speak("Exiting Cart View.")
+    return True
+
+def _cancel_scan():
+    """Discards last scan result and returns to SCANNING mode."""
+    global current_mode, last_scanned_product
+    if current_mode != "ITEM_SCANNED":
+        return False # No scan active to cancel
+        
+    _speak("Scan cancelled.")
+    last_scanned_product = None
+    current_mode = "SCANNING"
+    app.logger.info("Switched mode to SCANNING")
+    return True
+
+# --- Button Action API Endpoint (Refined) ---
+
+# Store confirmation state (simple example, might need more robust handling)
+confirm_action = None 
+confirm_timer = None
+CONFIRM_TIMEOUT = 3.0 # Seconds to wait for confirmation
+
+def _reset_confirm_state():
+    global confirm_action, confirm_timer
+    if confirm_timer:
+        confirm_timer.cancel()
+    confirm_action = None
+    confirm_timer = None
+
+@app.route('/api/action/button_press', methods=['POST'])
+def handle_button_press():
+    """Handles actions triggered by physical button presses.
+       Includes basic confirmation logic for remove/clear.
+    """
+    global confirm_action, confirm_timer, current_mode
+    
+    data = request.json
+    button_id = data.get('button_id')
+    # Add support for long press detection if button handler sends it
+    is_long_press = data.get('long_press', False) 
+    app.logger.info(f"Received button press: {button_id} (Long: {is_long_press}) in mode: {current_mode}")
+
+    success = False
+    with state_lock:
+        # --- Confirmation Handling ---
+        if confirm_action:
+            pending_action = confirm_action
+            _reset_confirm_state() # Always reset after a button press
+            
+            if pending_action == 'REMOVE' and button_id == 'BACK_CANCEL':
+                 app.logger.info("Confirming remove item.")
+                 success = _remove_cart_item()
+                 # State change (index adjustment) happens within _remove_cart_item
+                 return jsonify({'success': success, 'mode': current_mode}) # Return early
+                 
+            elif pending_action == 'CLEAR' and button_id == 'HELP_CLEAR': # Assuming Button 6 confirms clear
+                 app.logger.info("Confirming clear cart.")
+                 success = _clear_cart()
+                 # Mode changes to SCANNING within _clear_cart
+                 return jsonify({'success': success, 'mode': current_mode}) # Return early
+            else:
+                 # Any other button press cancels the pending confirmation
+                 app.logger.info(f"Button {button_id} pressed, cancelling pending action: {pending_action}")
+                 _speak(f"{pending_action.capitalize()} cancelled.")
+                 # Fall through to handle the new button press normally below
+
+        # --- Normal Button Handling ---
+        if button_id == 'SELECT_CONFIRM': # Button 1
+            if current_mode == "ITEM_SCANNED":
+                success = _add_item_to_cart() 
+            elif current_mode == "CART_REVIEW":
+                success = _speak_ingredients()
+            else: # SCANNING
+                _speak("Please scan an item first.")
+        
+        elif button_id == 'INFO_ALLERGENS': # Button 2
+             if current_mode == "ITEM_SCANNED":
+                 success = _speak_allergens()
+             elif current_mode == "CART_REVIEW":
+                 _speak("Cannot get allergen info while in cart view.")
+             else: # SCANNING
+                 _speak("Please scan an item to get allergen info.")
+             
+        elif button_id == 'BACK_CANCEL_DELETE': # Button 3
+             if current_mode == "ITEM_SCANNED":
+                 success = _cancel_scan()
+             elif current_mode == "CART_REVIEW":
+                 # Initiate remove confirmation
+                 if not shopping_cart:
+                      _speak("Cart is empty.")
+                 else:
+                     if shopping_cart and cart_index >= 0:
+                         try:
+                             item_name = shopping_cart[cart_index].get('name', 'Item')
+                             _speak(f"Remove {item_name}? Press the Back/Cancel button again to confirm.")
+                             confirm_action = 'REMOVE'
+                             confirm_timer = threading.Timer(CONFIRM_TIMEOUT, _reset_confirm_state)
+                             confirm_timer.start()
+                             success = True # Indicate action was initiated
+                         except IndexError:
+                             _speak("Error selecting item to remove.")
+                     else:
+                         _speak("Cart is empty or no item selected.")
+                     
+        elif button_id == 'MODE_TOGGLE': # Button 4
+            if current_mode == "CART_REVIEW":
+                success = _exit_cart_mode()
+            else: # SCANNING or ITEM_SCANNED
+                success = _enter_cart_mode()
+                
+        elif button_id == 'UNUSED_B5': # Button 5
+             _speak("Button 5 not assigned.")
+             pass # Placeholder
+
+        elif button_id == 'HELP_CLEAR': # Button 6
+            if is_long_press and current_mode == "CART_REVIEW":
+                 # Initiate clear confirmation
+                 if not shopping_cart:
+                      _speak("Cart is already empty.")
+                 else:
+                     if shopping_cart:
+                         _speak("Clear entire cart? Press this button again to confirm.")
+                         confirm_action = 'CLEAR'
+                         confirm_timer = threading.Timer(CONFIRM_TIMEOUT, _reset_confirm_state)
+                         confirm_timer.start()
+                         success = True # Indicate action was initiated
+                     else:
+                         _speak("Cart is already empty.")
+            elif is_long_press: # Long press outside CART_REVIEW
+                 _speak("Clear cart only available in Cart View.")
+            else: # Short press - Help
+                if current_mode == "SCANNING":
+                     _speak("Scanning Mode. Scan item or press Mode button for Cart.")
+                elif current_mode == "ITEM_SCANNED":
+                     item_name = last_scanned_product.get('name', 'item') if last_scanned_product else 'item'
+                     _speak(f"Item Scanned: {item_name}. Press Confirm to Add, Back to Cancel, Mode for Cart, or Button 2 for Allergens.")
+                elif current_mode == "CART_REVIEW":
+                     _speak("Cart View. Use dial to navigate. Press Confirm for details, Back to remove, Mode to exit.")
+                success = True
+        else:
+            app.logger.warning(f"Unhandled button ID: {button_id} in mode: {current_mode}")
+            _speak("Unknown button pressed.")
+            
+    return jsonify({'success': success, 'mode': current_mode})
+
+@app.route('/api/action/dial_change', methods=['POST'])
+def handle_dial_change():
+    """Handles actions triggered by the rotary dial."""
+    data = request.json
+    direction = data.get('direction') # Expect 'next' or 'previous'
+    app.logger.info(f"Received dial change: {direction} in mode: {current_mode}")
+    
+    success = False
+    with state_lock:
+         if current_mode == "CART_REVIEW":
+             success = _navigate_cart(direction)
+         else:
+             app.logger.warning(f"Dial change ignored in mode: {current_mode}")
+             _speak("Dial navigation only available in Cart View.")
+             
+    return jsonify({'success': success, 'mode': current_mode})
+
+
+# --- Data/State API Endpoints ---
+
+@app.route('/api/state')
+def get_state():
+    """Returns the current application state."""
+    with state_lock:
+        state_data = {
+            'mode': current_mode,
+            'cart_item_count': len(shopping_cart),
+            'cart_current_index': cart_index,
+            'last_scanned': last_scanned_product # Send last scanned for UI display
+        }
+    return jsonify(state_data)
+
+@app.route('/api/cart/items')
+def get_cart_items():
+    """Returns the list of items currently in the cart."""
+    with state_lock:
+        # Return a copy to avoid external modification issues if any
+        cart_data = list(shopping_cart) 
+    return jsonify({'cart': cart_data})
+
+def _speak_current_item_name(announce_index=True):
+    """Announces the name of the currently selected cart item."""
+    if current_mode != "CART_REVIEW" or not shopping_cart or cart_index < 0:
+        app.logger.warning("Speak item name called in wrong mode or cart empty/index invalid.")
+        # Don't speak error here, let navigate handle empty cart message
+        return False
+    
+    try:
+        item = shopping_cart[cart_index]
+        item_name = item.get('name', 'Unknown Item')
+        if announce_index:
+             _speak(f"Item {cart_index + 1}: {item_name}")
+        else:
+             _speak(item_name)
+    except IndexError:
+         app.logger.error(f"Cart index {cart_index} out of bounds for cart size {len(shopping_cart)}.")
+         _speak("Error retrieving item name.")
+         return False
+    return True
+    
+
+def _remove_cart_item():
+    """Removes the currently selected item from the cart."""
+    global cart_index, shopping_cart, current_mode
+    if current_mode != "CART_REVIEW" or not shopping_cart or cart_index < 0:
+        app.logger.warning("Remove item called in wrong mode or cart empty/index invalid.")
+        return False
+        
+    try:
+        removed_item = shopping_cart.pop(cart_index)
+        item_name = removed_item.get('name', 'Item')
+        app.logger.info(f"Removed item {item_name} from cart at index {cart_index}.")
+        _speak(f"Removed {item_name}.")
+        
+        # Adjust index and announce next/prev or empty state
+        cart_len = len(shopping_cart)
+        if cart_len == 0:
+            cart_index = -1
+            _speak("Cart is now empty.")
+            # Optionally switch back to SCANNING mode automatically?
+            # _exit_cart_mode() 
+        else:
+            # Stay at the same index if possible (items shift down), 
+            # otherwise move to the new last item.
+            if cart_index >= cart_len:
+                cart_index = cart_len - 1
+            # Announce the item now at the current index
+            _speak_current_item_name()
+            
+    except IndexError:
+        app.logger.error(f"Error removing item at index {cart_index}. Cart size: {len(shopping_cart)}.")
+        _speak("Error removing item.")
+        return False
+    return True
+
+def _clear_cart():
+    """Clears all items from the shopping cart."""
+    global shopping_cart, cart_index, current_mode
+    if not shopping_cart:
+        _speak("Cart is already empty.")
+        return False
+        
+    shopping_cart.clear()
+    cart_index = -1
+    app.logger.info("Shopping cart cleared.")
+    _speak("Cart cleared.")
+    # Switch back to scanning mode after clearing
+    current_mode = "SCANNING"
+    app.logger.info("Switched mode to SCANNING")
+    return True
 
 # Ensure camera release on shutdown (using Werkzeug signal if available, or atexit)
 def shutdown_server():
