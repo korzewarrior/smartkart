@@ -1,6 +1,6 @@
 {
     "barcode": {
-        "camera_index": 0,
+        "camera_index": 4,
         "save_images": false,
         "image_quality": 85,
         "scan_timeout": 30
@@ -11,9 +11,9 @@
         "voice": null,
         "enable_sounds": true,
         "sound_volume": 0.7,
-        "piper_executable": "/home/james/smartkart/webenv/bin/piper",
-        "piper_model": "/home/james/smartkart/piper_voices/en_US-lessac-medium.onnx",
-        "bluetooth_speaker": ""
+        "piper_executable": "scripts/super_piper.sh",
+        "piper_model": "/home/james/piper_voices/en_US-lessac-medium.onnx",
+        "bluetooth_speaker": "BTS0011"
     },
     "buttons": {
         "pin_select": 17,
