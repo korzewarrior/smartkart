@@ -1,0 +1,22 @@
+[
+  {
+    "index": 0,
+    "name": "Default Camera (built-in)",
+    "resolution": "640x480"
+  },
+  {
+    "index": 2,
+    "name": "Integrated Camera",
+    "resolution": "640x360"
+  },
+  {
+    "index": 4,
+    "name": "Logitech BRIO",
+    "resolution": "640x480"
+  },
+  {
+    "index": 6,
+    "name": "Logitech BRIO",
+    "resolution": "340x340"
+  }
+]

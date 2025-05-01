@@ -1,0 +1,98 @@
+# SmartKartv2 Raspberry Pi to Linux Laptop Conversion Plan
+
+## Goal
+
+Migrate the SmartKart web interface application from its original Raspberry Pi environment to run manually on a Linux laptop. The migrated application should utilize a specific Logitech USB camera (not the built-in one) and a designated Bluetooth speaker (not the built-in ones) for audio output.
+
+## Current Understanding
+
+The project consists of two main parts:
+1.  **Core Application (`src/main.py`):** Designed for Raspberry Pi, using physical buttons (`RPi.GPIO`) and potentially `pyttsx3` for TTS. **This part will likely not be used directly in the target setup.**
+2.  **Web Interface (`src/web_app.py`):** A Flask web application providing a browser-based interface. This uses `opencv-python` for camera access and Piper TTS for speech synthesis. **This is the target for migration.**
+
+Key files involved in the web interface:
+- `src/web_app.py`: Flask application code.
+- `run_web.py`: Script to launch the web server.
+- `start_web.sh`: Script to set up environment and launch `run_web.py`.
+- `requirements_web.txt`: Python dependencies for the web interface.
+- `config.json`: Configuration file for camera, audio, TTS, etc.
+- `src/barcode/scanner.py`: Likely handles camera interaction.
+- `src/audio/speech.py`: Likely handles TTS and audio playback.
+
+## Conversion Steps
+
+### 1. Environment Setup
+
+- **Create Virtual Environment:** Set up a dedicated Python virtual environment.
+  ```bash
+  python3 -m venv webenv
+  source webenv/bin/activate
+  ```
+- **Install Python Dependencies:** Install packages listed in `requirements_web.txt`. Pay attention to the `numpy<2.0` constraint.
+  ```bash
+  pip install -r requirements_web.txt
+  ```
+- **Install System Dependencies:** Ensure necessary system libraries for `opencv-python` are installed (e.g., `sudo apt update && sudo apt install -y libgl1-mesa-glx` on Debian/Ubuntu).
+- **Install Piper TTS:**
+    - Download or build the Piper TTS engine according to its official documentation ([https://github.com/rhasspy/piper](https://github.com/rhasspy/piper)).
+    - Download a desired voice model (e.g., `.onnx` and `.onnx.json` files).
+    - Note the full path to the `piper` executable and the `.onnx` voice model file.
+
+### 2. Configuration (`config.json`)
+
+Modify the `config.json` file with settings appropriate for the Linux laptop environment:
+
+- **`barcode.camera_index`**:
+    - **Task:** Identify the index number corresponding to the Logitech USB camera. Index `0` often refers to the built-in camera.
+    - **Action:** Create and run a small Python script using `opencv-python` to list available cameras and their indices. Update `camera_index` with the correct number for the Logitech camera. If `null` is kept, verify the application's logic for selecting the camera. *Explicitly setting the index is recommended.*
+    ```python
+    # Example script snippet (save as e.g., list_cameras.py)
+    import cv2
+    index = 0
+    while True:
+        cap = cv2.VideoCapture(index)
+        if not cap.read()[0]:
+            break
+        print(f"Camera index {index}: {cap.getBackendName()}") # Backend name might give clues
+        cap.release()
+        index += 1
+    ```
+- **`audio.piper_executable`**:
+    - **Task:** Point to the location of the Piper TTS executable installed in Step 1.
+    - **Action:** Replace the existing `/home/james/piper/piper/piper` path with the correct absolute path on your system.
+- **`audio.piper_model`**:
+    - **Task:** Point to the location of the Piper TTS voice model (`.onnx` file) downloaded in Step 1.
+    - **Action:** Replace the existing `/home/james/piper/voices/en_US-lessac-medium.onnx` path with the correct absolute path on your system.
+- **`audio.bluetooth_speaker`**:
+    - **Task:** Identify the correct identifier for your Bluetooth speaker recognized by the Linux system (e.g., MAC address or ALSA/PulseAudio device name).
+    - **Action:** Pair and connect your Bluetooth speaker to the laptop. Use system tools (like `bluetoothctl`, `pactl list sinks`, or audio settings GUI) to find the speaker's identifier. Update the value from `"BTS0011"` to the correct identifier. *Further investigation might be needed to see how `speech.py` uses this setting.* It might rely on the speaker being the *system default* audio output.
+- **`buttons` section**:
+    - **Task:** This section configures Raspberry Pi GPIO pins.
+    - **Action:** No changes needed, as the web interface should not use these pins.
+
+### 3. Code Verification & Potential Adjustments
+
+- **Camera Usage (`src/barcode/scanner.py` or `src/web_app.py`):**
+    - **Task:** Ensure the code reliably uses the `camera_index` specified in `config.json` to open the Logitech camera, not defaulting to another camera.
+    - **Action:** Review the OpenCV `cv2.VideoCapture()` call. Ensure it explicitly passes the loaded `camera_index` value.
+- **Audio Output (`src/audio/speech.py`):**
+    - **Task:** Verify that audio generated by Piper TTS is directed to the Bluetooth speaker.
+    - **Action:** Review how Piper TTS is invoked (likely using `subprocess`). Check if it directs audio to the default system output or if it attempts to use the `bluetooth_speaker` config value directly. The simplest approach is often to configure the Bluetooth speaker as the **default system audio output** in your Linux sound settings *before* running the application. Check if the `piper` executable itself has command-line flags for specifying an output device.
+- **Raspberry Pi Specific Code (`RPi.GPIO`):**
+    - **Task:** Confirm that the web application code path (`run_web.py` -> `src/web_app.py`) does not import or call `RPi.GPIO` or reference the `buttons` section of the config.
+    - **Action:** Search the codebase loaded by `src/web_app.py` for `RPi.GPIO` imports or usage. These should only be present in `src/main.py` or `src/interface/button_controller.py`, which are not expected to run in the web setup.
+
+### 4. Running the Application
+
+- **Connect Speaker:** Ensure the Bluetooth speaker is paired, connected, and set as the default audio output device in your Linux system settings.
+- **Activate Environment:** Open a terminal in the project root directory and activate the virtual environment: `source webenv/bin/activate`.
+- **Start Server:** Run the web application script: `python run_web.py`.
+- **Access Interface:** Open a web browser and navigate to the URL provided in the terminal output (e.g., `http://localhost:5000` or `http://<your-laptop-ip>:5000`).
+- **Test:** Use the web interface to scan products (using the Logitech camera) and verify audio feedback comes through the Bluetooth speaker.
+
+## Next Steps
+
+1.  Perform the Environment Setup (Step 1).
+2.  Execute the configuration changes outlined in Step 2.
+3.  Review the code as described in Step 3, making minor adjustments if necessary.
+4.  Attempt to run the application (Step 4) and test functionality. 

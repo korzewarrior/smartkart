@@ -24,4 +24,20 @@ build/
 # Project specific
 *.jpg
 *.png
-*.jpeg 
+*.jpeg
+
+# Ignore large files
+smrtkrt.zip
+piper_voices/en_US-lessac-medium.onnx
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Other large binary files
+*.mp3
+*.wav
+*.onnx 
