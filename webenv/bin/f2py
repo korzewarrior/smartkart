@@ -1,4 +1,6 @@
-#!/home/james/smartkart/webenv/bin/python3
+#!/bin/sh
+'''exec' "/home/james/Brain/asu/FSE 100/smartkartv3/webenv/bin/python" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys

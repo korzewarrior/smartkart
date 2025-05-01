@@ -11,17 +11,19 @@ class SpeechManager:
     """
     Handles text-to-speech functionality using Piper TTS.
     """
-    def __init__(self, piper_executable, model_path):
+    def __init__(self, piper_executable, model_path, bluetooth_speaker=None):
         """
         Initialize the speech manager using Piper TTS.
         
         Parameters:
         - piper_executable: Full path to the piper executable.
         - model_path: Full path to the desired .onnx voice model file.
+        - bluetooth_speaker: ID or name of the Bluetooth speaker to use (optional)
         """
         # Store configuration
         self.piper_executable = piper_executable
         self.model_path = model_path
+        self.bluetooth_speaker = bluetooth_speaker
         
         # Check if piper executable and model exist
         if not self._check_command(self.piper_executable):
@@ -48,6 +50,8 @@ class SpeechManager:
         self.scanning_sound_active = False
         
         print(f"SpeechManager initialized with Piper model: {self.model_path}")
+        if self.bluetooth_speaker:
+            print(f"Using Bluetooth speaker: {self.bluetooth_speaker}")
         # Log the sound file paths
         print(f"Sound file paths: Success={self.success_sound_path}, Scanning={self.scanning_sound_path}, Not found={self.not_found_sound_path}")
         
@@ -219,170 +223,141 @@ class SpeechManager:
             print(f"Could not create not-found sound: {e}")
             print("Missing required libraries. Install with: pip install numpy scipy")
     
-    def play_sound(self, sound_type="success"):
+    def _get_audio_playback_cmd(self, audio_file):
         """
-        Play a specific sound type for audio feedback
+        Get the command to play audio through the selected speaker
         
         Parameters:
-        - sound_type: Type of sound to play (e.g., "success", "error")
+        - audio_file: Path to the audio file to play
         
         Returns:
-        - True if sound was played successfully, False otherwise
+        - Command list for subprocess.run
         """
-        try:
-            sound_path = None
+        # Default command just uses aplay
+        cmd = ["aplay", audio_file]
+        
+        # If bluetooth_speaker is specified, try to use it
+        if self.bluetooth_speaker:
+            # Different approaches based on the audio system
             
-            # Determine which sound file to play
-            if sound_type == "success":
-                sound_path = self.success_sound_path
-            elif sound_type == "scanning":
-                sound_path = self.scanning_sound_path
-            elif sound_type == "not_found":
-                sound_path = self.not_found_sound_path
-            else:
-                print(f"Unknown sound type: {sound_type}")
-                return False
-            
-            # Check if the sound file exists
-            if not os.path.exists(sound_path):
-                print(f"Sound file not found: {sound_path}")
-                # Try to create it if it's missing
-                if sound_type == "success":
-                    self._create_default_success_sound()
-                elif sound_type == "scanning":
-                    self._create_scanning_sound()
-                elif sound_type == "not_found":
-                    self._create_not_found_sound()
-                
-                # Check again if creation was successful
-                if not os.path.exists(sound_path):
-                    # Fall back to speaking the sound type only for success
-                    if sound_type == "success":  # Only speak success
-                        self.speak(sound_type)
-                    return True
-            
-            # Play the sound using appropriate command based on platform
-            if os.name == 'posix':  # Linux or macOS
-                # Try aplay first (Linux)
-                try:
-                    print(f"Playing sound with aplay: {sound_path}")
-                    result = subprocess.run(
-                        ['aplay', sound_path],
-                        stdout=subprocess.PIPE,
-                        stderr=subprocess.PIPE,
-                        check=False
-                    )
-                    if result.returncode == 0:
-                        return True
-                    else:
-                        print(f"aplay failed with return code {result.returncode}")
-                        print(f"Error: {result.stderr.decode('utf-8', errors='ignore')}")
-                except (FileNotFoundError, subprocess.SubprocessError) as e:
-                    print(f"aplay error: {e}")
-                    
-                    # Fall back to paplay if available
+            # For PulseAudio
+            if self._check_command("paplay"):
+                # Try to use paplay with device specification
+                if self.bluetooth_speaker.startswith("bluez_sink.") or ":" in self.bluetooth_speaker:
+                    # This is likely a PulseAudio sink name or a MAC address
+                    cmd = ["paplay", "--device", self.bluetooth_speaker, audio_file]
+                elif self.bluetooth_speaker == "BTS0011":
+                    # Search for the specific device by name
                     try:
-                        print(f"Playing sound with paplay: {sound_path}")
                         result = subprocess.run(
-                            ['paplay', sound_path],
-                            stdout=subprocess.PIPE,
-                            stderr=subprocess.PIPE,
-                            check=False
+                            ["pacmd", "list-sinks"],
+                            capture_output=True, text=True, check=False
                         )
-                        if result.returncode == 0:
-                            return True
-                        else:
-                            print(f"paplay failed with return code {result.returncode}")
-                    except (FileNotFoundError, subprocess.SubprocessError) as e:
-                        print(f"paplay error: {e}")
-                        print("Failed to play sound using aplay or paplay")
-                
-                # If all else fails, fall back to speaking the sound type (but only for success)
-                if sound_type == "success":  # Only speak success
-                    print("Falling back to text-to-speech for sound playback")
-                    self.speak(sound_type)
-                return True
-            else:  # Windows or other
-                # Fall back to speaking the sound type (but only for success)
-                if sound_type == "success":  # Only speak success
-                    self.speak(sound_type)
-                return True
-                
-        except Exception as e:
-            print(f"Error playing sound: {e}")
-            # Fall back to speaking the sound type as a last resort (but only for success)
-            try:
-                if sound_type == "success":  # Only speak success
-                    self.speak(sound_type)
-                return True
-            except:
-                return False
-    
+                        for line in result.stdout.splitlines():
+                            if "name:" in line and "bluez" in line:
+                                # Found a Bluetooth device
+                                sink_name = line.split('<')[1].split('>')[0]
+                                
+                                # Check if it's our BTS0011
+                                try:
+                                    result2 = subprocess.run(
+                                        ["pacmd", "list-sinks"],
+                                        capture_output=True, text=True, check=False
+                                    )
+                                    for i, line2 in enumerate(result2.stdout.splitlines()):
+                                        if sink_name in line2 and "BTS0011" in "".join(result2.stdout.splitlines()[i:i+10]):
+                                            # Found our device
+                                            cmd = ["paplay", "--device", sink_name, audio_file]
+                                            break
+                                except:
+                                    pass
+                    except:
+                        pass
+            
+            # For ALSA (if PulseAudio isn't available or didn't work)
+            if cmd[0] == "aplay":
+                # Try to identify the Bluetooth device if it's a specific name
+                if self.bluetooth_speaker == "BTS0011":
+                    try:
+                        result = subprocess.run(
+                            ["aplay", "-L"],
+                            capture_output=True, text=True, check=False
+                        )
+                        for line in result.stdout.splitlines():
+                            if "bluez" in line.lower() or "bluetooth" in line.lower():
+                                # This might be a Bluetooth device
+                                device_name = line.strip()
+                                cmd = ["aplay", "-D", device_name, audio_file]
+                                break
+                    except:
+                        pass
+                elif self.bluetooth_speaker.startswith("hw:"):
+                    # Direct ALSA hardware device
+                    cmd = ["aplay", "-D", self.bluetooth_speaker, audio_file]
+        
+        return cmd
+
     def speak(self, text):
         """
-        Speak text using Piper TTS, writing to a temporary file and playing with aplay (blocking).
+        Speak the given text using Piper TTS.
         
         Parameters:
-        - text: Text to speak
+        - text: The text to speak
+        
+        Returns:
+        - True if speech was successful, False otherwise
         """
-        try:
-            print(f"SpeechManager: Generating speech with Piper for: '{text[:50]}...'") # DEBUG
-            
-            # Create a temporary WAV file (deleted automatically on exit)
-            with tempfile.NamedTemporaryFile(suffix=".wav", delete=True) as temp_wav:
-                temp_wav_path = temp_wav.name
-                # print(f"SpeechManager: Using temporary file: {temp_wav_path}") # DEBUG
-
-                # Construct Piper command 
-                # Using list format for subprocess is safer than f-string concatenation
-                piper_cmd = [
-                    self.piper_executable,
-                    "--model", self.model_path,
-                    "--output_file", temp_wav_path
-                    # Add other Piper flags here if needed, e.g.:
-                    # "--length_scale", "0.9", 
-                    # "--noise_scale", "0.667"
-                ]
-                
-                # Run Piper, passing text via stdin
-                # Use check=True to raise CalledProcessError on failure
-                piper_process = subprocess.run(
-                    piper_cmd, 
-                    input=text.encode('utf-8'), 
-                    check=True, 
-                    capture_output=True # Capture stdout/stderr
-                )
-                # print(f"Piper stdout: {piper_process.stdout.decode()}") # Optional debug
-                # print(f"Piper stderr: {piper_process.stderr.decode()}") # Optional debug
-                
-                print(f"SpeechManager: Piper completed. Playing file...") # DEBUG
-                
-                # Construct aplay command
-                aplay_cmd = ["aplay", "-q", temp_wav_path]
-
-                # Run aplay (use run which blocks until complete)
-                aplay_process = subprocess.run(
-                    aplay_cmd, 
-                    check=False, # Don't error out if aplay fails, just log it
-                    capture_output=True
-                )
-
-                if aplay_process.returncode != 0:
-                    print(f"Error running aplay: {aplay_process.stderr.decode('utf-8', errors='ignore')}")
-                else:
-                    print(f"SpeechManager: Finished speaking.") # DEBUG
-            
-            return True
-            
-        except subprocess.CalledProcessError as e:
-            print(f"Error running Piper subprocess: {e}")
-            print(f"Piper stderr: {e.stderr.decode('utf-8', errors='ignore')}")
+        if not text:
             return False
-        except FileNotFoundError as e:
-             print(f"Error: Required command/file not found. Ensure Piper is installed, paths in config are correct, and aplay is installed. {e}")
-             return False
+            
+        try:
+            # Create a temporary file for the output audio
+            with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as temp_file:
+                temp_wav_path = temp_file.name
+            
+            # Construct the Piper command
+            piper_cmd = [
+                self.piper_executable,
+                "--model", self.model_path,
+                "--output_file", temp_wav_path
+            ]
+            
+            # Run Piper to generate the audio file
+            with subprocess.Popen(piper_cmd, stdin=subprocess.PIPE, 
+                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                 text=True) as process:
+                stdout, stderr = process.communicate(input=text)
+                
+                if process.returncode != 0:
+                    print(f"Error running Piper TTS: {stderr}")
+                    # Clean up the temp file if it exists
+                    if os.path.exists(temp_wav_path):
+                        os.unlink(temp_wav_path)
+                    return False
+            
+            # Play the generated audio with the appropriate command
+            audio_cmd = self._get_audio_playback_cmd(temp_wav_path)
+            
+            try:
+                subprocess.run(audio_cmd, check=True)
+            except subprocess.SubprocessError as e:
+                print(f"Error playing audio: {e}")
+                # Fall back to default player
+                if audio_cmd[0] != "aplay":
+                    try:
+                        subprocess.run(["aplay", temp_wav_path], check=True)
+                    except:
+                        print("Failed to play audio with fallback player")
+                return False
+            finally:
+                # Clean up temp file
+                if os.path.exists(temp_wav_path):
+                    os.unlink(temp_wav_path)
+                    
+            return True
+                
         except Exception as e:
-            print(f"Error speaking text with Piper/aplay: {e}")
+            print(f"Error in TTS speech: {e}")
             return False
     
     def speak_async(self, text, priority=False):
@@ -503,39 +478,70 @@ class SpeechManager:
     
     def start_scanning_sound(self):
         """
-        Start playing the scanning sound in a loop in the background
+        Start playing the scanning sound on loop in the background
         
         Returns:
-        - True if started successfully, False otherwise
+        - True if sound was started successfully, False otherwise
         """
-        # Stop any currently playing scanning sound
-        self.stop_scanning_sound()
-        
-        if not os.path.exists(self.scanning_sound_path):
-            print(f"Scanning sound file not found: {self.scanning_sound_path}")
-            self._create_scanning_sound()
-            if not os.path.exists(self.scanning_sound_path):
-                print("Could not create scanning sound file")
-                return False
-        
+        if self.scanning_sound_active:
+            return True  # Already playing
+            
         try:
-            # Start the scanning sound in a loop
-            if os.name == 'posix':  # Linux or macOS
-                print(f"Starting scanning sound loop with: {self.scanning_sound_path}")
-                # Use aplay in a loop
-                self.scanning_sound_process = subprocess.Popen(
-                    ['while true; do aplay ' + self.scanning_sound_path + '; done'],
-                    shell=True,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE
-                )
-                self.scanning_sound_active = True
-                return True
-            else:
-                print("Scanning sound loop not supported on this platform")
-                return False
+            # Ensure scanning sound exists
+            if not os.path.exists(self.scanning_sound_path):
+                self._create_scanning_sound()
+                if not os.path.exists(self.scanning_sound_path):
+                    return False
+                    
+            # Stop any existing process
+            self.stop_scanning_sound()
+            
+            # Get the appropriate command for audio playback
+            audio_cmd = self._get_audio_playback_cmd(self.scanning_sound_path)
+            
+            # Add loop parameter for aplay or equivalent
+            if audio_cmd[0] == "aplay":
+                audio_cmd.insert(1, "--loop")
+                audio_cmd.insert(2, "999")  # Loop many times (effectively infinite)
+            elif audio_cmd[0] == "paplay":
+                # paplay doesn't support looping; use a workaround
+                # We'll run sox/play if available
+                if self._check_command("play"):
+                    # Use SoX's play instead
+                    play_cmd = ["play", self.scanning_sound_path, "repeat", "999"]
+                    if self.bluetooth_speaker and self.bluetooth_speaker != "default":
+                        # Try to set device for play
+                        if self._check_command("pactl"):
+                            # We'll use pactl to find the device
+                            try:
+                                result = subprocess.run(
+                                    ["pactl", "list", "sinks"],
+                                    capture_output=True, text=True, check=False
+                                )
+                                for line in result.stdout.splitlines():
+                                    if self.bluetooth_speaker in line:
+                                        # Found our device
+                                        play_cmd.extend(["remix", "1", "gain", "-3"])
+                                        break
+                            except:
+                                pass
+                    
+                    audio_cmd = play_cmd
+            
+            # Start playing the sound in the background
+            self.scanning_sound_process = subprocess.Popen(
+                audio_cmd, 
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.DEVNULL, 
+                stderr=subprocess.DEVNULL
+            )
+            
+            self.scanning_sound_active = True
+            return True
+            
         except Exception as e:
             print(f"Error starting scanning sound: {e}")
+            self.scanning_sound_active = False
             return False
     
     def stop_scanning_sound(self):

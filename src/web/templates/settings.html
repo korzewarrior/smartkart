@@ -4,39 +4,53 @@
 
 {% block content %}
 <div class="card">
-    <div class="card-header">Settings</div>
+    <div class="card-header">Device Settings</div>
     
-    <p>Audio settings (like voice, rate, volume) are currently managed by the PicoTTS engine and are not adjustable via this interface.</p>
+    <div style="padding: 20px;">
+        <!-- Camera Selection -->
+        <div class="form-group" style="margin-bottom: 24px;">
+            <label class="form-label" for="camera-select"><strong>Camera Device:</strong></label>
+            <select id="camera-select" class="form-control">
+                <option value="">Auto-detect camera</option>
+                {% for camera in available_cameras %}
+                <option value="{{ camera.index }}" {% if camera.index == current_camera_index %}selected{% endif %}>
+                    {{ camera.name }} ({{ camera.resolution }})
+                </option>
+                {% endfor %}
+            </select>
+            <small class="form-text text-muted">
+                Select the camera to use for barcode scanning. "Auto-detect" will use the first available camera.
+                To use the Logitech Brio camera, select it from this list.
+            </small>
+        </div>
+        
+        <!-- Audio Device Selection -->
+        <div class="form-group" style="margin-bottom: 24px;">
+            <label class="form-label" for="audio-device-select"><strong>Audio Output Device:</strong></label>
+            <select id="audio-device-select" class="form-control">
+                <option value="">System Default</option>
+                {% for device in available_audio_devices %}
+                <option value="{{ device.id }}" {% if device.id == current_audio_device %}selected{% endif %}>
+                    {{ device.name }}
+                </option>
+                {% endfor %}
+            </select>
+            <small class="form-text text-muted">
+                Select the audio device for speech and sound output. To use the BTS0011 Bluetooth speaker, 
+                select it from this list. Make sure it's paired and connected to the system.
+            </small>
+        </div>
+        
+        <div class="form-group" style="margin-top: 20px;">
+            <button id="apply-device-settings" class="btn btn-success">Apply Device Settings</button>
+            <button id="test-audio-device" class="btn btn-primary">Test Audio Device</button>
+        </div>
+    </div>
     
-    <!-- Remove pyttsx3-specific settings form -->
-    <!-- 
-    <form id="settings-form">
-        <div class="form-group">
-            <label class="form-label" for="speech-volume">Speech Volume</label>
-            ...
-        </div>
-        
-        <div class="form-group">
-            <label class="form-label" for="speech-rate">Speech Rate</label>
-            ...
-        </div>
-        
-        {% if voices %}
-        <div class="form-group">
-            <label class="form-label" for="voice">Voice</label>
-            ...
-        </div>
-        {% endif %}
-        
-        <div class="form-group" style="margin-top: 30px;">
-            <button type="submit" class="btn btn-success">Save Settings</button>
-            <button type="button" id="reset-settings" class="btn btn-danger">Reset to Defaults</button>
-        </div>
-    </form>
-    -->
+    <p style="padding: 0 20px;">Audio settings (like voice, rate, volume) are currently managed by the Piper TTS engine and are not adjustable via this interface.</p>
 
-    <!-- Optionally keep Reset Database functionality if desired -->
-    <div class="card" style="margin-top: 30px;">
+    <!-- Database Management -->
+    <div class="card" style="margin: 20px;">
         <div class="card-header">Database Management</div>
         <div style="padding: 20px;">
             <p>Resetting the database will clear the list of scanned products and related files.</p>
@@ -51,13 +65,10 @@
     Settings action completed.
 </div>
 
-<!-- Reset Confirmation Modals -->
-<!-- Settings Reset Modal (Keep or remove based on whether any settings remain) -->
-<!-- 
-<div id="reset-modal" style="display: none; ...">
-    ...
-</div> 
--->
+<!-- Error Alert -->
+<div id="error-alert" class="alert alert-danger" style="display: none; margin-top: 20px;">
+    Error occurred.
+</div>
 
 <!-- Database Reset Modal -->
 <div id="reset-db-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 100; justify-content: center; align-items: center;">
@@ -78,8 +89,13 @@
 {% block scripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Remove refs to volume/rate/voice elements
+        // Get UI elements
+        const cameraSelect = document.getElementById('camera-select');
+        const audioDeviceSelect = document.getElementById('audio-device-select');
+        const applyDeviceSettingsBtn = document.getElementById('apply-device-settings');
+        const testAudioDeviceBtn = document.getElementById('test-audio-device');
         const successAlert = document.getElementById('success-alert');
+        const errorAlert = document.getElementById('error-alert');
         
         // Database Reset Elements
         const resetDbBtn = document.getElementById('reset-db-btn');
@@ -87,9 +103,141 @@
         const cancelResetDbBtn = document.getElementById('cancel-reset-db-btn');
         const confirmResetDbBtn = document.getElementById('confirm-reset-db-btn');
         
-        // Remove pyttsx3 test/save logic
+        // Apply device settings when button is clicked
+        if (applyDeviceSettingsBtn) {
+            applyDeviceSettingsBtn.addEventListener('click', function() {
+                // Get selected values
+                const cameraIndex = cameraSelect.value;
+                const audioDevice = audioDeviceSelect.value;
+                
+                // Show loading state
+                applyDeviceSettingsBtn.disabled = true;
+                applyDeviceSettingsBtn.textContent = 'Applying...';
+                
+                // Send to server
+                fetch('/api/update_devices', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        camera_index: cameraIndex,
+                        audio_device: audioDevice
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Reset button state
+                    applyDeviceSettingsBtn.disabled = false;
+                    applyDeviceSettingsBtn.textContent = 'Apply Device Settings';
+                    
+                    if (data.success) {
+                        // Show success alert with messages
+                        let message = 'Device settings applied successfully.';
+                        if (data.success_messages && data.success_messages.length > 0) {
+                            message += '<br>' + data.success_messages.join('<br>');
+                        }
+                        if (data.error_messages && data.error_messages.length > 0) {
+                            message += '<br><span style="color: #d9534f;">Warnings: ' + 
+                                      data.error_messages.join('<br>') + '</span>';
+                        }
+                        successAlert.innerHTML = message;
+                        successAlert.style.display = 'block';
+                        
+                        setTimeout(() => {
+                            successAlert.style.display = 'none';
+                        }, 8000);
+                    } else {
+                        // Show error
+                        errorAlert.textContent = data.error || 'Error applying device settings.';
+                        errorAlert.style.display = 'block';
+                        setTimeout(() => {
+                            errorAlert.style.display = 'none';
+                        }, 5000);
+                    }
+                })
+                .catch(error => {
+                    // Reset button state
+                    applyDeviceSettingsBtn.disabled = false;
+                    applyDeviceSettingsBtn.textContent = 'Apply Device Settings';
+                    
+                    // Show error
+                    errorAlert.textContent = 'Network error. Please try again.';
+                    errorAlert.style.display = 'block';
+                    setTimeout(() => {
+                        errorAlert.style.display = 'none';
+                    }, 5000);
+                    
+                    console.error('Error:', error);
+                });
+            });
+        }
         
-        // --- Database Reset Logic (Keep if needed) --- 
+        // Test audio device button
+        if (testAudioDeviceBtn) {
+            testAudioDeviceBtn.addEventListener('click', function() {
+                // Get selected audio device
+                const audioDevice = audioDeviceSelect.value;
+                
+                // Show loading state
+                testAudioDeviceBtn.disabled = true;
+                testAudioDeviceBtn.textContent = 'Testing...';
+                
+                // Send the test request to the server
+                fetch('/api/update_devices', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        audio_device: audioDevice
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Reset button state
+                    testAudioDeviceBtn.disabled = false;
+                    testAudioDeviceBtn.textContent = 'Test Audio Device';
+                    
+                    if (data.success) {
+                        // Show success alert with messages
+                        let message = 'Audio test completed.';
+                        if (data.success_messages && data.success_messages.length > 0) {
+                            message += '<br>' + data.success_messages.join('<br>');
+                        }
+                        if (data.error_messages && data.error_messages.length > 0) {
+                            message += '<br><span style="color: #d9534f;">Warnings: ' + 
+                                      data.error_messages.join('<br>') + '</span>';
+                        }
+                        successAlert.innerHTML = message;
+                        successAlert.style.display = 'block';
+                        
+                        setTimeout(() => {
+                            successAlert.style.display = 'none';
+                        }, 5000);
+                    } else {
+                        // Show error
+                        errorAlert.textContent = data.error || 'Error testing audio device.';
+                        errorAlert.style.display = 'block';
+                        setTimeout(() => {
+                            errorAlert.style.display = 'none';
+                        }, 5000);
+                    }
+                })
+                .catch(error => {
+                    // Reset button state
+                    testAudioDeviceBtn.disabled = false;
+                    testAudioDeviceBtn.textContent = 'Test Audio Device';
+                    
+                    // Show error
+                    errorAlert.textContent = 'Network error. Please try again.';
+                    errorAlert.style.display = 'block';
+                    setTimeout(() => {
+                        errorAlert.style.display = 'none';
+                    }, 5000);
+                    
+                    console.error('Error:', error);
+                });
+            });
+        }
+        
+        // --- Database Reset Logic --- 
         if (resetDbBtn) {
             resetDbBtn.addEventListener('click', function() {
                 resetDbModal.style.display = 'flex';

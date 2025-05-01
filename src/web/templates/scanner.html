@@ -98,7 +98,7 @@
         position: absolute;
         top: -10px;
         right: -10px;
-        background-color: #ffcc00;
+        background-color: #ff9900;
         color: #000;
         border-radius: 50%;
         width: 24px;
@@ -108,8 +108,8 @@
         justify-content: center;
         font-weight: bold;
         font-size: 14px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        border: 1px solid #000;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        border: 2px solid #000;
     }
     
     /* Cart Display Area */
@@ -135,6 +135,15 @@
           background-color: #d6eaff;
       }
 
+    /* Enhanced button highlight effect */
+    .btn-highlight {
+        box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.9) !important;
+        transform: scale(1.1) !important;
+        transition: all 0.1s ease !important;
+        background-color: #ffdd00 !important;
+        color: #000 !important;
+        z-index: 100 !important;
+    }
 </style>
 {% endblock %}
 
@@ -443,52 +452,88 @@
             }
         });
         
-        // Add numpad keyboard mapping (1-8) for the buttons
+        // Debugging indicator element - Add a status display for keyboard events
+        const keyboardStatus = document.createElement('div');
+        keyboardStatus.style.position = 'fixed';
+        keyboardStatus.style.bottom = '10px';
+        keyboardStatus.style.right = '10px';
+        keyboardStatus.style.backgroundColor = 'rgba(0,0,0,0.7)';
+        keyboardStatus.style.color = '#fff';
+        keyboardStatus.style.padding = '5px 10px';
+        keyboardStatus.style.borderRadius = '5px';
+        keyboardStatus.style.zIndex = '1000';
+        keyboardStatus.style.fontSize = '14px';
+        keyboardStatus.style.fontFamily = 'monospace';
+        keyboardStatus.textContent = 'Keyboard: Ready';
+        document.body.appendChild(keyboardStatus);
+        
+        // Function to flash a message in the debug display
+        function showKeyMessage(message) {
+            keyboardStatus.textContent = message;
+            keyboardStatus.style.backgroundColor = 'rgba(0,128,0,0.7)';
+            setTimeout(() => {
+                keyboardStatus.style.backgroundColor = 'rgba(0,0,0,0.7)';
+                keyboardStatus.textContent = 'Keyboard: Ready';
+            }, 1500);
+        }
+        
+        // Enhanced keyboard mapping (1-8) for the buttons
         document.addEventListener('keydown', function(event) {
+            console.log('Key pressed:', event.key, 'Code:', event.code);
+            
             // Get the key that was pressed
             const key = event.key;
+            const code = event.code;
             let targetButton = null;
+            let keyName = '';
             
-            // Map numpad keys 1-8 to the buttons
-            switch(key) {
-                case '1': // Numpad 1
-                    targetButton = document.getElementById('btn-1'); // SELECT_CONFIRM
-                    break;
-                case '2': // Numpad 2
-                    targetButton = document.getElementById('btn-2'); // INFO_ALLERGENS
-                    break;
-                case '3': // Numpad 3
-                    targetButton = document.getElementById('btn-3'); // BACK_CANCEL_DELETE
-                    break;
-                case '4': // Numpad 4
-                    targetButton = document.getElementById('btn-4'); // MODE_TOGGLE
-                    break;
-                case '5': // Numpad 5
-                    targetButton = document.getElementById('btn-5'); // UNUSED_B5
-                    break;
-                case '6': // Numpad 6
-                    targetButton = document.getElementById('btn-6'); // HELP_CLEAR
-                    break;
-                case '7': // Numpad 7
-                    targetButton = document.getElementById('btn-prev'); // Previous item
-                    break;
-                case '8': // Numpad 8
-                    targetButton = document.getElementById('btn-next'); // Next item
-                    break;
-                default:
-                    // Do nothing for other keys
-                    return;
+            // Map both numpad and regular number keys to the buttons
+            // Support both event.key (1, 2, 3) and event.code (Numpad1, Numpad2, Digit1, Digit2)
+            if (key === '1' || code === 'Numpad1' || code === 'Digit1') {
+                targetButton = document.getElementById('btn-1');
+                keyName = 'Key 1';
+            } else if (key === '2' || code === 'Numpad2' || code === 'Digit2') {
+                targetButton = document.getElementById('btn-2');
+                keyName = 'Key 2';
+            } else if (key === '3' || code === 'Numpad3' || code === 'Digit3') {
+                targetButton = document.getElementById('btn-3');
+                keyName = 'Key 3';
+            } else if (key === '4' || code === 'Numpad4' || code === 'Digit4') {
+                targetButton = document.getElementById('btn-4');
+                keyName = 'Key 4';
+            } else if (key === '5' || code === 'Numpad5' || code === 'Digit5') {
+                targetButton = document.getElementById('btn-5');
+                keyName = 'Key 5';
+            } else if (key === '6' || code === 'Numpad6' || code === 'Digit6') {
+                targetButton = document.getElementById('btn-6');
+                keyName = 'Key 6';
+            } else if (key === '7' || code === 'Numpad7' || code === 'Digit7') {
+                targetButton = document.getElementById('btn-prev');
+                keyName = 'Key 7';
+            } else if (key === '8' || code === 'Numpad8' || code === 'Digit8') {
+                targetButton = document.getElementById('btn-next');
+                keyName = 'Key 8';
             }
             
-            // If a matching button was found and it's not disabled, trigger its action
-            if (targetButton && !targetButton.disabled) {
-                // Create a visual feedback by adding a highlight class
+            // If a matching button was found
+            if (targetButton) {
+                if (targetButton.disabled) {
+                    showKeyMessage(`${keyName}: Button is disabled`);
+                    console.log(`Button for ${keyName} is disabled`);
+                    return;
+                }
+                
+                // Log key press success
+                console.log(`${keyName} pressed - activating button:`, targetButton.textContent);
+                showKeyMessage(`${keyName}: ${targetButton.textContent}`);
+                
+                // Create a more prominent visual feedback
                 targetButton.classList.add('btn-highlight');
                 
                 // Remove the highlight after a short delay
                 setTimeout(() => {
                     targetButton.classList.remove('btn-highlight');
-                }, 200);
+                }, 300);
                 
                 // Get the action from the button's data attribute
                 const action = targetButton.dataset.action;
@@ -536,16 +581,22 @@
             if (cartPollingTimer) clearInterval(cartPollingTimer);
         });
 
-        // Add CSS for the button highlight effect
-        const style = document.createElement('style');
-        style.textContent = `
+        // Remove the style element and add enhanced styles
+        const highlightStyle = `
             .btn-highlight {
-                box-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
-                transform: scale(1.05);
-                transition: all 0.1s ease;
+                box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.9) !important;
+                transform: scale(1.1) !important;
+                transition: all 0.1s ease !important;
+                background-color: #ffdd00 !important;
+                color: #000 !important;
+                z-index: 100 !important;
             }
         `;
-        document.head.appendChild(style);
+        
+        // Add a visible indicator on page load to confirm JS is working
+        setTimeout(() => {
+            showKeyMessage('Keyboard mapping active!');
+        }, 1000);
     });
 </script>
 {% endblock %} 

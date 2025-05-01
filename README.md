@@ -153,4 +153,116 @@ This project is available under the MIT License.
 
 ---
 
-This project aims to increase independence and accessibility for visually impaired individuals while shopping. 
+This project aims to increase independence and accessibility for visually impaired individuals while shopping.
+
+## SmartKart v3 - Linux Laptop Edition
+
+SmartKart is an assistive shopping system that helps users scan product barcodes and get information about ingredients and allergens. This version has been adapted to run on a Linux laptop, supporting a Logitech Brio camera and BTS0011 Bluetooth speaker.
+
+### Prerequisites
+
+- A Linux laptop/desktop
+- Python 3.7 or newer
+- Logitech Brio webcam (or other compatible USB camera)
+- BTS0011 Bluetooth speaker (or other compatible audio output device)
+- Internet connection (for initial setup)
+
+### Setup Instructions
+
+1. Clone this repository:
+   ```
+   git clone https://github.com/yourusername/smartkartv3.git
+   cd smartkartv3
+   ```
+
+2. Create a virtual environment:
+   ```
+   python3 -m venv webenv
+   source webenv/bin/activate
+   ```
+
+3. Install the required dependencies:
+   ```
+   pip install -r requirements_web.txt
+   ```
+
+4. Connect your devices:
+   - Plug in your Logitech Brio camera to an available USB port
+   - Pair your BTS0011 Bluetooth speaker with your laptop using your system's Bluetooth settings
+
+5. Run the device detection script to identify your devices:
+   ```
+   python detect_devices.py
+   ```
+
+6. Run the web application:
+   ```
+   python run_web.py
+   ```
+
+7. Open a web browser and navigate to:
+   ```
+   http://localhost:5000
+   ```
+
+### Device Configuration
+
+The SmartKartv3 web interface includes a settings page that allows you to select which camera and audio output device to use:
+
+1. Navigate to Settings:
+   - Click on the "Settings" link in the navigation menu
+
+2. Configure Camera:
+   - Select "Logitech Brio" from the Camera Device dropdown
+   - Click "Apply Device Settings"
+
+3. Configure Audio:
+   - Select "BTS0011 Bluetooth Speaker" from the Audio Output Device dropdown
+   - Click "Apply Device Settings" 
+   - You can click "Test Audio Device" to verify the speaker is working
+
+### Usage
+
+1. Navigate to the Scanner page:
+   - Click on "Scanner" in the navigation menu
+
+2. Hold a product barcode in front of the camera:
+   - The system will scan the barcode and display product information
+   - Audio feedback will be provided through the selected speaker
+
+3. Use the virtual buttons to:
+   - Add items to your cart
+   - Get more information about allergens
+   - Review previous scans
+   - Clear the cart
+
+### Troubleshooting
+
+#### Camera Issues
+
+- If the Logitech Brio isn't detected:
+  - Make sure it's properly connected to a USB port
+  - Try a different USB port
+  - Restart the application
+  - Check if another application is using the camera
+
+- If the wrong camera is being used:
+  - Go to Settings and select the correct camera from the dropdown
+
+#### Audio Issues
+
+- If no audio is coming from the BTS0011 speaker:
+  - Check that the speaker is paired and connected in your system's Bluetooth settings
+  - Make sure the speaker is charged and powered on
+  - Select the correct device in the Settings page
+  - Test the speaker using the "Test Audio Device" button
+  - Ensure the speaker is set as the default audio output in your system sound settings
+
+### Compatibility
+
+This version of SmartKart has been tested with:
+- Ubuntu 20.04 LTS and newer
+- Logitech Brio webcam
+- BTS0011 Bluetooth speaker
+
+Other Linux distributions, cameras, and Bluetooth speakers may work but have not been extensively tested. 

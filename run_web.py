@@ -12,6 +12,53 @@ import subprocess
 # Add parent directory to path so imports work correctly
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
+# Ensure required directories exist
+def create_required_directories():
+    dirs_to_create = [
+        'src/web/static',
+        'src/web/templates',
+        'data',
+        'data/logs',
+        'data/sounds',
+        'data/scan_results'
+    ]
+    
+    for directory in dirs_to_create:
+        if not os.path.exists(directory):
+            try:
+                os.makedirs(directory, exist_ok=True)
+                print(f"Created directory: {directory}")
+            except Exception as e:
+                print(f"Warning: Failed to create directory {directory}: {e}")
+
+# Run device detection if not already run
+def run_device_detection():
+    try:
+        # Only run if cameras.json doesn't exist
+        if not os.path.exists('data/cameras.json') or not os.path.exists('data/audio_devices.json'):
+            print("Running device detection to find available cameras and audio devices...")
+            try:
+                from detect_devices import detect_cameras, detect_audio_devices
+                
+                cameras = detect_cameras()
+                audio_devices = detect_audio_devices()
+                
+                # Save to JSON files
+                import json
+                with open("data/cameras.json", "w") as f:
+                    json.dump(cameras, f, indent=2)
+                
+                with open("data/audio_devices.json", "w") as f:
+                    json.dump(audio_devices, f, indent=2)
+                
+                print(f"Detected {len(cameras)} cameras and {len(audio_devices)} audio devices")
+            except ImportError:
+                print("Warning: detect_devices.py not found. Device auto-detection will not be available.")
+            except Exception as e:
+                print(f"Warning: Error running device detection: {e}")
+    except Exception as e:
+        print(f"Warning: {e}")
+        
 from src.web_app import app
 
 def get_tailscale_ip():
@@ -43,10 +90,11 @@ def get_tailscale_ip():
     return None
 
 if __name__ == "__main__":
-    # Make sure required directories exist
-    for directory in ['src/web/static', 'src/web/templates']:
-        if not os.path.exists(directory):
-            os.makedirs(directory, exist_ok=True)
+    # Create required directories
+    create_required_directories()
+    
+    # Run device detection if needed
+    run_device_detection()
     
     # Get the Tailscale IP
     tailscale_ip = get_tailscale_ip()

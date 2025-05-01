@@ -21,6 +21,13 @@ from src.database.product_lookup import ProductInfoLookup
 from src.utils.config import ConfigManager
 from src.audio.speech import SpeechManager
 
+# Import device detection utilities (if available)
+try:
+    from detect_devices import detect_cameras, detect_audio_devices
+    device_detection_available = True
+except ImportError:
+    device_detection_available = False
+    
 # Create the Flask application
 app = Flask(__name__, 
             static_folder='web/static',
@@ -48,6 +55,8 @@ last_scanned_product = None # Holds the data of the *most recently scanned* item
 processed_barcodes = set() # Tracks barcodes processed *in this session* (cleared on reset)
 camera = None
 camera_lock = threading.Lock()
+selected_camera_index = None  # Store the selected camera index
+selected_audio_device = None  # Store the selected audio device
 
 # --- New State Management Variables ---
 # Application Modes: SCANNING, ITEM_SCANNED, CART_REVIEW
@@ -59,7 +68,27 @@ state_lock = threading.Lock() # Lock for modifying shared state variables
 
 def initialize_systems():
     """Initialize the SmartKart subsystems"""
-    global product_db, speech
+    global product_db, speech, selected_camera_index, selected_audio_device
+    
+    # Get camera index from config
+    try:
+        selected_camera_index = config.get('barcode', 'camera_index')
+        # If it's None or not set properly, make it None to allow auto-detection
+        if selected_camera_index is None or selected_camera_index == "":
+            selected_camera_index = None
+    except Exception as e:
+        app.logger.warning(f"Error getting camera_index from config: {e}")
+        selected_camera_index = None
+    
+    # Get Bluetooth speaker from config
+    try:
+        selected_audio_device = config.get('audio', 'bluetooth_speaker')
+        # If it's not set properly, make it None to use system default
+        if selected_audio_device == "":
+            selected_audio_device = None
+    except Exception as e:
+        app.logger.warning(f"Error getting bluetooth_speaker from config: {e}")
+        selected_audio_device = None
     
     # Initialize speech (Piper TTS version)
     try:
@@ -97,7 +126,8 @@ def initialize_systems():
 
         app.logger.info(f"Initializing Piper TTS with executable: {piper_exe}")
         app.logger.info(f"Initializing Piper TTS with model: {piper_model}")
-        speech = SpeechManager(piper_executable=piper_exe, model_path=piper_model)
+        app.logger.info(f"Using audio device: {selected_audio_device}")
+        speech = SpeechManager(piper_executable=piper_exe, model_path=piper_model, bluetooth_speaker=selected_audio_device)
         
     except RuntimeError as e:
         app.logger.error(f"Failed to initialize SpeechManager (Piper): {e}")
@@ -118,28 +148,61 @@ def initialize_systems():
     # Initialize product database
     product_db = ProductInfoLookup(product_list_file)
     
+    # Ensure data directory for device information exists
+    if device_detection_available:
+        data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data')
+        os.makedirs(data_dir, exist_ok=True)
+    
     return True
 
 def initialize_camera():
     """Initialize the camera using OpenCV."""
-    global camera
+    global camera, selected_camera_index
     with camera_lock:
         if camera is None:
             try:
-                # Try different camera indices if 0 doesn't work
-                for index in range(3): 
+                # If we have a specific camera index selected, try to use it
+                if selected_camera_index is not None:
+                    app.logger.info(f"Attempting to use specified camera index: {selected_camera_index}")
+                    cap = cv2.VideoCapture(selected_camera_index)
+                    if cap.isOpened():
+                        ret, test_frame = cap.read()
+                        if ret:
+                            camera = cap
+                            app.logger.info(f"Successfully connected to camera at index {selected_camera_index}")
+                            return
+                        else:
+                            app.logger.warning(f"Could not read frame from camera at index {selected_camera_index}")
+                            cap.release()
+                
+                # If specified camera failed or no camera specified, try auto-detection
+                for index in range(5):  # Try indices 0-4
+                    app.logger.info(f"Trying camera at index {index}")
                     cap = cv2.VideoCapture(index)
                     if cap.isOpened():
-                        camera = cap
-                        app.logger.info(f"Camera initialized successfully on index {index}.")
-                        # Optional: Set camera properties (resolution, FPS)
-                        # camera.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-                        # camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-                        break
+                        ret, test_frame = cap.read()
+                        if ret:
+                            camera = cap
+                            selected_camera_index = index  # Remember which one worked
+                            app.logger.info(f"Auto-detected working camera at index {index}")
+                            
+                            # Optional: Save this to config for next time
+                            try:
+                                config.set('barcode', 'camera_index', index)
+                                config.save_config()
+                                app.logger.info(f"Updated config with working camera index {index}")
+                            except Exception as e:
+                                app.logger.warning(f"Could not update config with camera index: {e}")
+                            
+                            break
+                        else:
+                            app.logger.warning(f"Camera at index {index} opened but could not read frame")
+                            cap.release()
                     else:
-                       cap.release() 
+                        app.logger.warning(f"Could not open camera at index {index}")
+                
                 if camera is None:
-                   app.logger.error("Could not open any video device.") 
+                    app.logger.error("Could not find a working camera")
             except Exception as e:
                 app.logger.error(f"Error initializing camera: {e}")
                 camera = None # Ensure camera is None if init fails
@@ -372,15 +435,51 @@ def products():
 
 @app.route('/settings')
 def settings():
-    """Render the settings page (PicoTTS version - limited settings)"""
-    # PicoTTS settings (like language) are not currently exposed here.
-    # Volume/Rate/Voice selection are removed as they were for pyttsx3.
-    current_settings = {}
-    available_voices = [] # Pass empty list
-
+    """Render the settings page."""
+    # Detect available cameras
+    available_cameras = []
+    if device_detection_available:
+        try:
+            available_cameras = detect_cameras()
+        except Exception as e:
+            app.logger.error(f"Error detecting cameras: {e}")
+    
+    # If detection failed or isn't available, create a simple fallback list
+    if not available_cameras:
+        available_cameras = [
+            {'index': 0, 'name': 'Default Camera', 'resolution': 'Auto'},
+            {'index': 1, 'name': 'Camera 1', 'resolution': 'Auto'},
+            {'index': 2, 'name': 'Camera 2', 'resolution': 'Auto'}
+        ]
+        
+        # Try to add the Logitech Brio specifically
+        available_cameras.append({'index': 3, 'name': 'Logitech Brio', 'resolution': 'Auto'})
+    
+    # Detect available audio devices
+    available_audio_devices = []
+    if device_detection_available:
+        try:
+            available_audio_devices = detect_audio_devices()
+        except Exception as e:
+            app.logger.error(f"Error detecting audio devices: {e}")
+    
+    # If detection failed or isn't available, create a simple fallback list
+    if not available_audio_devices:
+        available_audio_devices = [
+            {'id': 'default', 'name': 'System Default'},
+            {'id': 'BTS0011', 'name': 'BTS0011 Bluetooth Speaker'}
+        ]
+    
+    # Get current settings from config
+    current_camera_index = selected_camera_index
+    current_audio_device = selected_audio_device
+    
+    # Render the settings page with the available devices
     return render_template('settings.html', 
-                          settings=current_settings, 
-                          voices=available_voices)
+                          available_cameras=available_cameras,
+                          available_audio_devices=available_audio_devices,
+                          current_camera_index=current_camera_index,
+                          current_audio_device=current_audio_device)
 
 @app.route('/api/process_barcode', methods=['POST'])
 def process_barcode():
@@ -441,16 +540,117 @@ def process_barcode():
             'barcode': barcode
         })
 
-@app.route('/api/update_settings', methods=['POST'])
-def update_settings():
-    """Update application settings (PicoTTS version - no audio settings)"""
-    # No audio settings to update for PicoTTS via this interface currently.
-    # data = request.json
-    # if 'language' in data:
-    #    # Update config and potentially re-init SpeechManager if needed
-    #    pass
+@app.route('/api/update_devices', methods=['POST'])
+def update_devices():
+    """Update camera and audio device settings."""
+    global selected_camera_index, selected_audio_device, camera, speech
     
-    return jsonify({'success': True})
+    try:
+        data = request.json
+        
+        # Update camera settings if provided
+        if 'camera_index' in data:
+            new_camera_index = data['camera_index']
+            
+            # Convert to integer if possible
+            try:
+                new_camera_index = int(new_camera_index)
+            except (ValueError, TypeError):
+                if new_camera_index == "null" or new_camera_index == "":
+                    new_camera_index = None
+            
+            # Only update if it's actually changing
+            if new_camera_index != selected_camera_index:
+                # Release the current camera
+                release_camera()
+                
+                # Update selected index
+                selected_camera_index = new_camera_index
+                
+                # Update config
+                config.set('barcode', 'camera_index', new_camera_index)
+                
+                # Initialize with the new camera on next frame request
+                # (don't do it here to avoid blocking the response)
+        
+        # Update audio device settings if provided
+        if 'audio_device' in data:
+            new_audio_device = data['audio_device']
+            
+            # Validate input
+            if new_audio_device == "null" or new_audio_device == "":
+                new_audio_device = None
+            
+            # Only update if it's actually changing
+            if new_audio_device != selected_audio_device:
+                # Update selected device
+                selected_audio_device = new_audio_device
+                
+                # Update config
+                config.set('audio', 'bluetooth_speaker', new_audio_device or "")
+                
+                # Reinitialize speech with the new audio device
+                # Get the existing settings first
+                piper_exe = config.get('audio', 'piper_executable')
+                piper_model = config.get('audio', 'piper_model')
+                
+                # Create a new speech manager
+                try:
+                    speech = SpeechManager(piper_executable=piper_exe, 
+                                          model_path=piper_model, 
+                                          bluetooth_speaker=selected_audio_device)
+                except Exception as e:
+                    app.logger.error(f"Error reinitializing speech with new audio device: {e}")
+                    # Try to recover with default
+                    try:
+                        speech = SpeechManager(piper_executable=piper_exe, 
+                                              model_path=piper_model)
+                    except:
+                        speech = None
+        
+        # Save the config
+        config.save_config()
+        
+        # Test the new settings
+        success_messages = []
+        error_messages = []
+        
+        # Test camera if it was changed
+        if 'camera_index' in data:
+            try:
+                initialize_camera()
+                if camera and camera.isOpened():
+                    success_messages.append(f"Camera at index {selected_camera_index} connected successfully.")
+                else:
+                    error_messages.append(f"Could not connect to camera at index {selected_camera_index}.")
+            except Exception as e:
+                error_messages.append(f"Error testing camera: {e}")
+        
+        # Test audio if it was changed
+        if 'audio_device' in data and speech:
+            try:
+                # Try to speak a test message
+                speech_result = speech.speak("Audio device test.")
+                if speech_result:
+                    success_messages.append("Audio device test successful.")
+                else:
+                    error_messages.append("Audio device test failed.")
+            except Exception as e:
+                error_messages.append(f"Error testing audio device: {e}")
+        
+        return jsonify({
+            'success': True,
+            'selected_camera_index': selected_camera_index,
+            'selected_audio_device': selected_audio_device,
+            'success_messages': success_messages,
+            'error_messages': error_messages
+        })
+    
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        })
 
 @app.route('/api/reset_database', methods=['POST'])
 def reset_database():
